@@ -4,6 +4,7 @@ import Presensi from './components/Presensi.js'
 import Laporan from './components/Laporan.js';
 import TambahLaporan from './components/TambahLaporan.js';
 import DetailLaporan from './components/DetailLaporan.js';
+import EditLaporan from './components/EditLaporan.js';
 import Pengaturan from './components/Pengaturan.js';
 import HomePembimbing from './components/HomePembimbing';
 import Login from './components/Login.js';
@@ -18,6 +19,7 @@ function App() {
           <Route path="/laporan" element={<Laporan />}></Route>
           <Route path="/laporan/add" element={<TambahLaporan />}></Route>
           <Route path="/laporan/detail/:id" element={<DetailLaporan />}></Route>
+          <Route path="/laporan/edit/:id" element={<EditLaporan />}></Route>
           <Route path="/pengaturan" element={<Pengaturan />}></Route>
 
           <Route path="/pembimbing" element={<HomePembimbing />}></Route>

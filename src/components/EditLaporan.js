@@ -1,15 +1,15 @@
 import React from 'react'
 import Header from './sub/Header.js'
 import Sidebar from './sub/Sidebar.js'
-import MainTambahLaporan from './sub/MainTambahLaporan.js'
+import MainEditLaporan from './sub/MainEditLaporan.js'
 
-export default function TambahLaporan() {
+export default function EditLaporan() {
     return (
         <div>
             <Header />
             <div class="grid grid-cols-12 gap-3 mt-5">
                 <Sidebar activePage="laporan"/>
-                <MainTambahLaporan />
+                <MainEditLaporan />
             </div>
         </div>
     )
