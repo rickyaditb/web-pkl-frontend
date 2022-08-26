@@ -1,12 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useGeolocated } from "react-geolocated";
 import GpsImg from './img/gps.svg'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import moment from 'moment'
 import 'moment/locale/id';
-import { MapContainer, TileLayer, useMap, Rectangle, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, useMap, Rectangle, Popup, Marker } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css';
+
+import marker from 'leaflet/dist/images/marker-icon.png';
+
+import { Icon } from 'leaflet'
+
+const myIcon = new Icon({
+    iconUrl: marker
+})
+
+
 
 export default function MainDetailPresensi() {
 
@@ -19,12 +29,11 @@ export default function MainDetailPresensi() {
         });
 
     const rectangle = [
-        [-6.55703, 106.77489],
-        [-6.55756, 106.77546],
+        [-6.55693, 106.77489],
+        [-6.55756, 106.77556],
     ]
 
-
-    const blackOptions = { color: 'black' }
+    const blackOptions = { color: 'purple' }
 
     return !isGeolocationAvailable ? (
         <div>Peramban anda tidak mendukung Geolokasi</div>
@@ -43,8 +52,31 @@ export default function MainDetailPresensi() {
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     />
-                    <Rectangle bounds={rectangle} pathOptions={blackOptions} />
+                    <Rectangle bounds={rectangle} pathOptions={blackOptions}>
+                        <Popup>
+                            Lokasi Absensi
+                        </Popup>
+                    </Rectangle>
+                    {coords &&
+                        <Marker position={[coords.latitude, coords.longitude]} icon={myIcon}>
+                            <Popup>
+                                Lokasi Anda Saat Ini
+                            </Popup>
+                        </Marker>
+                    }
                 </MapContainer>
+                <div className='flex items-center justify-center text-center ml-2 p-3'>
+                    {coords &&
+                        (() => {
+                            if (coords.latitude > -6.55693 && coords.latitude < -6.55756)
+                                return <span>Terjadi Kesalahan</span>
+                            if (coords.longitude > 106.77489 && coords.longitude < 106.77556)
+                                return <span>Oke</span>
+                            else
+                                return <p className='text-3xl text-gray-700 font-bold'>Anda tidak berada pada lokasi absensi yang ditentukan.</p>
+                        })()
+                    }
+                </div>
             </div>
         </div>
     ) : (
