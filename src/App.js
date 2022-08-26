@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './components/Home.js';
 import Presensi from './components/Presensi.js'
+import DetailPresensi from './components/DetailPresensi.js';
 import Laporan from './components/Laporan.js';
 import TambahLaporan from './components/TambahLaporan.js';
 import DetailLaporan from './components/DetailLaporan.js';
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/presensi" element={<Presensi />}></Route>
+          <Route path="/presensi/detail" element={<DetailPresensi />}></Route>
           <Route path="/laporan" element={<Laporan />}></Route>
           <Route path="/laporan/add" element={<TambahLaporan />}></Route>
           <Route path="/laporan/detail/:id" element={<DetailLaporan />}></Route>

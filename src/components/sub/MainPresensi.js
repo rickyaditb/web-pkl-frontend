@@ -1,13 +1,16 @@
 import React from 'react'
 import CalendarImg from './img/calendar.svg'
+import { Link } from 'react-router-dom'
 
 export default function MainPresensi() {
+
     const d = new Date();
     const jam = `0${d.getHours()}`;
     const menit = `0${d.getMinutes()}`;
     const final = `${jam.slice(-2)}:${menit.slice(-2)} WIB`;
+
     return (
-        <div className="col-span-12 md:col-span-8 lg:col-span-7 transition duration-300 ease-in">
+        <div className="col-span-12 lg:col-span-10">
             <div className="grid grid-cols-2 gap-3">
                 <div className="bg-white p-2 shadow rounded">
                     <div className="flex items-center">
@@ -32,8 +35,8 @@ export default function MainPresensi() {
                     </div>
                 </div>
             </div>
-            <div className="bg-white mt-3 p-5 sm:p-10 rounded shadow grid grid-cols-2">
-                <img src={CalendarImg} className="w-64 sm:block hidden" />
+            <div className="bg-white mt-3 p-5 sm:p-8 rounded shadow grid grid-cols-2 justify-items-center">
+                <img src={CalendarImg} className="h-48 sm:block hidden" />
                 <div className="flex flex-col justify-center col-span-2 sm:col-span-1">
                     <div id="awal" class="transition ease-in">
                         <div className="flex items-center">
@@ -58,105 +61,46 @@ export default function MainPresensi() {
                             <button className="warna-main text-white px-5 py-3 font-bold rounded mt-3" onclick="absen()">Absen</button>
                         </div>
                     </div>
-                    <div id="akhir" className="text-center hidden opacity-0 transition ease-in">
-                        <p className="text-gray-700 text-2xl">Hari Ini Kamu sudah Absen<br />Terima Kasih!</p>
-                    </div>
                 </div>
             </div>
-            <div className="ml-3 text-xl font-bold text-gray-600 flex mt-3">
-                <p>Riwayat Absensi</p>
-                <div className="flex my-auto ml-auto gap-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path
-                            d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z" />
-                    </svg>
-                </div>
+            <div className="bg-white p-3 shadow rounded mb-8 mt-3">
+                <table class="text-left table-auto w-full">
+                    <thead>
+                        <tr class="text-gray-500">
+                            <th class="font-semibold p-3">No.</th>
+                            <th class="font-semibold p-3">Hari dan Tanggal Absensi</th>
+                            <th class="font-semibold p-3 text-center">Jam Absensi</th>
+                            <th class="font-semibold p-3 text-center">Keterangan</th>
+                            <th class="font-semibold p-3 text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-gray-900 border-t hover:bg-gray-100">
+                            <td class="p-3">1</td>
+                            <td class="p-3">Senin, 25 Agustus 2022</td>
+                            <td class="p-3 text-center">08:57</td>
+                            <td class="p-3">
+                                <div className="flex justify-center items-center">
+                                    <div class="px-3 py-2 font-semibold leading-tight text-green-700 bg-green-200 text-lg rounded flex justify-center items-center">
+                                        <p>Hadir</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td className='p-3'>
+                                <div className="flex justify-center items-center">
+                                    <Link to={`/presensi/detail/`} class="p-2 font-semibold leading-tight text-blue-700 bg-blue-100 text-sm rounded flex justify-center items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+                                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                                            <path fillRule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clipRule="evenodd" />
+                                        </svg>
+                                        <p className="ml-1">Detail Absensi</p>
+                                    </Link>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <div className="grid grid-cols-6 gap-2 mt-3">
-                <div className="bg-white p-3 rounded shadow cursor-pointer">Minggu 1</div>
-                <div className="p-3 rounded shadow warna-main text-white font-semibold cursor-pointer">Minggu 2</div>
-                <div className="bg-white p-3 rounded shadow cursor-pointer">Minggu 3</div>
-                <div className="bg-white p-3 rounded shadow cursor-pointer">Minggu 4</div>
-                <div className="bg-white p-3 rounded shadow cursor-pointer">Minggu 5</div>
-                <div className="bg-white p-3 rounded shadow cursor-pointer">Minggu 6</div>
-            </div>
-            <div className="mt-2 mb-32 flex flex-col gap-2">
-                <div className="bg-white shadow rounded p-3">
-                    <div className="grid grid-cols-2">
-                        <div className="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 bg-red-300 text-white p-2 mr-3 rounded" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                            <div>
-                                <p className="text-gray-600 text-sm ">Hari dan Tanggal Absensi</p>
-                                <p className="text-xl text-gray-600 font-bold -mt-1">Senin, 25 Juli 2022</p>
-                            </div>
-                        </div>
-                        <div className="grid grid-cols-2">
-                            <div>
-                                <p className="text-gray-600 text-sm ">Jam Absensi</p>
-                                <p className="text-xl text-gray-600 font-bold -mt-1">10:58 WIB</p>
-                            </div>
-                            <div>
-                                <p className="text-gray-600 text-sm ">Keterangan</p>
-                                <p className="text-xl text-gray-600 font-bold -mt-1">Telat</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="bg-white shadow rounded p-3">
-                    <div className="grid grid-cols-2">
-                        <div className="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 bg-green-300 text-white p-2 mr-3 rounded" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                            <div>
-                                <p className="text-gray-600 text-sm ">Hari dan Tanggal Absensi</p>
-                                <p className="text-xl text-gray-600 font-bold -mt-1">Selasa, 26 Juli 2022</p>
-                            </div>
-                        </div>
-                        <div className="grid grid-cols-2">
-                            <div>
-                                <p className="text-gray-600 text-sm ">Jam Absensi</p>
-                                <p className="text-xl text-gray-600 font-bold -mt-1">08:32 WIB</p>
-                            </div>
-                            <div>
-                                <p className="text-gray-600 text-sm ">Keterangan</p>
-                                <p className="text-xl text-gray-600 font-bold -mt-1">Hadir</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="bg-white shadow rounded p-3">
-                    <div className="grid grid-cols-2">
-                        <div className="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 bg-green-300 text-white p-2 mr-3 rounded" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                            <div>
-                                <p className="text-gray-600 text-sm ">Hari dan Tanggal Absensi</p>
-                                <p className="text-xl text-gray-600 font-bold -mt-1">Rabu, 27 Juli 2022</p>
-                            </div>
-                        </div>
-                        <div className="grid grid-cols-2">
-                            <div>
-                                <p className="text-gray-600 text-sm ">Jam Absensi</p>
-                                <p className="text-xl text-gray-600 font-bold -mt-1">09:02 WIB</p>
-                            </div>
-                            <div>
-                                <p className="text-gray-600 text-sm ">Keterangan</p>
-                                <p className="text-xl text-gray-600 font-bold -mt-1">Hadir</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
     )
 }
