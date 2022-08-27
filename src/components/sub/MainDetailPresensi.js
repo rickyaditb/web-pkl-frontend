@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useGeolocated } from "react-geolocated";
 import GpsImg from './img/gps.svg'
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import moment from 'moment'
 import 'moment/locale/id';
 import { MapContainer, TileLayer, useMap, Rectangle, Popup, Marker } from 'react-leaflet'
@@ -19,6 +19,23 @@ const myIcon = new Icon({
 
 
 export default function MainDetailPresensi() {
+    const [modal, setModal] = useState(false)
+    const [modalValue, setModalValue] = useState("")
+
+    const navigate = useNavigate();
+    let waktu_absensi = moment();
+
+    const savePresensi = async () => {
+        let keterangan = modalValue;
+        try {
+            await axios.post('http://localhost:5000/presensi', {
+                waktu_absensi, keterangan
+            });
+            navigate("/presensi");
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     const { coords, isGeolocationAvailable, isGeolocationEnabled } =
         useGeolocated({
@@ -33,6 +50,16 @@ export default function MainDetailPresensi() {
         [-6.55756, 106.77556],
     ]
 
+    const konfirmasi = (value) => {
+        setModalValue(value);
+        setModal(true);
+    }
+
+    const batal = () => {
+        setModalValue("");
+        setModal(false);
+    }
+
     const blackOptions = { color: 'purple' }
 
     return !isGeolocationAvailable ? (
@@ -46,8 +73,23 @@ export default function MainDetailPresensi() {
         </div>
     ) : coords ? (
         <div className="col-span-12 lg:col-span-10">
-            <div className=' bg-white p-5 grid grid-cols-2'>
-                <MapContainer center={[-6.5571255002408, 106.77520330650981]} zoom={18} scrollWheelZoom={false} style={{ width: "100%", height: "400px" }}>
+            {modal ?
+                <div className="bg-black/50 fixed inset-0 flex items-center justify-center z-30">
+                    <div>
+                        <div className="bg-white px-8 py-8 rounded text-center z-50 relative">
+                            <p className='font-bold text-2xl text-gray-800 mb-3'>Konfirmasi Presensi</p>
+                            <p className='text-lg'>Presensi yang sudah dikirim tidak akan bisa diubah.</p>
+                            <div className="flex gap-5 mt-3 justify-center">
+                                <button onClick={() => savePresensi()} className='bg-blue-100 text-blue-700 w-full rounded py-3 font-bold text-lg'>Ya, Kirim</button>
+                                <button onClick={() => batal()} className='bg-red-100 text-red-700 w-full rounded py-3 font-bold text-lg'>Tidak, Kembali</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                : <></>
+            }
+            <div className=' bg-white p-5 grid md:grid-cols-2 -z-20'>
+                <MapContainer className='z-10' center={[-6.5571255002408, 106.77520330650981]} zoom={18} scrollWheelZoom={false} style={{ width: "100%", height: "400px" }}>
                     <TileLayer
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -69,11 +111,36 @@ export default function MainDetailPresensi() {
                     {coords &&
                         (() => {
                             if (coords.latitude > -6.55693 && coords.latitude < -6.55756)
-                                return <span>Terjadi Kesalahan</span>
+                                return <div className=''>
+                                    <p className='text-3xl text-gray-700 font-bold'>
+                                        Anda tidak berada pada lokasi absensi yang ditentukan.
+                                    </p>
+                                    <div className="mt-3 flex justify-center gap-3">
+                                        <button onClick={() => konfirmasi("Izin")} data-presensi="Izin" className="bg-yellow-400 font-bold text-2xl text-white px-6 py-3 rounded">Izin</button>
+                                        <button onClick={() => konfirmasi("Sakit")} data-presensi="Sakit" className="bg-red-400 font-bold text-2xl text-white px-4 py-3 rounded">Sakit</button>
+                                    </div>
+                                </div>
                             if (coords.longitude > 106.77489 && coords.longitude < 106.77556)
-                                return <span>Oke</span>
+                                return <div className=''>
+                                    <p className='text-3xl text-gray-700 font-bold'>
+                                        Anda sudah berada pada lokasi absensi yang ditentukan.
+                                    </p>
+                                    <div className="mt-3 flex justify-center gap-3">
+                                        <button onClick={() => konfirmasi("Hadir")} data-presensi="Hadir" className="bg-green-400 font-bold text-2xl text-white px-4 py-3 rounded">Hadir</button>
+                                        <button onClick={() => konfirmasi("Izin")} data-presensi="Izin" className="bg-yellow-400 font-bold text-2xl text-white px-6 py-3 rounded">Izin</button>
+                                        <button onClick={() => konfirmasi("Sakit")} data-presensi="Sakit" className="bg-red-400 font-bold text-2xl text-white px-4 py-3 rounded">Sakit</button>
+                                    </div>
+                                </div>
                             else
-                                return <p className='text-3xl text-gray-700 font-bold'>Anda tidak berada pada lokasi absensi yang ditentukan.</p>
+                                return <div className=''>
+                                    <p className='text-3xl text-gray-700 font-bold'>
+                                        Anda tidak berada pada lokasi absensi yang ditentukan.
+                                    </p>
+                                    <div className="mt-3 flex justify-center gap-3">
+                                    <button onClick={() => konfirmasi("Izin")} data-presensi="Izin" className="bg-yellow-400 font-bold text-2xl text-white px-6 py-3 rounded">Izin</button>
+                                        <button onClick={() => konfirmasi("Sakit")} data-presensi="Sakit" className="bg-red-400 font-bold text-2xl text-white px-4 py-3 rounded">Sakit</button>
+                                    </div>
+                                </div>
                         })()
                     }
                 </div>

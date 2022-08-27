@@ -1,13 +1,28 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import CalendarImg from './img/calendar.svg'
 import { Link } from 'react-router-dom'
+import moment from 'moment'
+import 'moment/locale/id';
 
 export default function MainPresensi() {
+    const [presensi, setPresensi] = useState([]);
+
+    useEffect(() => {
+        getPresensi();
+    }, []);
+
+    const getPresensi = async () => {
+        const response = await axios.get('http://localhost:5000/presensi');
+        setPresensi(response.data);
+    };
 
     const d = new Date();
     const jam = `0${d.getHours()}`;
     const menit = `0${d.getMinutes()}`;
     const final = `${jam.slice(-2)}:${menit.slice(-2)} WIB`;
+
+    console.log(presensi)
 
     return (
         <div className="col-span-12 lg:col-span-10">
@@ -19,7 +34,7 @@ export default function MainPresensi() {
                         </svg>
                         <div>
                             <p className="text-gray-600 text-sm ">Waktu Absensi</p>
-                            <p className="text-xl text-gray-600 font-bold -mt-1">08:00 - 15:00</p>
+                            <p className="text-xl text-gray-600 font-bold -mt-1">08:00 - 9:00</p>
                         </div>
                     </div>
                 </div>
@@ -57,8 +72,8 @@ export default function MainPresensi() {
                                 <p className="text-xl text-gray-600 font-bold -mt-1" id="jam-hari-ini">{final}</p>
                             </div>
                         </div>
-                        <div>
-                            <button className="warna-main text-white px-5 py-3 font-bold rounded mt-3" onclick="absen()">Absen</button>
+                        <div className='mt-6'>
+                            <Link to={`/presensi/detail/`} className="warna-main text-white px-5 py-3 font-bold rounded" onclick="absen()">Absen</Link>
                         </div>
                     </div>
                 </div>
@@ -75,29 +90,44 @@ export default function MainPresensi() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="text-gray-900 border-t hover:bg-gray-100">
-                            <td class="p-3">1</td>
-                            <td class="p-3">Senin, 25 Agustus 2022</td>
-                            <td class="p-3 text-center">08:57</td>
-                            <td class="p-3">
-                                <div className="flex justify-center items-center">
-                                    <div class="px-3 py-2 font-semibold leading-tight text-green-700 bg-green-200 text-lg rounded flex justify-center items-center">
-                                        <p>Hadir</p>
+                        {presensi.map((item, index) => (
+                            <tr class="text-gray-900 border-t hover:bg-gray-100">
+                                <td class="p-3">{index + 1}</td>
+                                <td class="p-3">{moment(item.waktu_absensi).format('dddd, Do MMMM YYYY')}</td>
+                                <td class="p-3 text-center">{moment(item.waktu_absensi).format('hh:mm')}</td>
+                                <td class="p-3">
+                                    <div className="flex justify-center items-center">
+                                        {
+                                            (() => {
+                                                if (item.keterangan === "Hadir")
+                                                    return <div class="px-3 py-2 font-semibold leading-tight text-green-700 bg-green-200 text-lg rounded flex justify-center items-center">
+                                                        <p>{item.keterangan}</p>
+                                                    </div>
+                                                if (item.keterangan === "Sakit")
+                                                    return <div class="px-3 py-2 font-semibold leading-tight text-yellow-700 bg-yellow-200 text-lg rounded flex justify-center items-center">
+                                                        <p>{item.keterangan}</p>
+                                                    </div>
+                                                if (item.keterangan === "Izin")
+                                                    return <div class="px-3 py-2 font-semibold leading-tight text-red-700 bg-red-200 text-lg rounded flex justify-center items-center">
+                                                        <p>{item.keterangan}</p>
+                                                    </div>
+                                            })()
+                                        }
                                     </div>
-                                </div>
-                            </td>
-                            <td className='p-3'>
-                                <div className="flex justify-center items-center">
-                                    <Link to={`/presensi/detail/`} class="p-2 font-semibold leading-tight text-blue-700 bg-blue-100 text-sm rounded flex justify-center items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-                                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
-                                            <path fillRule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clipRule="evenodd" />
-                                        </svg>
-                                        <p className="ml-1">Detail Absensi</p>
-                                    </Link>
-                                </div>
-                            </td>
-                        </tr>
+                                </td>
+                                <td className='p-3'>
+                                    <div className="flex justify-center items-center">
+                                        <Link to={`/presensi/detail/`} class="p-2 font-semibold leading-tight text-blue-700 bg-blue-100 text-sm rounded flex justify-center items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+                                                <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                                                <path fillRule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clipRule="evenodd" />
+                                            </svg>
+                                            <p className="ml-1">Detail Absensi</p>
+                                        </Link>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>
