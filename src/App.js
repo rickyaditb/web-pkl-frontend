@@ -9,6 +9,7 @@ import EditLaporan from './components/EditLaporan.js';
 import Pengaturan from './components/Pengaturan.js';
 import HomePembimbing from './components/HomePembimbing';
 import Login from './components/Login.js';
+import Register from './components/Register.js';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
       </div>
       <Routes>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/register" element={<Register />}></Route>
       </Routes>
     </BrowserRouter>
   );
