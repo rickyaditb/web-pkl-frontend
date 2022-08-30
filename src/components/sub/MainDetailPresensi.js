@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useContext } from 'react'
 import { useGeolocated } from "react-geolocated";
 import GpsImg from './img/gps.svg'
 import axios from 'axios';
@@ -7,6 +7,7 @@ import moment from 'moment'
 import 'moment/locale/id';
 import { MapContainer, TileLayer, useMap, Rectangle, Popup, Marker } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css';
+import AuthContext from 'context/AuthContext';
 
 import marker from 'leaflet/dist/images/marker-icon.png';
 
@@ -19,8 +20,13 @@ const myIcon = new Icon({
 
 
 export default function MainDetailPresensi() {
-    const [modal, setModal] = useState(false)
-    const [modalValue, setModalValue] = useState("")
+    const user = useContext(AuthContext);
+
+    const [modal, setModal] = useState(false);
+    const [modalValue, setModalValue] = useState("");
+    const id_user = user.id;
+
+
 
     const navigate = useNavigate();
     let waktu_absensi = moment();
@@ -29,7 +35,7 @@ export default function MainDetailPresensi() {
         let keterangan = modalValue;
         try {
             await axios.post('http://localhost:5000/presensi', {
-                waktu_absensi, keterangan
+                id_user, waktu_absensi, keterangan
             });
             navigate("/presensi");
         } catch (error) {

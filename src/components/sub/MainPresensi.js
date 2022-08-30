@@ -1,28 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import AuthContext from 'context/AuthContext';
 import axios from 'axios';
 import CalendarImg from './img/calendar.svg'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 import 'moment/locale/id';
 
+
+
 export default function MainPresensi() {
+    const user = useContext(AuthContext);
+    const id_user = user.id;
+
     const [presensi, setPresensi] = useState([]);
+    const [presensiToday, setPresensiToday] = useState([]);
+    
 
     useEffect(() => {
         getPresensi();
     }, []);
 
+    useEffect(() => {
+        getPresensiToday();
+    }, [id_user])
+
     const getPresensi = async () => {
         const response = await axios.get('http://localhost:5000/presensi');
         setPresensi(response.data);
     };
-
+    const getPresensiToday = async () => {
+        const response = await axios.get(`http://localhost:5000/presensi_today/${id_user}`);
+        console.log(response.data);
+    };
+    console.log(id_user)
     const d = new Date();
     const jam = `0${d.getHours()}`;
     const menit = `0${d.getMinutes()}`;
     const final = `${jam.slice(-2)}:${menit.slice(-2)} WIB`;
 
-    console.log(presensi)
+    //console.log(presensi)
 
     return (
         <div className="col-span-12 lg:col-span-10">
@@ -91,7 +107,7 @@ export default function MainPresensi() {
                     </thead>
                     <tbody>
                         {presensi.map((item, index) => (
-                            <tr class="text-gray-900 border-t hover:bg-gray-100">
+                            <tr class="text-gray-900 border-t hover:bg-gray-100" key={item._id}>
                                 <td class="p-3">{index + 1}</td>
                                 <td class="p-3">{moment(item.waktu_absensi).format('dddd, Do MMMM YYYY')}</td>
                                 <td class="p-3 text-center">{moment(item.waktu_absensi).format('hh:mm')}</td>

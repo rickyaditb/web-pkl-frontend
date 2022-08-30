@@ -1,9 +1,20 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 export default function Sidebar(props) {
     let activePage = props.activePage;
-    console.log(activePage)
+
+    const navigate = useNavigate();
+    
+    const Logout = async() => {
+        try {
+            await axios.delete('http://localhost:5000/logout');
+            navigate('/login')
+        } catch (error) {
+            console.log(error)
+        }
+    }
     return (
         <div className="col-span-2 hidden lg:block">
             <Link to="/">
@@ -50,8 +61,7 @@ export default function Sidebar(props) {
                     <p className="ml-2">Pengaturan</p>
                 </div>
             </Link>
-            <div
-                className="px-4 py-3 text-gray-600 font-bold rounded-lg flex cursor-pointer hover:bg-red-200 duration-300">
+            <div onClick={Logout} className="px-4 py-3 text-gray-600 font-bold rounded-lg flex cursor-pointer hover:bg-red-200 duration-300">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 my-auto" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

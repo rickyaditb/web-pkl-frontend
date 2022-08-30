@@ -1,6 +1,9 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import AuthContext from 'context/AuthContext';
+import moment from 'moment';
 
 export default function MainHome() {
+    const user = useContext(AuthContext);
     return (
         <div className="col-span-12 md:col-span-8 lg:col-span-7 transition duration-300 ease-in mb-64">
             <div>
@@ -10,11 +13,11 @@ export default function MainHome() {
                         <div className="flex flex-col gap-1">
                             <div>
                                 <p className="text-gray-500">Nama</p>
-                                <p className="font-bold text-gray-600 text-xl">Ricky Aditya Bagaskara</p>
+                                <p className="font-bold text-gray-600 text-xl">{user.nama}</p>
                             </div>
                             <div>
                                 <p className="text-gray-500">Asal Instansi</p>
-                                <p className="font-bold text-gray-600 text-xl">Universitas Pakuan Bogor</p>
+                                <p className="font-bold text-gray-600 text-xl">{user.instansi}</p>
                             </div>
                         </div>
                     </div>
@@ -78,7 +81,7 @@ export default function MainHome() {
                     </svg>
                     <div className="ml-3">
                         <p className="text-gray-700">Tanggal Mulai PKL</p>
-                        <p className="text-gray-600 font-bold text-xl">25 Juli 2022</p>
+                        <p className="text-gray-600 font-bold text-xl">{moment(user.tanggal_mulai).format('Do MMMM YYYY')}</p>
                     </div>
                 </div>
                 <div className="bg-white shadow rounded p-5 flex items-center col-span-2 md:col-span-1">
@@ -87,7 +90,7 @@ export default function MainHome() {
                     </svg>
                     <div className="ml-3">
                         <p className="text-gray-700">Tanggal Selesai PKL</p>
-                        <p className="text-gray-600 font-bold text-xl">9 September 2022</p>
+                        <p className="text-gray-600 font-bold text-xl">{moment(user.tanggal_selesai).format('Do MMMM YYYY')}</p>
                     </div>
                 </div>
             </div>

@@ -20,7 +20,7 @@ export default function Login() {
         try {
             await axios.post('http://localhost:5000/login', {
                 email, password
-            });
+            },);
             navigate("/");
         } catch (error) {
             setErrorMsg(error.response.data.message);
