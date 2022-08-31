@@ -1,9 +1,12 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 import AuthContext from 'context/AuthContext';
 import moment from 'moment';
 
 export default function MainHome() {
     const user = useContext(AuthContext);
+    useEffect(() => {
+        user.refreshToken();
+    }, []);
     return (
         <div className="col-span-12 md:col-span-8 lg:col-span-7 transition duration-300 ease-in mb-64">
             <div>

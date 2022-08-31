@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import AuthContext from 'context/AuthContext';
 import axios from 'axios';
 import CalendarImg from './img/calendar.svg'
@@ -13,8 +13,7 @@ export default function MainPresensi() {
     const id_user = user.id;
 
     const [presensi, setPresensi] = useState([]);
-    const [presensiToday, setPresensiToday] = useState([]);
-    
+    const [presensiToday, setPresensiToday] = useState("x");
 
     useEffect(() => {
         getPresensi();
@@ -30,15 +29,14 @@ export default function MainPresensi() {
     };
     const getPresensiToday = async () => {
         const response = await axios.get(`http://localhost:5000/presensi_today/${id_user}`);
-        console.log(response.data);
+        setPresensiToday(response.data);
     };
-    console.log(id_user)
+
     const d = new Date();
     const jam = `0${d.getHours()}`;
     const menit = `0${d.getMinutes()}`;
     const final = `${jam.slice(-2)}:${menit.slice(-2)} WIB`;
 
-    //console.log(presensi)
 
     return (
         <div className="col-span-12 lg:col-span-10">
@@ -69,29 +67,40 @@ export default function MainPresensi() {
             <div className="bg-white mt-3 p-5 sm:p-8 rounded shadow grid grid-cols-2 justify-items-center">
                 <img src={CalendarImg} className="h-48 sm:block hidden" />
                 <div className="flex flex-col justify-center col-span-2 sm:col-span-1">
-                    <div id="awal" class="transition ease-in">
-                        <div className="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 bg-green-300 text-white p-2 mr-3 rounded" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
-                            </svg>
-                            <div>
-                                <p className="text-gray-600 text-sm ">Hari dan Tanggal</p>
-                                <p className="text-xl text-gray-600 font-bold -mt-1">Senin, 15 Agustus 2022</p>
-                            </div>
-                        </div>
-                        <div className="flex items-center mt-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 bg-blue-300 text-white p-2 mr-3 rounded" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
-                            </svg>
-                            <div>
-                                <p className="text-gray-600 text-sm ">Waktu</p>
-                                <p className="text-xl text-gray-600 font-bold -mt-1" id="jam-hari-ini">{final}</p>
-                            </div>
-                        </div>
-                        <div className='mt-6'>
-                            <Link to={`/presensi/detail/`} className="warna-main text-white px-5 py-3 font-bold rounded" onclick="absen()">Absen</Link>
-                        </div>
-                    </div>
+                    {
+                        (() => {
+                            if (presensiToday === "x")
+                                return <></>
+                            if (presensiToday === null)
+                                return <div id="awal">
+                                    <div className="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 bg-green-300 text-white p-2 mr-3 rounded" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                                        </svg>
+                                        <div>
+                                            <p className="text-gray-600 text-sm ">Hari dan Tanggal</p>
+                                            <p className="text-xl text-gray-600 font-bold -mt-1">Senin, 15 Agustus 2022</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center mt-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 bg-blue-300 text-white p-2 mr-3 rounded" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                                        </svg>
+                                        <div>
+                                            <p className="text-gray-600 text-sm ">Waktu</p>
+                                            <p className="text-xl text-gray-600 font-bold -mt-1" id="jam-hari-ini">{final}</p>
+                                        </div>
+                                    </div>
+                                    <div className='mt-6'>
+                                        <Link to={`/presensi/detail/`} className="warna-main text-white px-5 py-3 font-bold rounded" onclick="absen()">Absen</Link>
+                                    </div>
+                                </div>
+                            else
+                                return <div id="akhir">
+                                    <p class="text-gray-700 text-3xl text-center font-bold">Hari Ini Kamu sudah Absen<br />Terima Kasih!</p>
+                                </div>
+                        })()
+                    }
                 </div>
             </div>
             <div className="bg-white p-3 shadow rounded mb-8 mt-3">
