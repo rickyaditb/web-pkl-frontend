@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useCallback } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import AuthContext from 'context/AuthContext';
 import axios from 'axios';
 import CalendarImg from './img/calendar.svg'
@@ -17,14 +17,11 @@ export default function MainPresensi() {
 
     useEffect(() => {
         getPresensi();
-    }, []);
-
-    useEffect(() => {
         getPresensiToday();
     }, [id_user])
 
     const getPresensi = async () => {
-        const response = await axios.get('http://localhost:5000/presensi');
+        const response = await axios.get(`http://localhost:5000/presensi_user/${id_user}`);
         setPresensi(response.data);
     };
     const getPresensiToday = async () => {

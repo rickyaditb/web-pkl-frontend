@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import AuthContext from 'context/AuthContext';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 import 'moment/locale/id';
 
 export default function MainLaporan() {
+    const user = useContext(AuthContext);
+    const id_user = user.id;
+
     moment.locale('id');
     const [laporan, setLaporan] = useState([]);
     const [modal, setModal] = useState(false)
@@ -12,10 +16,10 @@ export default function MainLaporan() {
 
     useEffect(() => {
         getLaporan();
-    }, []);
+    }, [id_user]);
 
     const getLaporan = async () => {
-        const response = await axios.get('http://localhost:5000/laporan');
+        const response = await axios.get(`http://localhost:5000/laporan_user/${id_user}`);
         setLaporan(response.data);
     };
 
