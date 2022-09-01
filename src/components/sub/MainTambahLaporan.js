@@ -1,8 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import AuthContext from 'context/AuthContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 export default function MainTambahLaporan() {
+    const user = useContext(AuthContext);
+    const id_user = user.id;
+
     const [tanggal_laporan, setTanggal] = useState("");
     const [isi_laporan, setIsi] = useState("");
     const navigate = useNavigate();
@@ -11,7 +15,7 @@ export default function MainTambahLaporan() {
         e.preventDefault();
         try {
             await axios.post('http://localhost:5000/laporan', {
-                tanggal_laporan, isi_laporan
+                id_user, tanggal_laporan, isi_laporan
             });
             navigate("/laporan");
         } catch (error) {
