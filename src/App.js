@@ -15,7 +15,7 @@ import { AuthProvider } from './context/AuthContext';
 function App() {
   return (
     <BrowserRouter>
-      <div class="container mx-auto px-3 lg:px-16">
+      <div className="container mx-auto px-3 lg:px-16">
         <AuthProvider>
           <Routes>
             <Route path="/" element={<Home />}></Route>

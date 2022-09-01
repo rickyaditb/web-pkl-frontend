@@ -24,7 +24,7 @@ export default function MainPembimbing() {
             </div>
             <div className="flex flex-col gap-3">
                 <div className="bg-white p-5 rounded-lg shadow transform transition flex items-center">
-                    <img src="https://randomuser.me/api/portraits/men/79.jpg" className="bg-gray-500 w-28 h-28 rounded-full mx-5"/>
+                    <img alt="foto-staff" src="https://randomuser.me/api/portraits/men/79.jpg" className="bg-gray-500 w-28 h-28 rounded-full mx-5"/>
                         <div className="ml-5">
                             <div className="flex flex-col gap-1">
                                 <div>
@@ -39,7 +39,7 @@ export default function MainPembimbing() {
                         </div>
                 </div>
                 <div className="bg-white p-5 rounded-lg shadow transform transition flex items-center">
-                    <img src="https://randomuser.me/api/portraits/men/78.jpg" className="bg-gray-500 w-28 h-28 rounded-full mx-5"/>
+                    <img alt="foto-staff" src="https://randomuser.me/api/portraits/men/78.jpg" className="bg-gray-500 w-28 h-28 rounded-full mx-5"/>
                         <div className="ml-5">
                             <div className="flex flex-col gap-1">
                                 <div>
@@ -54,7 +54,7 @@ export default function MainPembimbing() {
                         </div>
                 </div>
                 <div className="bg-white p-5 rounded-lg shadow transform transition flex items-center">
-                    <img src="https://randomuser.me/api/portraits/men/77.jpg" className="bg-gray-500 w-28 h-28 rounded-full mx-5"/>
+                    <img alt="foto-staff" src="https://randomuser.me/api/portraits/men/77.jpg" className="bg-gray-500 w-28 h-28 rounded-full mx-5"/>
                         <div className="ml-5">
                             <div className="flex flex-col gap-1">
                                 <div>

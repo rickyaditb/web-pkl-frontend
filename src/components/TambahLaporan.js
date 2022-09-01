@@ -7,7 +7,7 @@ export default function TambahLaporan() {
     return (
         <div>
             <Header />
-            <div class="grid grid-cols-12 gap-3 mt-5">
+            <div className="grid grid-cols-12 gap-3 mt-5">
                 <Sidebar activePage="laporan"/>
                 <MainTambahLaporan />
             </div>

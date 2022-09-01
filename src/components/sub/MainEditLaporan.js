@@ -36,10 +36,10 @@ export default function MainEditLaporan() {
             <div className="bg-white shadow rounded p-5 mb-10">
                 <p className="text-center font-bold text-xl text-gray-600">Edit Laporan</p>
                 <form className="mt-3" action="laporan.html" onSubmit={editLaporan}>
-                    <label for="gambar" className="text-gray-700">Tanggal Laporan</label>
-                    <input type="date" value={moment(tanggal_laporan).format('YYYY-MM-DD')} onChange={(e) => setTanggal(e.target.value)} id="gambar" name="gambar" placeholder="Masukan Isi Laporan" class="gambar-form bg-gray-100 w-full py-3 px-3 rounded-lg mb-5 focus:outline-none focus:ring-2 border-none" />
-                    <label for="gambar" className="text-gray-700">Isi Laporan</label>
-                    <textarea type="text" value={isi_laporan} onChange={(e) => setIsi(e.target.value)} id="gambar" name="gambar" rows="5" placeholder="Masukan Isi Laporan" class="gambar-form bg-gray-100 w-full py-3 px-3 rounded-lg mb-5 focus:outline-none focus:ring-2 border-none"></textarea>
+                    <label htmlFor="gambar" className="text-gray-700">Tanggal Laporan</label>
+                    <input type="date" value={moment(tanggal_laporan).format('YYYY-MM-DD')} onChange={(e) => setTanggal(e.target.value)} id="gambar" name="gambar" placeholder="Masukan Isi Laporan" className="gambar-form bg-gray-100 w-full py-3 px-3 rounded-lg mb-5 focus:outline-none focus:ring-2 border-none" />
+                    <label htmlFor="gambar" className="text-gray-700">Isi Laporan</label>
+                    <textarea type="text" value={isi_laporan} onChange={(e) => setIsi(e.target.value)} id="gambar" name="gambar" rows="5" placeholder="Masukan Isi Laporan" className="gambar-form bg-gray-100 w-full py-3 px-3 rounded-lg mb-5 focus:outline-none focus:ring-2 border-none"></textarea>
                     <button className="py-3 px-3 rounded text-white bg-blue-400 font-bold cursor-pointer">Simpan Perubahan</button>
                 </form>
             </div>
