@@ -116,7 +116,7 @@ export default function MainPresensi() {
                             <tr className="text-gray-900 border-t hover:bg-gray-100" key={item._id}>
                                 <td className="p-3">{index + 1}</td>
                                 <td className="p-3">{moment(item.waktu_absensi).format('dddd, Do MMMM YYYY')}</td>
-                                <td className="p-3 text-center">{moment(item.waktu_absensi).format('hh:mm')}</td>
+                                <td className="p-3 text-center">{moment(item.waktu_absensi).format('HH:mm')}</td>
                                 <td className="p-3">
                                     <div className="flex justify-center items-center">
                                         {
