@@ -1,6 +1,27 @@
-import React from 'react'
+import React, { useState, useEffect, useContext } from 'react';
+import AuthContext from 'context/AuthContext';
 
 export default function MainPembimbing() {
+    const [user, setUser] = useState([]);
+
+
+    const auth = useContext(AuthContext);
+
+    useEffect(() => {
+        getUser();
+    }, [auth]);
+
+    const getUser = async () => {
+        console.log(auth.token);
+        const response = await auth.axiosJWT.get(`http://localhost:5000/user`, {
+            headers: {
+                Authorization: `Bearer ${auth.token}`
+            }
+        });
+        setUser(response.data);
+    };
+
+
     return (
         <div className="col-span-12 md:col-span-8 lg:col-span-7 transition duration-300 ease-in mb-16">
             <div className="ml-3 text-xl font-bold text-gray-600 flex mb-3 gap-3">
@@ -23,51 +44,23 @@ export default function MainPembimbing() {
                 </div>
             </div>
             <div className="flex flex-col gap-3">
-                <div className="bg-white p-5 rounded-lg shadow transform transition flex items-center">
-                    <img alt="foto-staff" src="https://randomuser.me/api/portraits/men/79.jpg" className="bg-gray-500 w-28 h-28 rounded-full mx-5"/>
+                {user.map((item, index) => (
+                    <div className="bg-white p-5 rounded-lg shadow transform transition flex items-center">
+                        <img alt="foto-staff" src="https://randomuser.me/api/portraits/men/79.jpg" className="bg-gray-500 w-28 h-28 rounded-full mx-5" />
                         <div className="ml-5">
                             <div className="flex flex-col gap-1">
                                 <div>
                                     <p className="text-gray-500">Nama</p>
-                                    <p className="font-bold text-gray-600 text-xl">Ricky Aditya Bagaskara</p>
+                                    <p className="font-bold text-gray-600 text-xl">{item.nama}</p>
                                 </div>
                                 <div>
                                     <p className="text-gray-500">Asal Instansi</p>
-                                    <p className="font-bold text-gray-600 text-xl">Universitas Pakuan Bogor</p>
+                                    <p className="font-bold text-gray-600 text-xl">{item.asal_instansi}</p>
                                 </div>
                             </div>
                         </div>
-                </div>
-                <div className="bg-white p-5 rounded-lg shadow transform transition flex items-center">
-                    <img alt="foto-staff" src="https://randomuser.me/api/portraits/men/78.jpg" className="bg-gray-500 w-28 h-28 rounded-full mx-5"/>
-                        <div className="ml-5">
-                            <div className="flex flex-col gap-1">
-                                <div>
-                                    <p className="text-gray-500">Nama</p>
-                                    <p className="font-bold text-gray-600 text-xl">Ahmad Faisal Nugraha</p>
-                                </div>
-                                <div>
-                                    <p className="text-gray-500">Asal Instansi</p>
-                                    <p className="font-bold text-gray-600 text-xl">Universitas Pakuan Bogor</p>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-                <div className="bg-white p-5 rounded-lg shadow transform transition flex items-center">
-                    <img alt="foto-staff" src="https://randomuser.me/api/portraits/men/77.jpg" className="bg-gray-500 w-28 h-28 rounded-full mx-5"/>
-                        <div className="ml-5">
-                            <div className="flex flex-col gap-1">
-                                <div>
-                                    <p className="text-gray-500">Nama</p>
-                                    <p className="font-bold text-gray-600 text-xl">Muhammad Dikhrillah</p>
-                                </div>
-                                <div>
-                                    <p className="text-gray-500">Asal Instansi</p>
-                                    <p className="font-bold text-gray-600 text-xl">Universitas Pakuan Bogor</p>
-                                </div>
-                            </div>
-                        </div>
-                </div>
+                    </div>
+                ))}
             </div>
         </div>
     )

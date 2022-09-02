@@ -60,7 +60,7 @@ export const AuthProvider = ({ children }) => {
     });
 
     return (
-        <AuthContext.Provider value={{id, nama, instansi, tanggal_mulai, tanggal_selesai, refreshToken}} >
+        <AuthContext.Provider value={{id, nama, instansi, tanggal_mulai, tanggal_selesai, token, refreshToken, axiosJWT}} >
             {children}
         </AuthContext.Provider>
     )
