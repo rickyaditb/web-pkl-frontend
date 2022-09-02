@@ -1,16 +1,20 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './components/Home.js';
-import Presensi from './components/Presensi.js'
-import DetailPresensi from './components/DetailPresensi.js';
-import Laporan from './components/Laporan.js';
-import TambahLaporan from './components/TambahLaporan.js';
-import DetailLaporan from './components/DetailLaporan.js';
-import EditLaporan from './components/EditLaporan.js';
-import Pengaturan from './components/Pengaturan.js';
-import HomePembimbing from './components/HomePembimbing';
+import { AuthProvider } from './context/AuthContext';
+// User Component
+import Home from './components/user/Home.js';
+import Presensi from './components/user/Presensi.js'
+import DetailPresensi from './components/user/DetailPresensi.js';
+import Laporan from './components/user/Laporan.js';
+import TambahLaporan from './components/user/TambahLaporan.js';
+import DetailLaporan from './components/user/DetailLaporan.js';
+import EditLaporan from './components/user/EditLaporan.js';
+import Pengaturan from './components/user/Pengaturan.js';
+// Pembimbing Component
+import HomePembimbing from './components/pembimbing/HomePembimbing';
+// Universal Component
 import Login from './components/Login.js';
 import Register from './components/Register.js';
-import { AuthProvider } from './context/AuthContext';
+
 
 function App() {
   return (
