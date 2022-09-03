@@ -11,6 +11,7 @@ import EditLaporan from './components/user/EditLaporan.js';
 import Pengaturan from './components/user/Pengaturan.js';
 // Pembimbing Component
 import HomePembimbing from './components/pembimbing/HomePembimbing';
+import PresensiPembimbing from 'components/pembimbing/PresensiPembimbing';
 // Universal Component
 import Login from './components/Login.js';
 import Register from './components/Register.js';
@@ -32,6 +33,8 @@ function App() {
             <Route path="/pengaturan" element={<Pengaturan />}></Route>
 
             <Route path="/pembimbing" element={<HomePembimbing />}></Route>
+            <Route path="/presensi_pembimbing" element={<PresensiPembimbing />}></Route>
+            <Route path="/presensi_pembimbing/:id" element={<PresensiPembimbing />}></Route>
           </Routes>
         </AuthProvider>
       </div>
