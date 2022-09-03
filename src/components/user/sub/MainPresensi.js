@@ -76,7 +76,7 @@ export default function MainPresensi() {
                                         </svg>
                                         <div>
                                             <p className="text-gray-600 text-sm ">Hari dan Tanggal</p>
-                                            <p className="text-xl text-gray-600 font-bold -mt-1">Senin, 15 Agustus 2022</p>
+                                            <p className="text-xl text-gray-600 font-bold -mt-1">{moment().format("dddd, Do MMMM YYYY")}</p>
                                         </div>
                                     </div>
                                     <div className="flex items-center mt-2">
