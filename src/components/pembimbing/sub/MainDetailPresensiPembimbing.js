@@ -4,9 +4,10 @@ import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 import moment from 'moment';
 import 'moment/locale/id';
+import noData from 'components/img/no-data.svg';
 
 export default function MainDetailPresensiPembimbing() {
-    const [presensi, setPresensi] = useState([]);
+    const [presensi, setPresensi] = useState("x");
     const [user, setUser] = useState({})
 
     const auth = useContext(AuthContext);
@@ -141,48 +142,57 @@ export default function MainDetailPresensiPembimbing() {
                     </div>
                 </div>
             </div>
-
-            <div className="bg-white p-3 shadow rounded mb-16">
-                <table className="text-left table-auto w-full">
-                    <thead>
-                        <tr className="text-gray-500">
-                            <th className="font-semibold p-3">No.</th>
-                            <th className="font-semibold p-3">Hari dan Tanggal Presensi</th>
-                            <th className="font-semibold p-3 text-center">Jam Absensi</th>
-                            <th className="font-semibold p-3 text-center">Keterangan</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {presensi.map((item, index) => (
-                            <tr className="text-gray-900 border-t hover:bg-gray-100">
-                                <td className="p-3">{index + 1}</td>
-                                <td className="p-3">{moment(item.waktu_absensi).format('dddd, Do MMMM YYYY')}</td>
-                                <td className="p-3 text-center">{moment(item.waktu_absensi).format('HH:mm')}</td>
-                                <td className="p-3">
-                                    <div className="flex justify-center items-center">
-                                        {
-                                            (() => {
-                                                if (item.keterangan === "Hadir")
-                                                    return <div className="px-3 py-2 font-semibold leading-tight text-green-700 bg-green-200 text-lg rounded flex justify-center items-center">
-                                                        <p>{item.keterangan}</p>
-                                                    </div>
-                                                if (item.keterangan === "Sakit")
-                                                    return <div className="px-3 py-2 font-semibold leading-tight text-purple-700 bg-purple-200 text-lg rounded flex justify-center items-center">
-                                                        <p>{item.keterangan}</p>
-                                                    </div>
-                                                if (item.keterangan === "Izin")
-                                                    return <div className="px-3 py-2 font-semibold leading-tight text-yellow-700 bg-yellow-200 text-lg rounded flex justify-center items-center">
-                                                        <p>{item.keterangan}</p>
-                                                    </div>
-                                            })()
-                                        }
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+            {(() => {
+                    if (presensi === "x")
+                        return <></>
+                    if (presensi.length === 0)
+                        return <div className='bg-white p-4 md:p-8 grid grid-cols-2 mb-16 shadow rounded justify-items-center content-center gap-3 md:gap-0'> 
+                            <img src={noData} alt="" className='w-64' />
+                            <div className='flex items-center text-2xl md:text-4xl font-bold text-gray-700 text-center'>Data Presensi <br/>Masih Kosong</div>
+                        </div>
+                    else
+                        return <div className="bg-white p-3 shadow rounded mb-16">
+                            <table className="text-left table-auto w-full">
+                                <thead>
+                                    <tr className="text-gray-500">
+                                        <th className="font-semibold p-3">No.</th>
+                                        <th className="font-semibold p-3">Hari dan Tanggal Presensi</th>
+                                        <th className="font-semibold p-3 text-center">Jam Absensi</th>
+                                        <th className="font-semibold p-3 text-center">Keterangan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {presensi.map((item, index) => (
+                                        <tr className="text-gray-900 border-t hover:bg-gray-100">
+                                            <td className="p-3">{index + 1}</td>
+                                            <td className="p-3">{moment(item.waktu_absensi).format('dddd, Do MMMM YYYY')}</td>
+                                            <td className="p-3 text-center">{moment(item.waktu_absensi).format('HH:mm')}</td>
+                                            <td className="p-3">
+                                                <div className="flex justify-center items-center">
+                                                    {
+                                                        (() => {
+                                                            if (item.keterangan === "Hadir")
+                                                                return <div className="px-3 py-2 font-semibold leading-tight text-green-700 bg-green-200 text-lg rounded flex justify-center items-center">
+                                                                    <p>{item.keterangan}</p>
+                                                                </div>
+                                                            if (item.keterangan === "Sakit")
+                                                                return <div className="px-3 py-2 font-semibold leading-tight text-purple-700 bg-purple-200 text-lg rounded flex justify-center items-center">
+                                                                    <p>{item.keterangan}</p>
+                                                                </div>
+                                                            if (item.keterangan === "Izin")
+                                                                return <div className="px-3 py-2 font-semibold leading-tight text-yellow-700 bg-yellow-200 text-lg rounded flex justify-center items-center">
+                                                                    <p>{item.keterangan}</p>
+                                                                </div>
+                                                        })()
+                                                    }
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                })()}
         </div>
     )
 }

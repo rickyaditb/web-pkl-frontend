@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import AuthContext from 'context/AuthContext';
 import axios from 'axios';
-import CalendarImg from './img/calendar.svg'
-import { Link } from 'react-router-dom'
-import moment from 'moment'
+import CalendarImg from './img/calendar.svg';
+import { Link } from 'react-router-dom';
+import moment from 'moment';
 import 'moment/locale/id';
+import noData from 'components/img/no-data.svg';
 
 
 
@@ -12,7 +13,7 @@ export default function MainPresensi() {
     const user = useContext(AuthContext);
     const id_user = user.id;
 
-    const [presensi, setPresensi] = useState([]);
+    const [presensi, setPresensi] = useState("x");
     const [presensiToday, setPresensiToday] = useState("x");
 
     useEffect(() => {
@@ -67,7 +68,7 @@ export default function MainPresensi() {
                     {
                         (() => {
                             if (presensiToday === "x")
-                                return <></>
+                                return <div className='mb-96'></div>
                             if (presensiToday === null)
                                 return <div id="awal">
                                     <div className="flex items-center">
@@ -100,59 +101,69 @@ export default function MainPresensi() {
                     }
                 </div>
             </div>
-            <div className="bg-white p-3 shadow rounded mb-8 mt-3">
-                <table className="text-left table-auto w-full">
-                    <thead>
-                        <tr className="text-gray-500">
-                            <th className="font-semibold p-3">No.</th>
-                            <th className="font-semibold p-3">Hari dan Tanggal Absensi</th>
-                            <th className="font-semibold p-3 text-center">Jam Absensi</th>
-                            <th className="font-semibold p-3 text-center">Keterangan</th>
-                            <th className="font-semibold p-3 text-center">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {presensi.map((item, index) => (
-                            <tr className="text-gray-900 border-t hover:bg-gray-100" key={item._id}>
-                                <td className="p-3">{index + 1}</td>
-                                <td className="p-3">{moment(item.waktu_absensi).format('dddd, Do MMMM YYYY')}</td>
-                                <td className="p-3 text-center">{moment(item.waktu_absensi).format('HH:mm')}</td>
-                                <td className="p-3">
-                                    <div className="flex justify-center items-center">
-                                        {
-                                            (() => {
-                                                if (item.keterangan === "Hadir")
-                                                    return <div className="px-3 py-2 font-semibold leading-tight text-green-700 bg-green-200 text-lg rounded flex justify-center items-center">
-                                                        <p>{item.keterangan}</p>
-                                                    </div>
-                                                if (item.keterangan === "Sakit")
-                                                    return <div className="px-3 py-2 font-semibold leading-tight text-yellow-700 bg-yellow-200 text-lg rounded flex justify-center items-center">
-                                                        <p>{item.keterangan}</p>
-                                                    </div>
-                                                if (item.keterangan === "Izin")
-                                                    return <div className="px-3 py-2 font-semibold leading-tight text-red-700 bg-red-200 text-lg rounded flex justify-center items-center">
-                                                        <p>{item.keterangan}</p>
-                                                    </div>
-                                            })()
-                                        }
-                                    </div>
-                                </td>
-                                <td className='p-3'>
-                                    <div className="flex justify-center items-center">
-                                        <Link to={`/presensi/detail/`} className="p-2 font-semibold leading-tight text-blue-700 bg-blue-100 text-sm rounded flex justify-center items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-                                                <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
-                                                <path fillRule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clipRule="evenodd" />
-                                            </svg>
-                                            <p className="ml-1">Detail Absensi</p>
-                                        </Link>
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+            {(() => {
+                if (presensi === "x")
+                    return <></>
+                if (presensi.length === 0)
+                    return <div className='bg-white p-4 md:p-8 grid grid-cols-2 mb-16 shadow rounded justify-items-center content-center gap-3 md:gap-0 mt-3'>
+                        <img src={noData} alt="" className='w-64' />
+                        <div className='flex items-center text-2xl md:text-4xl font-bold text-gray-700 text-center'>Data Presensi Kosong, Silahkan Absen</div>
+                    </div>
+                else
+                    return <div className="bg-white p-3 shadow rounded mb-8 mt-3">
+                        <table className="text-left table-auto w-full">
+                            <thead>
+                                <tr className="text-gray-500">
+                                    <th className="font-semibold p-3">No.</th>
+                                    <th className="font-semibold p-3">Hari dan Tanggal Absensi</th>
+                                    <th className="font-semibold p-3 text-center">Jam Absensi</th>
+                                    <th className="font-semibold p-3 text-center">Keterangan</th>
+                                    <th className="font-semibold p-3 text-center">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {presensi.map((item, index) => (
+                                    <tr className="text-gray-900 border-t hover:bg-gray-100" key={item._id}>
+                                        <td className="p-3">{index + 1}</td>
+                                        <td className="p-3">{moment(item.waktu_absensi).format('dddd, Do MMMM YYYY')}</td>
+                                        <td className="p-3 text-center">{moment(item.waktu_absensi).format('HH:mm')}</td>
+                                        <td className="p-3">
+                                            <div className="flex justify-center items-center">
+                                                {
+                                                    (() => {
+                                                        if (item.keterangan === "Hadir")
+                                                            return <div className="px-3 py-2 font-semibold leading-tight text-green-700 bg-green-200 text-lg rounded flex justify-center items-center">
+                                                                <p>{item.keterangan}</p>
+                                                            </div>
+                                                        if (item.keterangan === "Sakit")
+                                                            return <div className="px-3 py-2 font-semibold leading-tight text-yellow-700 bg-yellow-200 text-lg rounded flex justify-center items-center">
+                                                                <p>{item.keterangan}</p>
+                                                            </div>
+                                                        if (item.keterangan === "Izin")
+                                                            return <div className="px-3 py-2 font-semibold leading-tight text-red-700 bg-red-200 text-lg rounded flex justify-center items-center">
+                                                                <p>{item.keterangan}</p>
+                                                            </div>
+                                                    })()
+                                                }
+                                            </div>
+                                        </td>
+                                        <td className='p-3'>
+                                            <div className="flex justify-center items-center">
+                                                <Link to={`/presensi/detail/`} className="p-2 font-semibold leading-tight text-blue-700 bg-blue-100 text-sm rounded flex justify-center items-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+                                                        <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                                                        <path fillRule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clipRule="evenodd" />
+                                                    </svg>
+                                                    <p className="ml-1">Detail Absensi</p>
+                                                </Link>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+            })()}
         </div>
     )
 }
