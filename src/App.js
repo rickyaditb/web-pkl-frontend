@@ -12,6 +12,7 @@ import Pengaturan from './components/user/Pengaturan.js';
 // Pembimbing Component
 import HomePembimbing from './components/pembimbing/HomePembimbing';
 import PresensiPembimbing from 'components/pembimbing/PresensiPembimbing';
+import DetailPresensiPembimbing from 'components/pembimbing/DetailPresensiPembimbing';
 // Universal Component
 import Login from './components/Login.js';
 import Register from './components/Register.js';
@@ -34,7 +35,7 @@ function App() {
 
             <Route path="/pembimbing" element={<HomePembimbing />}></Route>
             <Route path="/presensi_pembimbing" element={<PresensiPembimbing />}></Route>
-            <Route path="/presensi_pembimbing/:id" element={<PresensiPembimbing />}></Route>
+            <Route path="/presensi_pembimbing/:id" element={<DetailPresensiPembimbing />}></Route>
           </Routes>
         </AuthProvider>
       </div>

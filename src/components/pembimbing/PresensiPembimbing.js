@@ -11,8 +11,6 @@ export default function PresensiPembimbing() {
             <div className="grid grid-cols-12 gap-3 mt-5">
                 <Sidebar activePage="presensi"/>
                 <MainPresensiPembimbing />
-
-
             </div>
         </div>
     )

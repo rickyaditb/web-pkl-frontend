@@ -10,9 +10,7 @@ export default function DetailPresensiPembimbing() {
             <Header />
             <div className="grid grid-cols-12 gap-3 mt-5">
                 <Sidebar activePage="presensi"/>
-                <MainPresensiPembimbing />
-
-
+                <MainDetailPresensiPembimbing />
             </div>
         </div>
     )
