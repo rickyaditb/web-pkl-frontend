@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from './sub/Header.js'
-import Sidebar from './sub/Sidebar.js'
+import Sidebar from 'components/Sidebar.js'
 import MainPembimbing from './sub/MainPembimbing.js'
 import Profile from './sub/Profile.js'
 

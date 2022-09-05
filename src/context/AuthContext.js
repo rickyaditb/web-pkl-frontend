@@ -12,6 +12,7 @@ export const AuthProvider = ({ children }) => {
     const [instansi, setInstansi] = useState('');
     const [tanggal_mulai, setMulai] = useState('');
     const [tanggal_selesai, setSelesai] = useState('');
+    const [role, setRole] = useState('');
     const [token, setToken] = useState('');
     const [expire, setExpire] = useState('');
 
@@ -32,6 +33,7 @@ export const AuthProvider = ({ children }) => {
             setExpire(decoded.exp);
             setMulai(decoded.tanggal_mulai);
             setSelesai(decoded.tanggal_selesai);
+            setRole(decoded.role);
         } catch (error) {
             if (error.response) {
                 navigate("/login");
@@ -60,7 +62,7 @@ export const AuthProvider = ({ children }) => {
     });
 
     return (
-        <AuthContext.Provider value={{id, nama, instansi, tanggal_mulai, tanggal_selesai, token, refreshToken, axiosJWT}} >
+        <AuthContext.Provider value={{id, nama, instansi, tanggal_mulai, tanggal_selesai, token, refreshToken, axiosJWT, role}} >
             {children}
         </AuthContext.Provider>
     )

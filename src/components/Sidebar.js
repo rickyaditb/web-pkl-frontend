@@ -1,9 +1,19 @@
-import React from 'react'
+import React, {useContext, useEffect, useState} from 'react'
+import AuthContext from 'context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 export default function Sidebar(props) {
     let activePage = props.activePage;
+
+    const [beranda, setBeranda] = useState('')
+    const [presensi, setPresensi] = useState('')
+    const [laporan, setLaporan] = useState('')
+
+    const auth = useContext(AuthContext);
+    useEffect(() => {
+        setSidebar();
+    }, [auth]);
 
     const navigate = useNavigate();
     
@@ -15,9 +25,22 @@ export default function Sidebar(props) {
             console.log(error)
         }
     }
+    
+    const setSidebar = () => {
+        if(auth.role === "user") {
+            setBeranda("/");
+            setPresensi("/presensi");
+            setLaporan("/laporan");
+        } else if (auth.role === "pembimbing") {
+            setBeranda("/pembimbing");
+            setPresensi("/presensi_pembimbing");
+            setLaporan("/laporan_pembimbing");
+        }
+    }
+
     return (
         <div className="col-span-2 hidden lg:block">
-            <Link to="/pembimbing">
+            <Link to={beranda}>
                 <div className={`text-gray-600 px-4 py-3 ${activePage === "home" && "warna-main text-white "} font-bold rounded-lg flex cursor-pointer ${activePage !== "home" && "hover:bg-purple-200 "} duration-300`}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 my-auto" viewBox="0 0 20 20"
                         fill="currentColor">
@@ -27,7 +50,7 @@ export default function Sidebar(props) {
                     <p className="ml-2">Beranda</p>
                 </div>
             </Link>
-            <Link to="/presensi_pembimbing">
+            <Link to={presensi}>
                 <div
                     className={`text-gray-600 px-4 py-3 ${activePage === "presensi" && "warna-main text-white "} font-bold rounded-lg flex cursor-pointer ${activePage !== "presensi" && "hover:bg-purple-200 "} duration-300`}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 my-auto" viewBox="0 0 20 20"
@@ -39,7 +62,7 @@ export default function Sidebar(props) {
                     <p className="ml-2">Presensi</p>
                 </div>
             </Link>
-            <Link to="/laporan_pembimbing">
+            <Link to={laporan}>
             <div className={`text-gray-600 px-4 py-3 ${activePage === "laporan" && "warna-main text-white "} font-bold rounded-lg flex cursor-pointer ${activePage !== "laporan" && "hover:bg-purple-200 "} duration-300`}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 my-auto" viewBox="0 0 20 20"
                         fill="currentColor">

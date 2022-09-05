@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from './sub/Header'
-import Sidebar from './sub/Sidebar'
+import Sidebar from 'components/Sidebar'
 import MainPresensiPembimbing from './sub/MainPresensiPembimbing'
 
 
