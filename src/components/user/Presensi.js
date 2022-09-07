@@ -2,6 +2,7 @@ import React from 'react'
 import Header from './sub/Header.js'
 import Sidebar from 'components/Sidebar.js'
 import MainPresensi from './sub/MainPresensi'
+import Bottombar from 'components/Bottombar.js';
 
 export default function Home() {
     return (
@@ -11,6 +12,7 @@ export default function Home() {
                 <Sidebar activePage="presensi"/>
                 <MainPresensi />
             </div>
+            <Bottombar activePage="presensi" />
         </div>
     )
 }

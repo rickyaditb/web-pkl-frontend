@@ -3,6 +3,7 @@ import Header from './sub/Header.js';
 import Sidebar from 'components/Sidebar.js';
 import MainHome from './sub/MainHome.js';
 import Pembimbing from './sub/Pembimbing.js';
+import Bottombar from 'components/Bottombar.js';
 
 export default function Home() {
     return (
@@ -12,8 +13,8 @@ export default function Home() {
                 <Sidebar activePage="home" />
                 <MainHome />
                 <Pembimbing />
-
             </div>
+            <Bottombar activePage="home" />
         </div>
     )
 }

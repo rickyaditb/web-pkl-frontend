@@ -2,6 +2,7 @@ import React from 'react'
 import Header from './sub/Header.js'
 import Sidebar from 'components/Sidebar.js'
 import MainDetailLaporan from './sub/MainDetailLaporan.js'
+import Bottombar from 'components/Bottombar.js';
 
 export default function DetailLaporan() {
     return (
@@ -11,6 +12,7 @@ export default function DetailLaporan() {
                 <Sidebar activePage="laporan"/>
                 <MainDetailLaporan />
             </div>
+            <Bottombar activePage="laporan" />
         </div>
     )
 }

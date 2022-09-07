@@ -2,6 +2,7 @@ import React from 'react'
 import Header from './sub/Header.js'
 import Sidebar from 'components/Sidebar.js'
 import MainDetailPresensi from './sub/MainDetailPresensi.js'
+import Bottombar from 'components/Bottombar.js';
 
 export default function DetailPresensi() {
     return (
@@ -11,6 +12,7 @@ export default function DetailPresensi() {
                 <Sidebar activePage="presensi"/>
                 <MainDetailPresensi />
             </div>
+            <Bottombar activePage="presensi" />
         </div>
     )
 }

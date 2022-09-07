@@ -2,6 +2,7 @@ import React from 'react'
 import Header from './sub/Header'
 import Sidebar from 'components/Sidebar'
 import MainDetailPresensiPembimbing from './sub/MainDetailPresensiPembimbing'
+import Bottombar from 'components/Bottombar.js';
 
 
 export default function DetailPresensiPembimbing() {
@@ -12,6 +13,7 @@ export default function DetailPresensiPembimbing() {
                 <Sidebar activePage="presensi"/>
                 <MainDetailPresensiPembimbing />
             </div>
+            <Bottombar activePage="presensi" />
         </div>
     )
 }

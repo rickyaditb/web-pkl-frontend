@@ -3,6 +3,7 @@ import Header from './sub/Header.js'
 import Sidebar from 'components/Sidebar.js'
 import Pembimbing from './sub/Pembimbing.js'
 import MainPengaturan from './sub/MainPengaturan.js'
+import Bottombar from 'components/Bottombar.js';
 
 export default function Pengaturan() {
     return (
@@ -13,6 +14,7 @@ export default function Pengaturan() {
                 <MainPengaturan />
                 <Pembimbing />
             </div>
+            <Bottombar activePage="pengaturan" />
         </div>
     )
 }
