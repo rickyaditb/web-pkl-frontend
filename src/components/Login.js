@@ -21,7 +21,17 @@ export default function Login() {
             await axios.post('http://localhost:5000/login', {
                 email, password
             },);
-            navigate("/");
+            const response = await axios.get(`http://localhost:5000/login/${email}`);
+            if (response.data.role === "user") {
+                navigate("/");
+            } else if (response.data.role === "pembimbing") {
+                navigate("/pembimbing");
+            } else if (response.data.role === "admin") {
+                navigate("/admin");
+            } else {
+                setErrorMsg("Terjadi kesalahan, harap hubungi Admin")
+            }
+            
         } catch (error) {
             setErrorMsg(error.response.data.message);
         }
