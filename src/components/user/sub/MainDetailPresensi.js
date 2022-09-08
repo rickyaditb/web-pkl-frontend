@@ -94,7 +94,7 @@ export default function MainDetailPresensi() {
                 </div>
                 : <></>
             }
-            <div className=' bg-white p-5 grid md:grid-cols-2 -z-20'>
+            <div className='bg-white p-5 grid md:grid-cols-2 -z-20 shadow-lg'>
                 <MapContainer className='z-10' center={[-6.5571255002408, 106.77520330650981]} zoom={18} scrollWheelZoom={false} style={{ width: "100%", height: "400px" }}>
                     <TileLayer
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
