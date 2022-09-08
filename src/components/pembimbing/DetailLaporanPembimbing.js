@@ -3,9 +3,11 @@ import Header from './sub/Header'
 import Sidebar from 'components/Sidebar'
 import MainDetailLaporanPembimbing from './sub/MainDetailLaporanPembimbing'
 import Bottombar from 'components/Bottombar.js';
+import CheckPembimbing from './sub/CheckPembimbing.js';
 
 
 export default function DetailLaporanPembimbing() {
+    CheckPembimbing();
     return (
         <div>
             <Header />

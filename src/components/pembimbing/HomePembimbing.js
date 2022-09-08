@@ -4,8 +4,10 @@ import Sidebar from 'components/Sidebar.js'
 import MainPembimbing from './sub/MainPembimbing.js'
 import Profile from './sub/Profile.js'
 import Bottombar from 'components/Bottombar.js';
+import CheckPembimbing from './sub/CheckPembimbing.js';
 
 export default function HomePembimbing() {
+    CheckPembimbing();
     return (
         <div>
             <Header />
