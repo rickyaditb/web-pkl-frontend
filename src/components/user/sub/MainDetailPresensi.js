@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useGeolocated } from "react-geolocated";
 import GpsImg from './img/gps.svg'
 import axios from 'axios';
@@ -26,9 +26,22 @@ export default function MainDetailPresensi() {
     const [modalValue, setModalValue] = useState("");
     const id_user = user.id;
 
-
+   
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        getPresensiToday();
+    }, [id_user])
+
+    const getPresensiToday = async () => {
+        const response = await axios.get(`http://localhost:5000/presensi_today/${id_user}`);
+        if(response.data) {
+            navigate('/presensi')
+        }
+        console.log(response.data)
+    };
+
     let waktu_absensi = moment();
 
     const savePresensi = async () => {
