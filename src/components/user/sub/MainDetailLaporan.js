@@ -7,7 +7,6 @@ import 'moment/locale/id';
 export default function MainDetailLaporan() {
     moment.locale('id');
     const [laporan, setLaporan] = useState([]);
-    console.log(laporan)
 
     const { id } = useParams();
 

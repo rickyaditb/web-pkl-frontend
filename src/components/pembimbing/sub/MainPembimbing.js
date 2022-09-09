@@ -12,7 +12,6 @@ export default function MainPembimbing() {
     }, [auth]);
 
     const getUser = async () => {
-        console.log(auth.token);
         const response = await auth.axiosJWT.get(`http://localhost:5000/user`, {
             headers: {
                 Authorization: `Bearer ${auth.token}`

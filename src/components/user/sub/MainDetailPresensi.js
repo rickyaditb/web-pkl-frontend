@@ -17,16 +17,12 @@ const myIcon = new Icon({
     iconUrl: marker
 })
 
-
-
 export default function MainDetailPresensi() {
     const user = useContext(AuthContext);
 
     const [modal, setModal] = useState(false);
     const [modalValue, setModalValue] = useState("");
     const id_user = user.id;
-
-   
 
     const navigate = useNavigate();
 
@@ -39,7 +35,6 @@ export default function MainDetailPresensi() {
         if(response.data) {
             navigate('/presensi')
         }
-        console.log(response.data)
     };
 
     let waktu_absensi = moment();

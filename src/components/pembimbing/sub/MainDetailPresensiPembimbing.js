@@ -28,9 +28,7 @@ export default function MainDetailPresensiPembimbing() {
         const response = await axios.get(`http://localhost:5000/presensi_detail/${id}`)
         setUser(response.data[0])
     }
-
-    console.log(presensi)
-
+    
     return (
         <div className="col-span-12 lg:col-span-10">
             <div className="bg-white rounded shadow px-5 py-3 mb-3 text-gray-700 font-semibold flex">

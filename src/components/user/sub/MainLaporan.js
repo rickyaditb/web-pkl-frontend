@@ -44,8 +44,6 @@ export default function MainLaporan() {
         setModal(false);
     }
 
-    console.log(modalValue)
-
     return (
         <div className="col-span-12 lg:col-span-10">
             {modal ?
