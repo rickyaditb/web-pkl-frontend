@@ -94,7 +94,7 @@ export default function MainDetailLaporanPembimbing() {
                 if (presensi.length === 0)
                     return <div className='bg-white p-4 md:p-8 grid grid-cols-2 mb-16 shadow rounded justify-items-center content-center gap-3 md:gap-0'>
                         <img src={noData} alt="" className='w-64' />
-                        <div className='flex items-center text-2xl md:text-4xl font-bold text-gray-700 text-center'>Data Presensi <br />Masih Kosong</div>
+                        <div className='flex items-center text-2xl md:text-4xl font-bold text-gray-700 text-center'>Data Laporan <br />Masih Kosong</div>
                     </div>
                 else
                     return <div className="bg-white p-3 shadow rounded mb-16">
