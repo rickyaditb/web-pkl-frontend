@@ -28,9 +28,9 @@ export default function MainTambahLaporan() {
                 <p className="text-center font-bold text-xl text-gray-600">Buat Laporan Baru</p>
                 <form className="mt-3" action="laporan.html" onSubmit={saveLaporan}>
                     <label for="gambar" className="text-gray-700">Tanggal Laporan</label>
-                    <input type="date" value={tanggal_laporan} onChange={(e) => setTanggal(e.target.value)} id="gambar" name="gambar" placeholder="Masukan Isi Laporan" className="gambar-form bg-gray-100 w-full py-3 px-3 rounded-lg mb-5 focus:outline-none focus:ring-2 border-none" />
+                    <input type="date" value={tanggal_laporan} onChange={(e) => setTanggal(e.target.value)} id="gambar" name="gambar" placeholder="Masukan Isi Laporan" className="gambar-form bg-gray-100 w-full py-3 px-3 rounded-lg mb-5 focus:outline-none focus:ring-2 border-none" required/>
                     <label for="gambar" className="text-gray-700">Isi Laporan</label>
-                    <textarea type="text" value={isi_laporan} onChange={(e) => setIsi(e.target.value)} id="gambar" name="gambar" rows="5" placeholder="Masukan Isi Laporan" className="gambar-form bg-gray-100 w-full py-3 px-3 rounded-lg mb-5 focus:outline-none focus:ring-2 border-none"></textarea>
+                    <textarea type="text" value={isi_laporan} onChange={(e) => setIsi(e.target.value)} id="gambar" name="gambar" rows="5" placeholder="Masukan Isi Laporan" className="gambar-form bg-gray-100 w-full py-3 px-3 rounded-lg mb-5 focus:outline-none focus:ring-2 border-none" required></textarea>
                     <button className="py-3 px-3 rounded text-white bg-blue-400 font-bold cursor-pointer">Buat Laporan</button>
                 </form>
             </div>

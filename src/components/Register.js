@@ -81,13 +81,13 @@ export default function Register() {
                                     <p className="text-center text-gray-500">Sudah punya akun ?<br/>
                                         Masuk Disini</p>
                                 </Link>
-                                <input type="submit" value="Daftar" className="px-5 py-3 rounded-lg text-white warna-main font-bold cursor-pointer" />
+                                <input type="submit" value="Daftar" className="px-5 py-3 rounded-lg text-white warna-main font-bold cursor-pointer" required/>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="block md:hidden mt-3 mb-16">
-                    <input type="submit" value="Daftar" className="w-full px-5 py-3 rounded-lg text-white warna-main font-bold cursor-pointer" />
+                    <input type="submit" value="Daftar" className="w-full px-5 py-3 rounded-lg text-white warna-main font-bold cursor-pointer" required/>
                     <Link to={`/login`}>
                         <p className="text-center text-gray-500 mt-3">
                             Sudah punya akun ? Masuk Disini
