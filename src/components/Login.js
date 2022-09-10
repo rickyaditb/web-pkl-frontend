@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import LoginImg from "./img/login.svg"
 import Logo from './img/logo.png'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import RegisterContext from 'context/RegisterContext'
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -14,6 +15,8 @@ export default function Login() {
     useEffect(() => {
         setErrorMsg("")
     }, [email, password]);
+
+    const pesan = useContext(RegisterContext);
 
     const loginUser = async (e) => {
         e.preventDefault();
@@ -34,6 +37,7 @@ export default function Login() {
             
         } catch (error) {
             setErrorMsg(error.response.data.message);
+            pesan.setBerhasilMsg("")
         }
     }
 
@@ -46,6 +50,7 @@ export default function Login() {
                 <img src={Logo} className="w-32 mx-auto mb-3 hidden md:block" />
                 <form onSubmit={loginUser}>
                     <p className="text-center font-bold text-2xl text-gray-600 mb-3">Sistem Informasi Staff Magang</p>
+                    {pesan.berhasilMsg ? <div className='bg-green-200 text-green-800 p-5 rounded my-2 font-semibold'>{pesan.berhasilMsg}</div> : <></>}
                     {errorMsg ? <div className='bg-red-200 text-red-800 p-5 rounded my-2 font-semibold'>{errorMsg}</div> : <></>}
                     <label htmlFor="email" className="text-gray-700">Email</label><br />
                     <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} id="email" name="email" placeholder="Masukan Email Anda"

@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { RegisterProvider as Rp} from 'context/RegisterContext';
 // User Component
 import Home from './components/user/Home.js';
 import Presensi from './components/user/Presensi.js'
@@ -44,8 +45,8 @@ function App() {
         </AuthProvider>
       </div>
       <Routes>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/register" element={<Register />}></Route>
+        <Route path="/login" element={<Rp><Login /></Rp>}></Route>
+        <Route path="/register" element={<Rp><Register /></Rp>}></Route>
       </Routes>
     </BrowserRouter>
   );

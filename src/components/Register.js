@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Logo from './img/logo.png'
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import RegisterContext from 'context/RegisterContext';
 
 export default function Register() {
     const [email, setEmail] = useState("");
@@ -17,6 +18,8 @@ export default function Register() {
 
     const navigate = useNavigate();
 
+    const pesan = useContext(RegisterContext)
+
     useEffect(() => {
         setErrorMsg("")
     }, [email, password, confPassword]);
@@ -27,6 +30,7 @@ export default function Register() {
             await axios.post('http://localhost:5000/user', {
                 email, nama, asal_instansi, role, tanggal_mulai, tanggal_selesai, password, confPassword
             });
+            pesan.setBerhasilMsg("Akun anda berhasil dibuat, silahkan masuk");
             navigate("/login");
         } catch (error) {
             setErrorMsg(error.response.data.message);
