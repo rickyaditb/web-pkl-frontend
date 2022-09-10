@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider as Ap } from './context/AuthContext';
 import { RegisterProvider as Rp} from 'context/RegisterContext';
 // User Component
 import Home from './components/user/Home.js';
@@ -25,24 +25,22 @@ function App() {
   return (
     <BrowserRouter>
       <div className="container mx-auto px-3 lg:px-16">
-        <AuthProvider>
           <Routes>
-            <Route path="/" element={<Home />}></Route>
-            <Route path="/presensi" element={<Presensi />}></Route>
-            <Route path="/presensi/detail" element={<DetailPresensi />}></Route>
-            <Route path="/laporan" element={<Laporan />}></Route>
-            <Route path="/laporan/add" element={<TambahLaporan />}></Route>
-            <Route path="/laporan/detail/:id" element={<DetailLaporan />}></Route>
-            <Route path="/laporan/edit/:id" element={<EditLaporan />}></Route>
-            <Route path="/pengaturan" element={<Pengaturan />}></Route>
+            <Route path="/" element={<Ap><Home /></Ap>}></Route>
+            <Route path="/presensi" element={<Ap><Presensi /></Ap>}></Route>
+            <Route path="/presensi/detail" element={<Ap><DetailPresensi /></Ap>}></Route>
+            <Route path="/laporan" element={<Ap><Laporan /></Ap>}></Route>
+            <Route path="/laporan/add" element={<Ap><TambahLaporan /></Ap>}></Route>
+            <Route path="/laporan/detail/:id" element={<Ap><DetailLaporan /></Ap>}></Route>
+            <Route path="/laporan/edit/:id" element={<Ap><EditLaporan /></Ap>}></Route>
+            <Route path="/pengaturan" element={<Ap><Pengaturan /></Ap>}></Route>
 
-            <Route path="/pembimbing" element={<HomePembimbing />}></Route>
-            <Route path="/presensi_pembimbing" element={<PresensiPembimbing />}></Route>
-            <Route path="/presensi_pembimbing/:id" element={<DetailPresensiPembimbing />}></Route>
-            <Route path="/laporan_pembimbing" element={<LaporanPembimbing />}></Route>
-            <Route path="/laporan_pembimbing/:id" element={<DetailLaporanPembimbing />}></Route>
+            <Route path="/pembimbing" element={<Ap><HomePembimbing /></Ap>}></Route>
+            <Route path="/presensi_pembimbing" element={<Ap><PresensiPembimbing /></Ap>}></Route>
+            <Route path="/presensi_pembimbing/:id" element={<Ap><DetailPresensiPembimbing /></Ap>}></Route>
+            <Route path="/laporan_pembimbing" element={<Ap><LaporanPembimbing /></Ap>}></Route>
+            <Route path="/laporan_pembimbing/:id" element={<Ap><DetailLaporanPembimbing /></Ap>}></Route>
           </Routes>
-        </AuthProvider>
       </div>
       <Routes>
         <Route path="/login" element={<Rp><Login /></Rp>}></Route>
