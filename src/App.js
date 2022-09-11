@@ -10,6 +10,7 @@ import TambahLaporan from './components/user/TambahLaporan.js';
 import DetailLaporan from './components/user/DetailLaporan.js';
 import EditLaporan from './components/user/EditLaporan.js';
 import Pengaturan from './components/user/Pengaturan.js';
+import UserProfile from 'components/user/UserProfile';
 // Pembimbing Component
 import HomePembimbing from './components/pembimbing/HomePembimbing';
 import PresensiPembimbing from 'components/pembimbing/PresensiPembimbing';
@@ -33,6 +34,7 @@ function App() {
         <Route path="/laporan/detail/:id" element={<Ap><DetailLaporan /></Ap>}></Route>
         <Route path="/laporan/edit/:id" element={<Ap><EditLaporan /></Ap>}></Route>
         <Route path="/pengaturan" element={<Ap><Pengaturan /></Ap>}></Route>
+        <Route path="/profile/:id" element={<Ap><UserProfile /></Ap>}></Route>
 
         <Route path="/pembimbing" element={<Ap><HomePembimbing /></Ap>}></Route>
         <Route path="/presensi_pembimbing" element={<Ap><PresensiPembimbing /></Ap>}></Route>

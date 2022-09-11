@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import AuthContext from 'context/AuthContext';
+import { Link } from 'react-router-dom';
 
 export default function MainPembimbing() {
     const [user, setUser] = useState([]);
@@ -44,7 +45,7 @@ export default function MainPembimbing() {
             </div>
             <div className="flex flex-col gap-3">
                 {user.map((item, index) => (
-                    <div className="bg-white p-5 rounded-lg shadow transform transition flex items-center">
+                    <Link to={`/profile/${item._id}`} key={item._id} className="bg-white p-5 rounded-lg shadow transform transition flex items-center">
                         <img alt="foto-staff" src="https://randomuser.me/api/portraits/men/79.jpg" className="bg-gray-500 w-28 h-28 rounded-full mx-5" />
                         <div className="ml-5">
                             <div className="flex flex-col gap-1">
@@ -58,7 +59,7 @@ export default function MainPembimbing() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
         </div>
