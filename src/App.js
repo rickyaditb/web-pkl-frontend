@@ -39,8 +39,7 @@ function App() {
         <Route path="/presensi_pembimbing/:id" element={<Ap><DetailPresensiPembimbing /></Ap>}></Route>
         <Route path="/laporan_pembimbing" element={<Ap><LaporanPembimbing /></Ap>}></Route>
         <Route path="/laporan_pembimbing/:id" element={<Ap><DetailLaporanPembimbing /></Ap>}></Route>
-      </Routes>
-      <Routes>
+
         <Route path="/login" element={<Rp><Login /></Rp>}></Route>
         <Route path="/register" element={<Rp><Register /></Rp>}></Route>
       </Routes>
