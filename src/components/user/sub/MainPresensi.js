@@ -17,8 +17,8 @@ export default function MainPresensi() {
     const [presensiToday, setPresensiToday] = useState("x");
 
     useEffect(() => {
-        getPresensi();
-        getPresensiToday();
+        id_user && getPresensi();
+        id_user && getPresensiToday();
     }, [id_user])
 
     const getPresensi = async () => {

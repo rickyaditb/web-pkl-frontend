@@ -27,7 +27,7 @@ export default function MainDetailPresensi() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        getPresensiToday();
+        id_user && getPresensiToday();
     }, [id_user])
 
     const getPresensiToday = async () => {

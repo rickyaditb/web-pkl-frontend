@@ -16,7 +16,7 @@ export default function MainLaporan() {
     const [modalValue, setModalValue] = useState("")
 
     useEffect(() => {
-        getLaporan();
+        id_user && getLaporan();
     }, [id_user]);
 
     const getLaporan = async () => {
