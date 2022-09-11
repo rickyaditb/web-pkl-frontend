@@ -1,4 +1,4 @@
-import React, {createContext, useState, useEffect} from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
         }
     }
     const axiosJWT = axios.create();
-    
+
     axiosJWT.interceptors.request.use(async (config) => {
         const currentDate = new Date();
         if (expire * 1000 < currentDate.getTime()) {
@@ -62,8 +62,10 @@ export const AuthProvider = ({ children }) => {
     });
 
     return (
-        <AuthContext.Provider value={{id, nama, instansi, tanggal_mulai, tanggal_selesai, token, refreshToken, axiosJWT, role}} >
-            {children}
+        <AuthContext.Provider value={{ id, nama, instansi, tanggal_mulai, tanggal_selesai, token, refreshToken, axiosJWT, role }} >
+            <div className="container mx-auto px-3 lg:px-16">
+                {children}
+            </div>
         </AuthContext.Provider>
     )
 }
