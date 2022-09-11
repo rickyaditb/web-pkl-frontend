@@ -2,14 +2,13 @@
 module.exports = {
   content: [
     "./src/*.{html,js}",
+    "./src/context/*.{html,js}",
     "./src/components/*.{html,js}",
     "./src/components/user/*.{html,js}",
     "./src/components/user/sub/*.{html,js}",
     "./src/components/pembimbing/*.{html,js}",
     "./src/components/pembimbing/sub/*.{html,js}",
-  ]
-  
-  ,
+  ],
   theme: {
     extend: {},
   },
