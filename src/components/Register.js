@@ -14,6 +14,8 @@ export default function Register() {
     const [tanggal_selesai, setSelesai] = useState("");
     const [password, setPassword] = useState("");
     const [confPassword, setPassword2] = useState("");
+    const [pembimbing, setPembimbing] = useState("")
+    const [pembimbingList, setPembimbingList] = useState([])
     const [errorMsg, setErrorMsg] = useState("")
 
     const navigate = useNavigate();
@@ -24,11 +26,23 @@ export default function Register() {
         setErrorMsg("")
     }, [email, password, confPassword]);
 
+    useEffect(() => {
+        if (asal_instansi === "Pengadilan Agama Bogor") {
+            setRole("pembimbing")
+        } else {
+            setRole("user")
+        }
+    }, [asal_instansi]);
+
+    useEffect(() => {
+        getPembimbing();
+    }, []);
+
     const daftarUser = async (e) => {
         e.preventDefault();
         try {
             await axios.post('http://localhost:5000/user', {
-                email, nama, asal_instansi, role, tanggal_mulai, tanggal_selesai, password, confPassword
+                email, nama, asal_instansi, role, tanggal_mulai, tanggal_selesai, password, confPassword, pembimbing
             });
             pesan.setBerhasilMsg("Akun anda berhasil dibuat, silahkan masuk");
             navigate("/login");
@@ -36,6 +50,11 @@ export default function Register() {
             setErrorMsg(error.response.data.message);
         }
     }
+
+    const getPembimbing = async () => {
+        const response = await axios.get(`http://localhost:5000/pembimbing`);
+        setPembimbingList(response.data);
+    };
 
     return (
         <div className="bg-white">
@@ -48,50 +67,63 @@ export default function Register() {
                         <div className="flex flex-col gap-3">
                             <div>
                                 <label htmlFor="email" className="text-gray-700">Email</label>
-                                <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} id="email" name="email" placeholder="Masukan Email Anda" className="bg-gray-100 w-full py-3 px-3 rounded-lg focus:outline-none focus:ring-2 border-none" required/>
+                                <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} id="email" name="email" placeholder="Masukan Email Anda" className="bg-gray-100 w-full py-3 px-3 rounded-lg focus:outline-none focus:ring-2 border-none" required />
                             </div>
                             <div>
                                 <label htmlFor="nama" className="text-gray-700">Nama Lengkap</label>
-                                <input type="text" value={nama} onChange={(e) => setNama(e.target.value)} id="nama" name="nama" placeholder="Masukan Nama Anda" className="bg-gray-100 w-full py-3 px-3 rounded-lg focus:outline-none focus:ring-2 border-none" required/>
+                                <input type="text" value={nama} onChange={(e) => setNama(e.target.value)} id="nama" name="nama" placeholder="Masukan Nama Anda" className="bg-gray-100 w-full py-3 px-3 rounded-lg focus:outline-none focus:ring-2 border-none" required />
                             </div>
                             <div>
                                 <label htmlFor="asal_instansi" className="text-gray-700">Asal Instansi</label>
-                                <input type="text" value={asal_instansi} onChange={(e) => setInstansi(e.target.value)} id="asal_instansi" name="asal_instansi" placeholder="Masukan Asal Instansi Anda" className="bg-gray-100 w-full py-3 px-3 rounded-lg focus:outline-none focus:ring-2 border-none" required/>
+                                <input type="text" value={asal_instansi} onChange={(e) => setInstansi(e.target.value)} id="asal_instansi" name="asal_instansi" placeholder="Masukan Asal Instansi Anda" className="bg-gray-100 w-full py-3 px-3 rounded-lg focus:outline-none focus:ring-2 border-none" required />
                             </div>
+                            {asal_instansi === "Pengadilan Agama Bogor" ? <></> :
+                            <div>
+                                <label htmlFor="asal_instansi" className="text-gray-700">Pembimbing</label>
+                                <select value={pembimbing} onChange={(e) => setPembimbing(e.target.value)} className="bg-gray-100 w-full py-3 px-3 rounded-lg focus:outline-none focus:ring-2 border-none" required={asal_instansi === "Pengadilan Agama Bogor" ? false : true }>
+                                    <option value="">Pilih Pembimbing Anda</option>
+                                    {pembimbingList.map((item) => (
+                                        <option value={item._id}>{item.nama}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            }
                         </div>
                     </div>
                     <div className="mt-3 md:mt-0" id="login">
                         <div className="flex flex-col gap-3">
+                            {asal_instansi === "Pengadilan Agama Bogor" ? <></> :
                             <div className="grid grid-cols-2 gap-3">
                                 <div>
                                     <label htmlFor="tanggal_mulai" className="text-gray-700">Tanggal Mulai</label>
-                                    <input type="date" value={tanggal_mulai} onChange={(e) => setMulai(e.target.value)} id="tanggal_mulai" name="tanggal_mulai" className="bg-gray-100 w-full py-3 px-3 rounded-lg focus:outline-none focus:ring-2 border-none" required/>
+                                    <input type="date" value={tanggal_mulai} onChange={(e) => setMulai(e.target.value)} id="tanggal_mulai" name="tanggal_mulai" className="bg-gray-100 w-full py-3 px-3 rounded-lg focus:outline-none focus:ring-2 border-none" required />
                                 </div>
                                 <div>
                                     <label htmlFor="tanggal_selesai" className="text-gray-700">Tanggal Selesai</label>
-                                    <input type="date" value={tanggal_selesai} onChange={(e) => setSelesai(e.target.value)} id="tanggal_selesai" name="tanggal_selesai" className="bg-gray-100 w-full py-3 px-3 rounded-lg focus:outline-none focus:ring-2 border-none" required/>
+                                    <input type="date" value={tanggal_selesai} onChange={(e) => setSelesai(e.target.value)} id="tanggal_selesai" name="tanggal_selesai" className="bg-gray-100 w-full py-3 px-3 rounded-lg focus:outline-none focus:ring-2 border-none" required />
                                 </div>
                             </div>
+                            }
                             <div>
                                 <label htmlFor="password" className="text-gray-700">Kata Sandi</label>
-                                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} id="password" name="password" placeholder="Masukan Kata Sandi Anda" className="bg-gray-100 w-full py-3 px-3 rounded-lg focus:outline-none focus:ring-2 border-none" required/>
+                                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} id="password" name="password" placeholder="Masukan Kata Sandi Anda" className="bg-gray-100 w-full py-3 px-3 rounded-lg focus:outline-none focus:ring-2 border-none" required />
                             </div>
                             <div>
                                 <label htmlFor="password2" className="text-gray-700">Konfirmasi Kata Sandi</label>
-                                <input type="password" value={confPassword} onChange={(e) => setPassword2(e.target.value)} id="password2" name="password2" placeholder="Masukan Kembali Kata Sandi Anda" className="bg-gray-100 w-full py-3 px-3 rounded-lg focus:outline-none focus:ring-2 border-none" required/>
+                                <input type="password" value={confPassword} onChange={(e) => setPassword2(e.target.value)} id="password2" name="password2" placeholder="Masukan Kembali Kata Sandi Anda" className="bg-gray-100 w-full py-3 px-3 rounded-lg focus:outline-none focus:ring-2 border-none" required />
                             </div>
                             <div className="ml-auto items-center gap-3 hidden md:flex">
                                 <Link to={`/login`}>
-                                    <p className="text-center text-gray-500">Sudah punya akun ?<br/>
+                                    <p className="text-center text-gray-500">Sudah punya akun ?<br />
                                         Masuk Disini</p>
                                 </Link>
-                                <input type="submit" value="Daftar" className="px-5 py-3 rounded-lg text-white warna-main font-bold cursor-pointer" required/>
+                                <input type="submit" value="Daftar" className="px-5 py-3 rounded-lg text-white warna-main font-bold cursor-pointer" required />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="block md:hidden mt-3 mb-16">
-                    <input type="submit" value="Daftar" className="w-full px-5 py-3 rounded-lg text-white warna-main font-bold cursor-pointer" required/>
+                    <input type="submit" value="Daftar" className="w-full px-5 py-3 rounded-lg text-white warna-main font-bold cursor-pointer" required />
                     <Link to={`/login`}>
                         <p className="text-center text-gray-500 mt-3">
                             Sudah punya akun ? Masuk Disini
@@ -99,6 +131,7 @@ export default function Register() {
                     </Link>
                 </div>
             </form>
+            {pembimbing}
         </div>
     )
 }
