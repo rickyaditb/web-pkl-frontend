@@ -15,10 +15,12 @@ export default function MainPresensi() {
 
     const [presensi, setPresensi] = useState("x");
     const [presensiToday, setPresensiToday] = useState("x");
+    const [stat, setStat] = useState({})
 
     useEffect(() => {
         id_user && getPresensi();
         id_user && getPresensiToday();
+        id_user && getStatistic();
     }, [id_user])
 
     const getPresensi = async () => {
@@ -29,6 +31,11 @@ export default function MainPresensi() {
         const response = await axios.get(`http://localhost:5000/presensi_today/${id_user}`);
         setPresensiToday(response.data);
     };
+
+    const getStatistic = async () => {
+        const response = await axios.get(`http://localhost:5000/presensi_detail/${id_user}`)
+        setStat(response.data[0])
+    }
 
     const d = new Date();
     const jam = `0${d.getHours()}`;
@@ -99,6 +106,73 @@ export default function MainPresensi() {
                                 </div>
                         })()
                     }
+                </div>
+            </div>
+            <div className="grid grid-cols-5 gap-3 mt-3">
+                <div className="bg-white text-gray-600 px-2 py-2 font-bold rounded-lg shadow flex">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        className="h-12 w-12 my-auto mr-2 bg-blue-400 text-white p-2 rounded-lg" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <div className="border-l-2 pl-2 my-auto">
+                        <p className="text-xs text-gray-500">Hadir</p>
+                        <p className="text-2xl -mb-1">{stat.hadir}</p>
+                    </div>
+                </div>
+                <div className="bg-white text-gray-600 px-2 py-2 font-bold rounded-lg shadow flex">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        className="h-12 w-12 my-auto mr-2 bg-orange-400 text-white p-2 rounded-lg" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <div className="border-l-2 pl-2 my-auto">
+                        <p className="text-xs text-gray-500">Terlambat</p>
+                        <p className="text-xl -mb-1">{stat.terlambat}</p>
+                    </div>
+                </div>
+                <div className="bg-white text-gray-600 px-2 py-2 font-bold rounded-lg shadow flex">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        className="h-12 w-12 my-auto mr-2 bg-purple-400 text-white p-2 rounded-lg" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <div className="border-l-2 pl-2 my-auto">
+                        <p className="text-xs text-gray-500">Sakit</p>
+                        <p className="text-xl -mb-1">{stat.sakit}</p>
+                    </div>
+                </div>
+                <div className="bg-white text-gray-600 px-2 py-2 font-bold rounded-lg shadow flex">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        className="h-12 w-12 my-auto mr-2 bg-yellow-400 text-white p-2 rounded-lg" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <div className="border-l-2 pl-2 my-auto">
+                        <p className="text-xs text-gray-500">Izin</p>
+                        <p className="text-xl -mb-1">{stat.izin}</p>
+                    </div>
+                </div>
+                <div className="bg-white text-gray-600 px-2 py-2 font-bold rounded-lg shadow flex">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        className="h-12 w-12 my-auto mr-2 bg-red-400 text-white p-2 rounded-lg" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <div className="border-l-2 pl-2 my-auto">
+                        <p className="text-xs text-gray-500">Alpha</p>
+                        <p className="text-xl -mb-1">{stat.alpha}</p>
+                    </div>
                 </div>
             </div>
             {(() => {
