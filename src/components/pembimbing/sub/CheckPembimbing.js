@@ -15,8 +15,6 @@ export default function CheckPembimbing() {
     const cekUser = () => {
         if(role === "user") {
             navigate('/')
-        } else if (role === "admin") {
-            navigate('/admin')
         }
     };
 }

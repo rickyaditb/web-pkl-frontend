@@ -35,6 +35,10 @@ export default function Sidebar(props) {
             setBeranda("/pembimbing");
             setPresensi("/presensi_pembimbing");
             setLaporan("/laporan_pembimbing");
+        } else if (auth.role === "admin") {
+            setBeranda("/admin");
+            setPresensi("/presensi_pembimbing");
+            setLaporan("/laporan_pembimbing");
         }
     }
 
