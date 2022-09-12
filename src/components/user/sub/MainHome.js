@@ -37,7 +37,7 @@ export default function MainHome() {
                     </svg>
                     <div className="border-l-2 pl-2 my-auto">
                         <p className="text-xs text-gray-500">Status</p>
-                        <p className="text-xl -mb-1">Aktif</p>
+                        <p className="text-xl -mb-1">{user.status}</p>
                     </div>
                 </div>
                 <div className="bg-white text-gray-600 px-2 py-2 font-bold rounded-lg shadow flex hover:bg-blue-100 cursor-pointer transform transition duration-200">
