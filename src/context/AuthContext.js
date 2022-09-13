@@ -8,6 +8,8 @@ const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
     const [id, setId] = useState('');
+    const [email, setEmail] = useState('');
+    const [telepon, setTelepon] = useState('');
     const [nama, setNama] = useState('');
     const [instansi, setInstansi] = useState('');
     const [tanggal_mulai, setMulai] = useState('');
@@ -29,6 +31,8 @@ export const AuthProvider = ({ children }) => {
             setToken(response.data.accessToken)
             const decoded = jwt_decode(response.data.accessToken);
             setId(decoded.userId);
+            setEmail(decoded.email);
+            setTelepon(decoded.telepon);
             setNama(decoded.nama);
             setInstansi(decoded.instansi);
             setExpire(decoded.exp);
@@ -52,6 +56,8 @@ export const AuthProvider = ({ children }) => {
             setToken(response.data.accessToken);
             const decoded = jwt_decode(response.data.accessToken);
             setId(decoded.userId);
+            setEmail(decoded.email);
+            setTelepon(decoded.telepon);
             setNama(decoded.nama);
             setInstansi(decoded.instansi);
             setExpire(decoded.exp);
