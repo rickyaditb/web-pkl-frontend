@@ -79,7 +79,7 @@ export default function MainDetailPresensi() {
     return !isGeolocationAvailable ? (
         <div>Peramban anda tidak mendukung Geolokasi</div>
     ) : !isGeolocationEnabled ? (
-        <div className="col-span-12 lg:col-span-10">
+        <div className="col-span-12 lg:col-span-10 mb-24">
             <div className="bg-white rounded p-10 grid grid-cols-2 shadow justify-items-center place-items-center">
                 <img src={GpsImg} className="w-96" />
                 <p className='text-3xl font-bold text-gray-700 text-center'>Mohon Aktifkan GPS Anda <br /> Untuk Melanjutkan</p>
@@ -102,7 +102,7 @@ export default function MainDetailPresensi() {
                 </div>
                 : <></>
             }
-            <div className='bg-white p-5 grid md:grid-cols-2 -z-20 shadow-lg'>
+            <div className='bg-white p-5 grid md:grid-cols-2 -z-20 shadow mb-24'>
                 <MapContainer className='z-10' center={[-6.5571255002408, 106.77520330650981]} zoom={18} scrollWheelZoom={false} style={{ width: "100%", height: "400px" }}>
                     <TileLayer
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -161,7 +161,7 @@ export default function MainDetailPresensi() {
             </div>
         </div>
     ) : (
-        <div className="col-span-12 lg:col-span-10">
+        <div className="col-span-12 lg:col-span-10 mb-24">
             <div className="bg-white rounded p-10 grid grid-cols-1 md:grid-cols-2 shadow justify-items-center place-items-center">
                 <img src={GpsImg} className="w-96" />
                 <p className='text-3xl font-bold text-gray-700 text-center mt-8 md:mt-0'>Memuat Data Geolokasi <br /> Mohon Tunggu...</p>

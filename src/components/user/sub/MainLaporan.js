@@ -80,7 +80,7 @@ export default function MainLaporan() {
                         <div className='flex items-center text-2xl md:text-4xl font-bold text-gray-700 text-center'>Data Laporan <br />Masih Kosong</div>
                     </div>
                 else
-                    return <div className="bg-white p-3 shadow rounded mb-16">
+                    return <div className="bg-white p-3 shadow rounded mb-24">
                         <table className="text-left table-auto w-full">
                             <thead>
                                 <tr className="text-gray-500">

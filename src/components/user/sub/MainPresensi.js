@@ -108,8 +108,8 @@ export default function MainPresensi() {
                     }
                 </div>
             </div>
-            <div className="grid grid-cols-5 gap-3 mt-3">
-                <div className="bg-white text-gray-600 px-2 py-2 font-bold rounded-lg shadow flex">
+            <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 mt-3">
+                <div className="bg-white text-gray-600 px-2 py-2 font-bold rounded-lg shadow flex col-span-2 lg:col-span-1">
                     <svg xmlns="http://www.w3.org/2000/svg"
                         className="h-12 w-12 my-auto mr-2 bg-blue-400 text-white p-2 rounded-lg" viewBox="0 0 20 20"
                         fill="currentColor">
@@ -184,7 +184,7 @@ export default function MainPresensi() {
                         <div className='flex items-center text-2xl md:text-4xl font-bold text-gray-700 text-center'>Data Presensi Kosong, Silahkan Absen</div>
                     </div>
                 else
-                    return <div className="bg-white p-3 shadow rounded mb-8 mt-3">
+                    return <div className="bg-white p-3 shadow rounded mb-24 mt-3">
                         <table className="text-left table-auto w-full">
                             <thead>
                                 <tr className="text-gray-500">

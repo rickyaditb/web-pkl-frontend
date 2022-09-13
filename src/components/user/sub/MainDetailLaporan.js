@@ -37,7 +37,7 @@ export default function MainDetailLaporan() {
                     <p>Detail Laporan Kegiatan</p>
                 </p>
             </div>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-3 gap-3 mb-16">
                 <div className='col-span-3 md:col-span-1'>
                     <div className="bg-white p-3 rounded-lg shadow flex flex-col gap-3">
                         <div className="bg-white text-gray-600 font-bold rounded-lg flex">

@@ -795,8 +795,8 @@ video {
   margin-top: 1.5rem;
 }
 
-.mb-8 {
-  margin-bottom: 2rem;
+.mb-32 {
+  margin-bottom: 8rem;
 }
 
 .mb-20 {
@@ -807,8 +807,8 @@ video {
   margin-bottom: -1px;
 }
 
-.mb-12 {
-  margin-bottom: 3rem;
+.mb-8 {
+  margin-bottom: 2rem;
 }
 
 .block {
@@ -1647,6 +1647,10 @@ body {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .md\:gap-0 {
     gap: 0px;
   }
@@ -1674,6 +1678,10 @@ body {
     grid-column: span 3 / span 3;
   }
 
+  .lg\:col-span-1 {
+    grid-column: span 1 / span 1;
+  }
+
   .lg\:mt-10 {
     margin-top: 2.5rem;
   }
@@ -1684,6 +1692,10 @@ body {
 
   .lg\:hidden {
     display: none;
+  }
+
+  .lg\:grid-cols-5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   .lg\:px-16 {
