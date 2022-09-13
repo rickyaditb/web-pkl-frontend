@@ -15,7 +15,7 @@ export default function MainPresensiPembimbing() {
     };
 
     return (
-        <div className="col-span-12 lg:col-span-10">
+        <div className="col-span-12 lg:col-span-10 mb-8">
             <div className="bg-white p-3 shadow rounded mb-16">
                 <table className="text-left table-auto w-full">
                     <thead>
