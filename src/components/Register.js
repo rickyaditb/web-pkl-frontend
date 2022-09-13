@@ -7,6 +7,7 @@ import RegisterContext from 'context/RegisterContext';
 
 export default function Register() {
     const [email, setEmail] = useState("");
+    const [telepon, setTelepon] = useState("");
     const [nama, setNama] = useState("");
     const [asal_instansi, setInstansi] = useState("");
     const [role, setRole] = useState("user");
@@ -42,7 +43,7 @@ export default function Register() {
         e.preventDefault();
         try {
             await axios.post('http://localhost:5000/user', {
-                email, nama, asal_instansi, role, tanggal_mulai, tanggal_selesai, password, confPassword, pembimbing
+                email, telepon, nama, asal_instansi, role, tanggal_mulai, tanggal_selesai, password, confPassword, pembimbing
             });
             pesan.setBerhasilMsg("Akun anda berhasil dibuat, silahkan masuk");
             navigate("/login");
@@ -92,6 +93,10 @@ export default function Register() {
                     </div>
                     <div className="mt-3 md:mt-0" id="login">
                         <div className="flex flex-col gap-3">
+                            <div>
+                                <label htmlFor="telepon" className="text-gray-700">No. Telepon</label>
+                                <input type="text" value={telepon} onChange={(e) => setTelepon(e.target.value)} id="telepon" name="telepon" placeholder="Masukan Nama Anda" className="bg-gray-100 w-full py-3 px-3 rounded-lg focus:outline-none focus:ring-2 border-none" required />
+                            </div>
                             {asal_instansi === "Pengadilan Agama Bogor" ? <></> :
                             <div className="grid grid-cols-2 gap-3">
                                 <div>
