@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Profile() {
     return (
-        <div className="col-span-12 md:col-span-4 lg:col-span-3 mb-20 transition duration-300 ease-in">
+        <div className="col-span-12 md:col-span-4 lg:col-span-3 mb-24 transition duration-300 ease-in">
             <div className="ml-3 text-xl font-bold text-gray-600 flex">
                 <p>Profile</p>
                 <div className="flex my-auto ml-auto gap-3">

@@ -23,25 +23,16 @@ export default function MainPembimbing() {
 
 
     return (
-        <div className="col-span-12 md:col-span-8 lg:col-span-7 transition duration-300 ease-in mb-16">
-            <div className="ml-3 text-xl font-bold text-gray-600 flex mb-3 gap-3">
-                <div className="text-blue-500 border-b-2 border-blue-500 px-2 cursor-pointer">
-                    <p className="mb-2">Staff Magang Aktif</p>
-                </div>
-                <div className="text-gray-500 border-b-2 hover:border-gray-500 px-2 cursor-pointer transition border-gray-100">
-                    <p className="mb-2">Staff Magang Non-Aktif</p>
-                </div>
-                <div className="flex my-auto ml-auto gap-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path
-                            d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z" />
-                    </svg>
-                </div>
+        <div className="col-span-12 md:col-span-8 lg:col-span-7 transition duration-300 ease-in mb-1 md:mb-16">
+            <div class="text-lg font-bold text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700 bg-white shadow mb-3">
+                <ul class="flex flex-wrap -mb-px">
+                    <li class="mr-2">
+                        <a href="#" class="inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500" aria-current="page">Staff Magang Aktif</a>
+                    </li>
+                    <li class="mr-2">
+                        <a href="#" class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Staff Magang Non Aktif</a>
+                    </li>
+                </ul>
             </div>
             <div className="flex flex-col gap-3">
                 {user.map((item, index) => (
