@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react'
+import React, { useContext, useEffect } from 'react'
 import AuthContext from 'context/AuthContext';
 import moment from 'moment';
 
@@ -26,15 +26,19 @@ export default function MainHome() {
                     </div>
                 </div>
             </div>
-            <div className="grid grid-cols-2 xl:grid-cols-4 gap-3 mt-3">
-                <div className="bg-white text-gray-600 px-2 py-2 font-bold rounded-lg shadow flex">
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                        className="h-12 w-12 my-auto mr-2 bg-green-300 text-white p-2 rounded-lg" viewBox="0 0 20 20"
-                        fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                            clip-rule="evenodd" />
-                    </svg>
+            <div className="grid grid-cols-2 xl:grid-cols-3 gap-3 mt-3">
+                <div className="bg-white text-gray-600 px-2 py-2 font-bold rounded-lg shadow flex col-span-2 xl:col-span-1">
+                    {user.status === "Aktif" ?
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 my-auto mr-2 bg-green-300 text-white p-2 rounded-lg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg> : (user.status === "Non Aktif") ?
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-12 w-12 my-auto mr-2 bg-red-300 text-white p-2 rounded-lg">
+                            <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clipRule="evenodd" />
+                        </svg> :
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 my-auto mr-2 bg-green-300 text-white p-2 rounded-lg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                    }
                     <div className="border-l-2 pl-2 my-auto">
                         <p className="text-xs text-gray-500">Status</p>
                         <p className="text-xl -mb-1">{user.status}</p>
@@ -49,7 +53,7 @@ export default function MainHome() {
                     </svg>
                     <div className="border-l-2 pl-2 my-auto">
                         <p className="text-xs text-gray-500">Kehadiran</p>
-                        <p className="text-2xl -mb-1">20</p>
+                        <p className="text-2xl -mb-1">93%</p>
                     </div>
                 </div>
                 <div className="bg-white text-gray-600 px-2 py-2 font-bold rounded-lg shadow flex">
@@ -60,20 +64,8 @@ export default function MainHome() {
                             d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                     </svg>
                     <div className="border-l-2 pl-2 my-auto">
-                        <p className="text-xs text-gray-500">Sakit / Izin</p>
-                        <p className="text-2xl -mb-1">0</p>
-                    </div>
-                </div>
-                <div className="bg-white text-gray-600 px-2 py-2 font-bold rounded-lg shadow flex">
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                        className="h-12 w-12 my-auto mr-2 bg-yellow-300 text-white p-2 rounded-lg" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    <div className="border-l-2 pl-2 my-auto">
-                        <p className="text-xs text-gray-500">Tanpa Ket.</p>
-                        <p className="text-xl -mb-1">0</p>
+                        <p className="text-xs text-gray-500">Jumlah Laporan</p>
+                        <p className="text-2xl -mb-1">15/40</p>
                     </div>
                 </div>
             </div>
