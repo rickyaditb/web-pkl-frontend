@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
     const [tanggal_selesai, setSelesai] = useState('');
     const [role, setRole] = useState('');
     const [status, setStatus] = useState('');
+    const [pembimbing, setPembimbing] = useState('');
     const [token, setToken] = useState('');
     const [expire, setExpire] = useState('');
 
@@ -40,6 +41,7 @@ export const AuthProvider = ({ children }) => {
             setSelesai(decoded.tanggal_selesai);
             setRole(decoded.role);
             setStatus(decoded.status);
+            setPembimbing(decoded.pembimbing);
         } catch (error) {
             if (error.response) {
                 navigate("/login");
@@ -65,6 +67,7 @@ export const AuthProvider = ({ children }) => {
             setSelesai(decoded.tanggal_selesai);
             setRole(decoded.role);
             setStatus(decoded.status);
+            setPembimbing(decoded.pembimbing);
         }
         return config;
     }, (error) => {
@@ -72,7 +75,7 @@ export const AuthProvider = ({ children }) => {
     });
 
     return (
-        <AuthContext.Provider value={{ id, nama, instansi, tanggal_mulai, tanggal_selesai, token, refreshToken, axiosJWT, role, status }} >
+        <AuthContext.Provider value={{ id, nama, email, telepon, instansi, tanggal_mulai, tanggal_selesai, token, refreshToken, axiosJWT, role, status, pembimbing }} >
             <div className="container mx-auto px-3 lg:px-16">
                 {children}
             </div>

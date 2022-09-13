@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react';
+import AuthContext from 'context/AuthContext';
 
 export default function Pembimbing() {
+    const user = useContext(AuthContext);
     return (
         <div className="col-span-12 md:col-span-4 lg:col-span-3 mb-20 transition duration-300 ease-in">
             <div className="ml-3 text-xl font-bold text-gray-600 flex">
@@ -19,18 +21,18 @@ export default function Pembimbing() {
             </div>
             <div className="bg-white px-5 py-5 rounded-lg shadow transform transition duration-300 mt-3">
                 <img src="https://randomuser.me/api/portraits/men/66.jpg" className="bg-gray-500 w-24 h-24 rounded-full mx-auto" />
-                    <p className="text-center text-gray-700 mt-2 font-semibold text-lg">Pak Hermansyah S.H.I</p>
+                    <p className="text-center text-gray-700 mt-2 font-semibold text-lg">{user.pembimbing.nama}</p>
                     <div className="flex mt-2">
                         <svg xmlns="http://www.w3.org/2000/svg" className="p-1 rounded-lg h-7 w-7 my-auto bg-blue-400 text-white" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                         </svg>
-                        <p className="text-gray-700 my-auto ml-2">085691493966</p>
+                        <p className="text-gray-700 my-auto ml-2">{user.pembimbing.telepon}</p>
                     </div>
                     <div className="flex mt-2">
                         <svg xmlns="http://www.w3.org/2000/svg" className="p-1 rounded-lg h-7 w-7 my-auto bg-yellow-400 text-white" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M14.243 5.757a6 6 0 10-.986 9.284 1 1 0 111.087 1.678A8 8 0 1118 10a3 3 0 01-4.8 2.401A4 4 0 1114 10a1 1 0 102 0c0-1.537-.586-3.07-1.757-4.243zM12 10a2 2 0 10-4 0 2 2 0 004 0z" clip-rule="evenodd" />
                         </svg>
-                        <p className="text-gray-700 my-auto ml-2">loremipsum@lorem.ac.id</p>
+                        <p className="text-gray-700 my-auto ml-2">{user.pembimbing.email}</p>
                     </div>
             </div>
             <div className="bg-white text-gray-600 p-3 mt-3 font-bold rounded-lg shadow flex transform transition hover:bg-blue-100 duration-300 cursor-pointer">
