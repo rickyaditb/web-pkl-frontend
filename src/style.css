@@ -767,6 +767,10 @@ video {
   margin-left: 0.25rem;
 }
 
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
 .mr-3 {
   margin-right: 0.75rem;
 }
@@ -803,8 +807,8 @@ video {
   margin-bottom: -1px;
 }
 
-.mb-2 {
-  margin-bottom: 0.5rem;
+.mb-32 {
+  margin-bottom: 8rem;
 }
 
 .block {
@@ -929,6 +933,21 @@ video {
 
 .w-7 {
   width: 1.75rem;
+}
+
+.min-w-fit {
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+}
+
+.min-w-max {
+  min-width: -webkit-max-content;
+  min-width: max-content;
+}
+
+.min-w-full {
+  min-width: 100%;
 }
 
 .shrink-0 {
@@ -1190,11 +1209,6 @@ video {
 .bg-green-300 {
   --tw-bg-opacity: 1;
   background-color: rgb(134 239 172 / var(--tw-bg-opacity));
-}
-
-.bg-yellow-300 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(253 224 71 / var(--tw-bg-opacity));
 }
 
 .bg-yellow-100 {
@@ -1715,16 +1729,20 @@ body {
 }
 
 @media (min-width: 1280px) {
-  .xl\:col-span-4 {
-    grid-column: span 4 / span 4;
-  }
-
   .xl\:col-span-1 {
     grid-column: span 1 / span 1;
   }
 
-  .xl\:grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  .xl\:col-span-4 {
+    grid-column: span 4 / span 4;
+  }
+
+  .xl\:hidden {
+    display: none;
+  }
+
+  .xl\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .xl\:grid-cols-2 {
@@ -1733,9 +1751,5 @@ body {
 
   .xl\:grid-cols-5 {
     grid-template-columns: repeat(5, minmax(0, 1fr));
-  }
-
-  .xl\:grid-cols-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
