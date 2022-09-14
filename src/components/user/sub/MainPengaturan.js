@@ -114,7 +114,7 @@ export default function MainPengaturan(props) {
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.3} stroke="currentColor" className="w-5 h-5">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                             </svg>
-                            <p>Ganti Password</p>
+                            <p>Ganti Kata Sandi</p>
                         </p>
                     </div>
                     <div className="bg-white rounded shadow px-5 py-3 mb-3 text-gray-700 font-semibold flex md:hidden cursor-pointer" onClick={kembali}>
@@ -133,7 +133,7 @@ export default function MainPengaturan(props) {
                             <input type="password" value={passwordLama} onChange={(e) => setPasswordLama(e.target.value)} id="password-lama" placeholder='Masukan Kata Sandi Lama' className='w-full bg-gray-100 p-3' required />
                             <label for="password-baru" className='text-gray-700'>Kata Sandi Baru</label>
                             <input type="password" value={passwordBaru} onChange={(e) => setPasswordBaru(e.target.value)} id="password-lama" placeholder='Masukan Kata Sandi Baru' className='w-full bg-gray-100 p-3' required />
-                            <button className='warna-main text-white font-bold p-3 rounded mt-3 w-full text-xl'>Ganti Password</button>
+                            <button className='warna-main text-white font-bold p-3 rounded mt-3 w-full text-xl'>Ganti Kata Sandi</button>
                         </form>
                     </div>
                 </div> : <></>
@@ -197,9 +197,9 @@ export default function MainPengaturan(props) {
                         {errorMsg ? <div className='bg-red-200 text-red-800 p-3 rounded mb-2 font-semibold'>{errorMsg}</div> : <></>}
                         {berhasil ? <div className='bg-green-200 text-green-800 p-3 rounded mb-2 font-semibold'>{berhasil}</div> : <></>}
                         <form onSubmit={editTelepon}>
-                            <label for="number" className='text-gray-700'>No. Telepon Baru</label>
+                            <label for="number" className='text-gray-700'>Nomor Telepon Baru</label>
                             <input type="number" value={telepon} onChange={(e) => setTelepon(e.target.value)} id="telepon" name='telepon' placeholder='Masukan No. Telepon Baru' className='w-full bg-gray-100 p-3' required />
-                            <button className='warna-main text-white font-bold p-3 rounded mt-3 w-full text-xl'>Ganti Email</button>
+                            <button className='warna-main text-white font-bold p-3 rounded mt-3 w-full text-xl'>Ganti Nomor Telepon</button>
                         </form>
                     </div>
                 </div> : <></>
