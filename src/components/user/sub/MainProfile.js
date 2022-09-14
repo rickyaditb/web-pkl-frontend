@@ -60,16 +60,20 @@ export default function MainProfile() {
                 </div>
                 <div className="grid grid-cols-3 gap-3">
                     <div className="bg-white text-gray-600 px-2 py-2 font-bold rounded-lg shadow flex">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            className="h-12 w-12 my-auto mr-2 bg-green-400 text-white p-2 rounded-lg" viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                clip-rule="evenodd" />
-                        </svg>
+                    {user.status === "Aktif" ?
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 my-auto mr-2 bg-green-400 text-white p-2 rounded-lg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg> : (user.status === "Non Aktif") ?
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-12 w-12 my-auto mr-2 bg-red-400 text-white p-2 rounded-lg">
+                                <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clipRule="evenodd" />
+                            </svg> :
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 my-auto mr-2 bg-green-400 text-white p-2 rounded-lg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                    }
                         <div className="border-l-2 pl-2 my-auto">
                             <p className="text-xs text-gray-500">Status</p>
-                            <p className="text-xl -mb-1">Aktif</p>
+                            <p className={`-mb-1 ${user.status === "Aktif" ? "text-xl" : "text-sm"}`}>{user.status}</p>
                         </div>
                     </div>
                     <div className="bg-white text-gray-600 px-2 py-2 font-bold rounded-lg shadow flex">
@@ -139,23 +143,42 @@ export default function MainProfile() {
                     </div>
                 </div>
             </div>
-            <div className="grid grid-cols-2 mt-3 gap-3">
-                <div className="bg-white shadow rounded p-3 flex items-center col-span-2 md:col-span-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-white bg-blue-400 p-2 rounded" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
+            <div className="bg-white p-4 rounded-lg shadow mt-3 grid grid-cols-2 gap-3">
+                <div className="bg-white text-gray-600 font-bold rounded-lg flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-12 w-12 my-auto mr-2 bg-purple-300 text-white p-2 rounded-lg">
+                        <path fillRule="evenodd" d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z" clipRule="evenodd" />
                     </svg>
-                    <div className="ml-3">
-                        <p className="text-gray-700">Tanggal Mulai PKL</p>
-                        <p className="text-gray-600 font-bold text-xl">{moment(user.tanggal_mulai).format('Do MMMM YYYY')}</p>
+                    <div className="border-l-2 pl-2 my-auto">
+                        <p className="text-xs text-gray-500">No Telepon</p>
+                        <p className="text-lg -mb-1">{user.telepon}</p>
                     </div>
                 </div>
-                <div className="bg-white shadow rounded p-3 flex items-center col-span-2 md:col-span-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-white bg-red-400 p-2 rounded" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
+                <div className="bg-white text-gray-600 font-bold rounded-lg flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-12 w-12 my-auto mr-2 bg-slate-400 text-white p-2 rounded-lg">
+                        <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
+                        <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
                     </svg>
-                    <div className="ml-3">
-                        <p className="text-gray-700">Tanggal Selesai PKL</p>
-                        <p className="text-gray-600 font-bold text-xl">{moment(user.tanggal_selesai).format('Do MMMM YYYY')}</p>
+                    <div className="border-l-2 pl-2 my-auto">
+                        <p className="text-xs text-gray-500">Email</p>
+                        <p className="text-lg -mb-1">{user.email}</p>
+                    </div>
+                </div>
+                <div className="bg-white text-gray-600 font-bold rounded-lg flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 my-auto mr-2 bg-red-300 text-white p-2 rounded-lg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+                    </svg>
+                    <div className="border-l-2 pl-2 my-auto">
+                        <p className="text-xs text-gray-500">Tanggal Mulai</p>
+                        <p className="text-lg -mb-1">{moment(user.tanggal_mulai).format('Do MMMM YYYY')}</p>
+                    </div>
+                </div>
+                <div className="bg-white text-gray-600 font-bold rounded-lg flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 my-auto mr-2 bg-blue-300 text-white p-2 rounded-lg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+                    </svg>
+                    <div className="border-l-2 pl-2 my-auto">
+                        <p className="text-xs text-gray-500">Tanggal Selesai</p>
+                        <p className="text-lg -mb-1">{moment(user.tanggal_selesai).format('Do MMMM YYYY')}</p>
                     </div>
                 </div>
             </div>

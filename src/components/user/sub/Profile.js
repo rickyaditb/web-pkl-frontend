@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react';
+import AuthContext from 'context/AuthContext';
 
 export default function Profile(props) {
+    const user = useContext(AuthContext);
     return (
         <div className={`col-span-12 md:col-span-4 lg:col-span-3 transition duration-300 ease-in ${props.kelas}`}>
             <div className="ml-3 text-xl font-bold text-gray-600 flex">
@@ -19,18 +21,28 @@ export default function Profile(props) {
             </div>
             <div className="bg-white px-5 py-5 rounded-lg shadow transform transition duration-300 mt-3">
                 <img src="https://randomuser.me/api/portraits/men/66.jpg" className="bg-gray-500 w-24 h-24 rounded-full mx-auto" />
-                <p className="text-center text-gray-700 mt-2 font-semibold text-lg">Pak Hermansyah S.H.I</p>
-                <div className="flex mt-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="p-1 rounded-lg h-7 w-7 my-auto bg-blue-400 text-white" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                <p className="text-center text-gray-700 mt-2 font-semibold text-lg">{user.nama}</p>
+                <p className="text-center text-gray-700 ">{user.instansi}</p>
+            </div>
+            <div className="bg-white p-4 rounded-lg shadow mt-3 flex flex-col gap-3">
+                <div className="bg-white text-gray-600 font-bold rounded-lg flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-12 w-12 my-auto mr-2 bg-purple-300 text-white p-2 rounded-lg">
+                        <path fillRule="evenodd" d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z" clipRule="evenodd" />
                     </svg>
-                    <p className="text-gray-700 my-auto ml-2">085691493966</p>
+                    <div className="border-l-2 pl-2 my-auto">
+                        <p className="text-xs text-gray-500">No Telepon</p>
+                        <p className="text-lg -mb-1">{user.telepon}</p>
+                    </div>
                 </div>
-                <div className="flex mt-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="p-1 rounded-lg h-7 w-7 my-auto bg-yellow-400 text-white" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M14.243 5.757a6 6 0 10-.986 9.284 1 1 0 111.087 1.678A8 8 0 1118 10a3 3 0 01-4.8 2.401A4 4 0 1114 10a1 1 0 102 0c0-1.537-.586-3.07-1.757-4.243zM12 10a2 2 0 10-4 0 2 2 0 004 0z" clip-rule="evenodd" />
+                <div className="bg-white text-gray-600 font-bold rounded-lg flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-12 w-12 my-auto mr-2 bg-slate-400 text-white p-2 rounded-lg">
+                        <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
+                        <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
                     </svg>
-                    <p className="text-gray-700 my-auto ml-2">loremipsum@lorem.ac.id</p>
+                    <div className="border-l-2 pl-2 my-auto">
+                        <p className="text-xs text-gray-500">Email</p>
+                        <p className="text-lg md:text-base -mb-1 break-all">{user.email}</p>
+                    </div>
                 </div>
             </div>
         </div>

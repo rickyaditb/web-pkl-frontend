@@ -2,7 +2,7 @@ import React from 'react'
 import Header from './sub/Header.js'
 import Sidebar from 'components/Sidebar.js'
 import MainPembimbing from './sub/MainPembimbing.js'
-import Profile from './sub/Profile.js'
+import Profile from 'components/user/sub/Profile.js'
 import Bottombar from 'components/Bottombar.js';
 import CheckPembimbing from './sub/CheckPembimbing.js';
 
