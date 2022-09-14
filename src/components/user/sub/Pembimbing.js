@@ -1,10 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import AuthContext from 'context/AuthContext';
+import { motion } from 'framer-motion';
 
 export default function Pembimbing() {
     const user = useContext(AuthContext);
     return (
-        <div className="col-span-12 md:col-span-4 lg:col-span-3 mb-20 transition duration-300 ease-in">
+        <motion.div initial={{opacity: 0, scale: 1.04}} animate={{opacity: 1, scale: 1}} transition={{ duration: 0.1}} className="col-span-12 md:col-span-4 lg:col-span-3 mb-20 transition duration-300 ease-in">
             <div className="ml-3 text-xl font-bold text-gray-600 flex">
                 <p>Pembimbing</p>
                 <div className="flex my-auto ml-auto gap-3">
@@ -45,6 +46,6 @@ export default function Pembimbing() {
                     <p className="text-lg -mb-1">Kirim Pesan</p>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }

@@ -7,7 +7,6 @@ import Bottombar from 'components/Bottombar.js';
 import CheckUser from './sub/CheckUser.js';
 
 export default function Home() {
-    CheckUser();
     return (
         <div>
             <Header />
