@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import AuthContext from 'context/AuthContext';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export default function MainPembimbing() {
     const [user, setUser] = useState([]);
@@ -48,19 +49,19 @@ export default function MainPembimbing() {
     }
 
     return (
-        <div className="col-span-12 md:col-span-8 lg:col-span-7 transition duration-300 ease-in mb-1 md:mb-16">
+        <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="col-span-12 md:col-span-8 lg:col-span-7 mb-1 md:mb-16">
             <div class="text-lg font-bold text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700 bg-white shadow mb-3">
                 <ul class="flex flex-wrap -mb-px">
                     <li class="mr-2 cursor-pointer" onClick={switchToAktif}>
-                        <p class={`inline-block p-4 rounded-t-lg border-b-2 ${tab === "Aktif" ? "text-blue-600 border-blue-600" : "border-transparent hover:text-gray-600 hover:border-gray-300" }`} aria-current="page">Staff Magang Aktif</p>
+                        <p class={`inline-block p-4 rounded-t-lg border-b-2 ${tab === "Aktif" ? "text-blue-600 border-blue-600" : "border-transparent hover:text-gray-600 hover:border-gray-300"}`} aria-current="page">Staff Magang Aktif</p>
                     </li>
                     <li class="mr-2 cursor-pointer" onClick={switchToNon}>
-                        <p class={`inline-block p-4 rounded-t-lg border-b-2 ${tab === "Non" ? "text-blue-600 border-blue-600" : "border-transparent hover:text-gray-600 hover:border-gray-300" }`}>Staff Magang Non Aktif</p>
+                        <p class={`inline-block p-4 rounded-t-lg border-b-2 ${tab === "Non" ? "text-blue-600 border-blue-600" : "border-transparent hover:text-gray-600 hover:border-gray-300"}`}>Staff Magang Non Aktif</p>
                     </li>
                 </ul>
             </div>
-            {tab === "Aktif" ?
-                <div className="flex flex-col gap-3">
+            {tab === "Aktif" &&
+                <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="flex flex-col gap-3">
                     {aktif.map((item, index) => (
                         <Link to={`/profile/${item._id}`} key={item._id} className="bg-white p-5 rounded-lg shadow transform transition flex items-center">
                             <img alt="foto-staff" src="https://randomuser.me/api/portraits/men/79.jpg" className="bg-gray-500 w-28 h-28 rounded-full mx-5" />
@@ -78,9 +79,10 @@ export default function MainPembimbing() {
                             </div>
                         </Link>
                     ))}
-                </div>
-                :
-                <div className="flex flex-col gap-3">
+                </motion.div>
+            }
+            {tab === "Non" &&
+                <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="flex flex-col gap-3">
                     {nonAktif.map((item, index) => (
                         <Link to={`/profile/${item._id}`} key={item._id} className="bg-white p-5 rounded-lg shadow transform transition flex items-center">
                             <img alt="foto-staff" src="https://randomuser.me/api/portraits/men/79.jpg" className="bg-gray-500 w-28 h-28 rounded-full mx-5" />
@@ -98,8 +100,8 @@ export default function MainPembimbing() {
                             </div>
                         </Link>
                     ))}
-                </div>
+                </motion.div>
             }
-        </div>
+        </motion.div>
     )
 }

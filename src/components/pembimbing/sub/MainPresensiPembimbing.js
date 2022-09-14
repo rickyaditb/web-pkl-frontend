@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export default function MainPresensiPembimbing() {
     const [user, setUser] = useState([]);
@@ -42,32 +43,32 @@ export default function MainPresensiPembimbing() {
     }
 
     return (
-        <div className="col-span-12 lg:col-span-10 mb-8">
+        <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="col-span-12 lg:col-span-10 mb-8">
             <div class="text-lg font-bold text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700 bg-white shadow mb-3">
                 <ul class="flex flex-wrap -mb-px">
                     <li class="mr-2 cursor-pointer" onClick={switchToAktif}>
-                        <p class={`inline-block p-4 rounded-t-lg border-b-2 ${tab === "Aktif" ? "text-blue-600 border-blue-600" : "border-transparent hover:text-gray-600 hover:border-gray-300" }`} aria-current="page">Staff Magang Aktif</p>
+                        <p class={`inline-block p-4 rounded-t-lg border-b-2 ${tab === "Aktif" ? "text-blue-600 border-blue-600" : "border-transparent hover:text-gray-600 hover:border-gray-300"}`} aria-current="page">Staff Magang Aktif</p>
                     </li>
                     <li class="mr-2 cursor-pointer" onClick={switchToNon}>
-                        <p class={`inline-block p-4 rounded-t-lg border-b-2 ${tab === "Non" ? "text-blue-600 border-blue-600" : "border-transparent hover:text-gray-600 hover:border-gray-300" }`}>Staff Magang Non Aktif</p>
+                        <p class={`inline-block p-4 rounded-t-lg border-b-2 ${tab === "Non" ? "text-blue-600 border-blue-600" : "border-transparent hover:text-gray-600 hover:border-gray-300"}`}>Staff Magang Non Aktif</p>
                     </li>
                 </ul>
             </div>
-            <div className="bg-white p-3 shadow rounded mb-16">
-                <table className="text-left table-auto w-full">
-                    <thead>
-                        <tr className="text-gray-500">
-                            <th className="font-semibold p-3">No.</th>
-                            <th className="font-semibold p-3">Nama</th>
-                            <th className="font-semibold p-3 text-center">Hadir</th>
-                            <th className="font-semibold p-3 text-center">Terlambat</th>
-                            <th className="font-semibold p-3 text-center">Sakit</th>
-                            <th className="font-semibold p-3 text-center">Izin</th>
-                            <th className="font-semibold p-3 text-center">Alpha</th>
-                            <th className="font-semibold p-3 text-center">Aksi</th>
-                        </tr>
-                    </thead>
-                    {tab === "Aktif" ?
+            {tab === "Aktif" &&
+                <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="bg-white p-3 shadow rounded mb-16">
+                    <table className="text-left table-auto w-full">
+                        <thead>
+                            <tr className="text-gray-500">
+                                <th className="font-semibold p-3">No.</th>
+                                <th className="font-semibold p-3">Nama</th>
+                                <th className="font-semibold p-3 text-center">Hadir</th>
+                                <th className="font-semibold p-3 text-center">Terlambat</th>
+                                <th className="font-semibold p-3 text-center">Sakit</th>
+                                <th className="font-semibold p-3 text-center">Izin</th>
+                                <th className="font-semibold p-3 text-center">Alpha</th>
+                                <th className="font-semibold p-3 text-center">Aksi</th>
+                            </tr>
+                        </thead>
                         <tbody>
                             {aktif.map((item, index) => (
                                 <tr className="text-gray-900 border-t hover:bg-gray-100" key={item._id}>
@@ -91,7 +92,25 @@ export default function MainPresensiPembimbing() {
                                     </td>
                                 </tr>
                             ))}
-                        </tbody> :
+                        </tbody>
+                    </table>
+                </motion.div>
+            }
+            {tab === "Non" &&
+                <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="bg-white p-3 shadow rounded mb-16">
+                    <table className="text-left table-auto w-full">
+                        <thead>
+                            <tr className="text-gray-500">
+                                <th className="font-semibold p-3">No.</th>
+                                <th className="font-semibold p-3">Nama</th>
+                                <th className="font-semibold p-3 text-center">Hadir</th>
+                                <th className="font-semibold p-3 text-center">Terlambat</th>
+                                <th className="font-semibold p-3 text-center">Sakit</th>
+                                <th className="font-semibold p-3 text-center">Izin</th>
+                                <th className="font-semibold p-3 text-center">Alpha</th>
+                                <th className="font-semibold p-3 text-center">Aksi</th>
+                            </tr>
+                        </thead>
                         <tbody>
                             {nonAktif.map((item, index) => (
                                 <tr className="text-gray-900 border-t hover:bg-gray-100" key={item._id}>
@@ -116,9 +135,9 @@ export default function MainPresensiPembimbing() {
                                 </tr>
                             ))}
                         </tbody>
-                    }
-                </table>
-            </div>
-        </div>
+                    </table>
+                </motion.div>
+            }
+        </motion.div>
     )
 }

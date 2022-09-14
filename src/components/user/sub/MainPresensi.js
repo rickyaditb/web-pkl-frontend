@@ -6,8 +6,7 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 import 'moment/locale/id';
 import noData from 'components/img/no-data.svg';
-
-
+import { motion } from 'framer-motion';
 
 export default function MainPresensi() {
     const user = useContext(AuthContext);
@@ -44,7 +43,7 @@ export default function MainPresensi() {
 
 
     return (
-        <div className="col-span-12 lg:col-span-10">
+        <motion.div initial={{opacity: 0, scale: 1.04}} animate={{opacity: 1, scale: 1}} transition={{ duration: 0.3}} className="col-span-12 lg:col-span-10">
             <div className="grid grid-cols-2 gap-3">
                 <div className="bg-white p-2 shadow rounded">
                     <div className="flex items-center">
@@ -238,6 +237,6 @@ export default function MainPresensi() {
                         </table>
                     </div>
             })()}
-        </div>
+        </motion.div>
     )
 }

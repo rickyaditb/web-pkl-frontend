@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react'
 import AuthContext from 'context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'
+import axios from 'axios';
+import { motion } from 'framer-motion';
 
 export default function MainPengaturan(props) {
     const [menu, setMenu] = useState("main");
@@ -71,7 +72,7 @@ export default function MainPengaturan(props) {
     return (
         <div className="col-span-12 md:col-span-8 lg:col-span-7 transition duration-300 ease-in mb-24">
             {menu === "main" ?
-                <div className="bg-white p-5 rounded shadow">
+                <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="bg-white p-5 rounded shadow">
                     <div className='font-bold text-gray-600 text-xl flex items-center gap-2 mb-4 pb-3 border-b-2 border-gray-200 cursor-pointer' onClick={() => { setMenu("email") }}>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
                             <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
@@ -100,11 +101,11 @@ export default function MainPengaturan(props) {
                             <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                         </svg>
                     </div>
-                </div> :
+                </motion.div> :
                 <></>
             }
             {menu === "password" ?
-                <div>
+                <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }}>
                     <div className="bg-white rounded shadow px-5 py-3 mb-3 text-gray-700 font-semibold hidden md:flex">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2 mt-0.5 text-gray-600" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
@@ -136,10 +137,10 @@ export default function MainPengaturan(props) {
                             <button className='warna-main text-white font-bold p-3 rounded mt-3 w-full text-xl'>Ganti Kata Sandi</button>
                         </form>
                     </div>
-                </div> : <></>
+                </motion.div> : <></>
             }
             {menu === "email" ?
-                <div>
+                <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }}>
                     <div className="bg-white rounded shadow px-5 py-3 mb-3 text-gray-700 font-semibold hidden md:flex">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2 mt-0.5 text-gray-600" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
@@ -169,10 +170,10 @@ export default function MainPengaturan(props) {
                             <button className='warna-main text-white font-bold p-3 rounded mt-3 w-full text-xl'>Ganti Email</button>
                         </form>
                     </div>
-                </div> : <></>
+                </motion.div> : <></>
             }
             {menu === "telepon" ?
-                <div>
+                <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }}>
                     <div className="bg-white rounded shadow px-5 py-3 mb-3 text-gray-700 font-semibold hidden md:flex">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2 mt-0.5 text-gray-600" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
@@ -202,17 +203,17 @@ export default function MainPengaturan(props) {
                             <button className='warna-main text-white font-bold p-3 rounded mt-3 w-full text-xl'>Ganti Nomor Telepon</button>
                         </form>
                     </div>
-                </div> : <></>
+                </motion.div> : <></>
             }
             {menu === "main" ?
-                <div className='mt-3 bg-red-400 text-white font-bold p-3 rounded text-xl flex items-center gap-2 justify-center lg:hidden'>
+                <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className='mt-3 bg-red-400 text-white font-bold p-3 rounded text-xl flex items-center gap-2 justify-center lg:hidden'>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 my-auto" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                     </svg>
                     <p>Keluar</p>
-                </div> : <></>
+                </motion.div> : <></>
             }
         </div>
     )

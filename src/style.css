@@ -1616,6 +1616,14 @@ body {
     margin-bottom: 4rem;
   }
 
+  .md\:mb-32 {
+    margin-bottom: 8rem;
+  }
+
+  .md\:mb-96 {
+    margin-bottom: 24rem;
+  }
+
   .md\:block {
     display: block;
   }

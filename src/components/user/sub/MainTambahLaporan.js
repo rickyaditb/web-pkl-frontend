@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import AuthContext from 'context/AuthContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export default function MainTambahLaporan() {
     const user = useContext(AuthContext);
@@ -23,7 +24,7 @@ export default function MainTambahLaporan() {
         }
     }
     return (
-        <div className="col-span-12 lg:col-span-10 mb-16">
+        <motion.div initial={{opacity: 0, scale: 1.04}} animate={{opacity: 1, scale: 1}} transition={{ duration: 0.3}} className="col-span-12 lg:col-span-10 mb-16">
             <div className="bg-white rounded shadow px-5 py-3 mb-3 text-gray-700 font-semibold flex">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2 mt-0.5 text-gray-600" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
@@ -46,6 +47,6 @@ export default function MainTambahLaporan() {
                     <button className="py-3 px-3 rounded text-white bg-blue-400 font-bold cursor-pointer">Buat Laporan</button>
                 </form>
             </div>
-        </div>
+        </motion.div>
     )
 }

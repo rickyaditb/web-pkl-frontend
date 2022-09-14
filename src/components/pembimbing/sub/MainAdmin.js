@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import AuthContext from 'context/AuthContext';
 import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function MainAdmin() {
     const [user, setUser] = useState([]);
@@ -49,7 +50,7 @@ export default function MainAdmin() {
     }
 
     return (
-        <div className="col-span-12 lg:col-span-10">
+        <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="col-span-12 lg:col-span-10">
             <div class="text-lg font-bold text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700 bg-white shadow mb-3">
                 <ul class="flex flex-wrap -mb-px">
                     <li class="mr-2 cursor-pointer" onClick={switchToAktif}>
@@ -60,18 +61,18 @@ export default function MainAdmin() {
                     </li>
                 </ul>
             </div>
-            <div className="bg-white p-3 shadow rounded mb-16">
-                <table className="text-left table-auto w-full">
-                    <thead>
-                        <tr className="text-gray-500">
-                            <th className="font-semibold p-3">No.</th>
-                            <th className="font-semibold p-3">Nama</th>
-                            <th className="font-semibold p-3">Asal Instansi</th>
-                            <th className="font-semibold p-3">Pembimbing</th>
-                            <th className="font-semibold p-3 text-center">Aksi</th>
-                        </tr>
-                    </thead>
-                    {tab === "Aktif" ?
+            {tab === "Aktif" &&
+                <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="bg-white p-3 shadow rounded mb-16">
+                    <table className="text-left table-auto w-full">
+                        <thead>
+                            <tr className="text-gray-500">
+                                <th className="font-semibold p-3">No.</th>
+                                <th className="font-semibold p-3">Nama</th>
+                                <th className="font-semibold p-3">Asal Instansi</th>
+                                <th className="font-semibold p-3">Pembimbing</th>
+                                <th className="font-semibold p-3 text-center">Aksi</th>
+                            </tr>
+                        </thead>
                         <tbody>
                             {aktif.map((item, index) => (
                                 <tr className="text-gray-900 border-t hover:bg-gray-100">
@@ -92,7 +93,23 @@ export default function MainAdmin() {
                                     </td>
                                 </tr>
                             ))}
-                        </tbody> :
+                        </tbody>
+                    </table>
+                </motion.div>
+            }
+
+            {tab === "Non" &&
+                <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="bg-white p-3 shadow rounded mb-16">
+                    <table className="text-left table-auto w-full">
+                        <thead>
+                            <tr className="text-gray-500">
+                                <th className="font-semibold p-3">No.</th>
+                                <th className="font-semibold p-3">Nama</th>
+                                <th className="font-semibold p-3">Asal Instansi</th>
+                                <th className="font-semibold p-3">Pembimbing</th>
+                                <th className="font-semibold p-3 text-center">Aksi</th>
+                            </tr>
+                        </thead>
                         <tbody>
                             {nonAktif.map((item, index) => (
                                 <tr className="text-gray-900 border-t hover:bg-gray-100">
@@ -114,9 +131,9 @@ export default function MainAdmin() {
                                 </tr>
                             ))}
                         </tbody>
-                    }
-                </table>
-            </div>
-        </div>
+                    </table>
+                </motion.div>
+            }
+        </motion.div>
     )
 }

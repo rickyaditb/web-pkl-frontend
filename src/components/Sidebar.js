@@ -43,7 +43,7 @@ export default function Sidebar(props) {
     }
 
     return (
-        <div className="col-span-2 hidden lg:block">
+        <div className="col-span-2 mb-96 hidden lg:block">
             <Link to={beranda}>
                 <div className={`text-gray-600 px-4 py-3 ${activePage === "home" && "warna-main text-white "} font-bold rounded-lg flex cursor-pointer ${activePage !== "home" && "hover:bg-purple-200 "} duration-300`}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 my-auto" viewBox="0 0 20 20"

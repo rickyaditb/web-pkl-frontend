@@ -8,10 +8,9 @@ import 'moment/locale/id';
 import { MapContainer, TileLayer, useMap, Rectangle, Popup, Marker } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css';
 import AuthContext from 'context/AuthContext';
-
 import marker from 'leaflet/dist/images/marker-icon.png';
-
-import { Icon } from 'leaflet'
+import { Icon } from 'leaflet';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const myIcon = new Icon({
     iconUrl: marker
@@ -77,7 +76,7 @@ export default function MainDetailPresensi() {
     const blackOptions = { color: 'purple' }
 
     return !isGeolocationAvailable ? (
-        <div>Peramban anda tidak mendukung Geolokasi</div>
+        <motion.div initial={{opacity: 0, scale: 1.04}} animate={{opacity: 1, scale: 1}} transition={{ duration: 0.3}}>Peramban anda tidak mendukung Geolokasi</motion.div>
     ) : !isGeolocationEnabled ? (
         <div className="col-span-12 lg:col-span-10 mb-24">
             <div className="bg-white rounded p-10 grid grid-cols-2 shadow justify-items-center place-items-center">
@@ -86,9 +85,10 @@ export default function MainDetailPresensi() {
             </div>
         </div>
     ) : coords ? (
-        <div className="col-span-12 lg:col-span-10">
-            {modal ?
-                <div className="bg-black/50 fixed inset-0 flex items-center justify-center z-30">
+        <motion.div initial={{opacity: 0, scale: 1.04}} animate={{opacity: 1, scale: 1}} transition={{ duration: 0.3}} className="col-span-12 lg:col-span-10">
+            <AnimatePresence>
+            {modal &&
+                <motion.div initial={{opacity: 0, scale: 1.04}} animate={{opacity: 1, scale: 1}} transition={{ duration: 0.3}} exit={{opacity: 0}} className="bg-black/50 fixed inset-0 flex items-center justify-center z-30">
                     <div>
                         <div className="bg-white px-8 py-8 rounded text-center z-50 relative">
                             <p className='font-bold text-2xl text-gray-800 mb-3'>Konfirmasi Presensi</p>
@@ -99,9 +99,9 @@ export default function MainDetailPresensi() {
                             </div>
                         </div>
                     </div>
-                </div>
-                : <></>
+                </motion.div>
             }
+            </AnimatePresence>
             <div className='bg-white p-5 grid md:grid-cols-2 -z-20 shadow mb-24'>
                 <MapContainer className='z-10' center={[-6.5571255002408, 106.77520330650981]} zoom={18} scrollWheelZoom={false} style={{ width: "100%", height: "400px" }}>
                     <TileLayer
@@ -159,13 +159,13 @@ export default function MainDetailPresensi() {
                     }
                 </div>
             </div>
-        </div>
+        </motion.div>
     ) : (
-        <div className="col-span-12 lg:col-span-10 mb-24">
+        <motion.div initial={{opacity: 0, scale: 1.04}} animate={{opacity: 1, scale: 1}} transition={{ duration: 0.3}} className="col-span-12 lg:col-span-10 mb-24">
             <div className="bg-white rounded p-10 grid grid-cols-1 md:grid-cols-2 shadow justify-items-center place-items-center">
                 <img src={GpsImg} className="w-96" />
                 <p className='text-3xl font-bold text-gray-700 text-center mt-8 md:mt-0'>Memuat Data Geolokasi <br /> Mohon Tunggu...</p>
             </div>
-        </div>
+        </motion.div>
     );
 }

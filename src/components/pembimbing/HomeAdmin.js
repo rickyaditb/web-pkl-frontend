@@ -3,7 +3,6 @@ import Header from './sub/Header.js'
 import Sidebar from 'components/Sidebar.js'
 import MainAdmin from './sub/MainAdmin.js'
 import Bottombar from 'components/Bottombar.js';
-import Profile from './sub/Profile.js';
 
 export default function HomeAdmin() {
     return (
