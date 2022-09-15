@@ -17,6 +17,15 @@ export default function MainPengaturan(props) {
     const user = useContext(AuthContext);
     const _id = user.id;
 
+    const Logout = async() => {
+        try {
+            await axios.delete('http://localhost:5000/logout');
+            navigate('/login')
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     const editEmail = async (e) => {
         e.preventDefault();
         try {
@@ -206,7 +215,7 @@ export default function MainPengaturan(props) {
                 </motion.div> : <></>
             }
             {menu === "main" ?
-                <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className='mt-3 bg-red-400 text-white font-bold p-3 rounded text-xl flex items-center gap-2 justify-center lg:hidden'>
+                <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className='mt-3 bg-red-400 text-white font-bold p-3 rounded text-xl flex items-center gap-2 justify-center lg:hidden cursor-pointer' onClick={Logout}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 my-auto" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
