@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider as Ap } from './context/AuthContext';
 import { RegisterProvider as Rp } from 'context/RegisterContext';
+import { useRef } from 'react';
 // User Component
 import Home from './components/user/Home.js';
 import Presensi from './components/user/Presensi.js'
@@ -22,6 +23,7 @@ import HomeAdmin from 'components/pembimbing/HomeAdmin';
 // Universal Component
 import Login from './components/Login.js';
 import Register from './components/Register.js';
+import UploadGambar from 'components/UploadGambar';
 
 
 function App() {
@@ -48,6 +50,8 @@ function App() {
 
         <Route path="/login" element={<Rp><Login /></Rp>}></Route>
         <Route path="/register" element={<Rp><Register /></Rp>}></Route>
+
+        <Route path="/gambar" element={<Ap><UploadGambar /></Ap>}></Route>
       </Routes>
     </BrowserRouter>
   );

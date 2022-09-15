@@ -1,17 +1,36 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import AuthContext from 'context/AuthContext';
 import moment from 'moment';
 import { motion } from 'framer-motion';
+import axios from 'axios'
 
 export default function MainHome() {
     const user = useContext(AuthContext);
+    const id_user = user.id;
+
+    const [userData, setUserData] = useState("")
+
+    useEffect(() => {
+        id_user && getUser();
+    }, [id_user])
+
+    const getUser = async () => {
+        const response = await axios.get(`http://localhost:5000/user/${id_user}`);
+        setUserData(response.data);
+    };
+    console.log(userData)
+
     useEffect(() => {
         user.refreshToken();
     }, []);
     return (
         <motion.div initial={{opacity: 0, scale: 1}} animate={{opacity: 1, scale: 1}} transition={{ duration: 0.3}} className="col-span-12 md:col-span-8 lg:col-span-7 mb-1">
             <div className="bg-white p-5 rounded-lg shadow transform transition flex items-center">
-                <img src="https://randomuser.me/api/portraits/men/79.jpg" className="bg-gray-500 w-28 h-28 rounded-full mx-5" />
+                {userData.gambar ? 
+                <img src={`http://localhost:5000/${id_user}.png`} className="bg-gray-500 w-28 h-28 rounded-full mx-5" />
+                :
+                <img src={`https://randomuser.me/api/portraits/men/79.jpg`} className="bg-gray-500 w-28 h-28 rounded-full mx-5" />
+                }
                 <div className="ml-5">
                     <div className="flex flex-col gap-1">
                         <div>
