@@ -1,10 +1,10 @@
 import React from 'react'
 import Logo from './img/logo.png'
 
-export default function Header() {
+export default function Header(props) {
 
     return (
-        <div className="bg-white p-5 mt-3 lg:mt-10 rounded-lg flex shadow items-center">
+        <div className={`bg-white p-5 mt-3 lg:mt-10 rounded-lg flex shadow items-center ${props.kelas}`}>
             <img src={Logo} className="w-16"/>
             <div>
                 <p className="text-gray-600 font-bold ml-5 mt-1 text-2xl">Pengadilan Agama Bogor</p>

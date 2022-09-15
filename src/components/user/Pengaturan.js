@@ -8,7 +8,7 @@ import Bottombar from 'components/Bottombar.js';
 export default function Pengaturan() {
     return (
         <div>
-            <Header />
+            <Header kelas="hidden md:flex" />
             <div className="grid grid-cols-12 gap-3 mt-5">
                 <Sidebar activePage="pengaturan" />
                 <MainPengaturan />

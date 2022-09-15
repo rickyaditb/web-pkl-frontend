@@ -43,8 +43,8 @@ export default function MainPresensi() {
 
 
     return (
-        <motion.div initial={{opacity: 0, scale: 1.04}} animate={{opacity: 1, scale: 1}} transition={{ duration: 0.3}} className="col-span-12 lg:col-span-10">
-            <div className="grid grid-cols-2 gap-3">
+        <div className="col-span-12 lg:col-span-10">
+            <motion.div initial={{opacity: 0, scale: 1}} animate={{opacity: 1, scale: 1}} transition={{ duration: 0.3}} className="grid grid-cols-2 gap-3">
                 <div className="bg-white p-2 shadow rounded">
                     <div className="flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 bg-blue-300 text-white p-2 mr-3 rounded" viewBox="0 0 20 20" fill="currentColor">
@@ -67,8 +67,8 @@ export default function MainPresensi() {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="bg-white mt-3 p-5 sm:p-8 rounded shadow grid grid-cols-2 justify-items-center">
+            </motion.div>
+            <motion.div initial={{opacity: 0, scale: 1}} animate={{opacity: 1, scale: 1}} transition={{ duration: 0.3}} className="bg-white mt-3 p-5 sm:p-8 rounded shadow grid grid-cols-2 justify-items-center">
                 <img src={CalendarImg} className="h-48 sm:block hidden" />
                 <div className="flex flex-col justify-center col-span-2 sm:col-span-1">
                     {
@@ -106,8 +106,8 @@ export default function MainPresensi() {
                         })()
                     }
                 </div>
-            </div>
-            <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 mt-3">
+            </motion.div>
+            <motion.div initial={{opacity: 0, scale: 1}} animate={{opacity: 1, scale: 1}} transition={{ duration: 0.3}} className="grid grid-cols-2 lg:grid-cols-5 gap-3 mt-3">
                 <div className="bg-white text-gray-600 px-2 py-2 font-bold rounded-lg shadow flex col-span-2 lg:col-span-1">
                     <svg xmlns="http://www.w3.org/2000/svg"
                         className="h-12 w-12 my-auto mr-2 bg-blue-400 text-white p-2 rounded-lg" viewBox="0 0 20 20"
@@ -173,10 +173,10 @@ export default function MainPresensi() {
                         <p className="text-xl -mb-1">{stat.alpha}</p>
                     </div>
                 </div>
-            </div>
+            </motion.div>
             {(() => {
                 if (presensi === "x")
-                    return <></>
+                    return <div className='mb-96'></div>
                 if (presensi.length === 0)
                     return <div className='bg-white p-4 md:p-8 grid grid-cols-2 mb-16 shadow rounded justify-items-center content-center gap-3 md:gap-0 mt-3'>
                         <img src={noData} alt="" className='w-64' />
@@ -237,6 +237,6 @@ export default function MainPresensi() {
                         </table>
                     </div>
             })()}
-        </motion.div>
+        </div>
     )
 }

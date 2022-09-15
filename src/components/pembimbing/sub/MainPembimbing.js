@@ -49,7 +49,7 @@ export default function MainPembimbing() {
     }
 
     return (
-        <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="col-span-12 md:col-span-8 lg:col-span-7 mb-1 md:mb-16">
+        <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="col-span-12 md:col-span-8 lg:col-span-7 mb-1 md:mb-16">
             <div class="text-lg font-bold text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700 bg-white shadow mb-3">
                 <ul class="flex flex-wrap -mb-px">
                     <li class="mr-2 cursor-pointer" onClick={switchToAktif}>
@@ -61,7 +61,7 @@ export default function MainPembimbing() {
                 </ul>
             </div>
             {tab === "Aktif" &&
-                <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="flex flex-col gap-3">
+                <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="flex flex-col gap-3">
                     {aktif.map((item, index) => (
                         <Link to={`/profile/${item._id}`} key={item._id} className="bg-white p-5 rounded-lg shadow transform transition flex items-center">
                             <img alt="foto-staff" src="https://randomuser.me/api/portraits/men/79.jpg" className="bg-gray-500 w-28 h-28 rounded-full mx-5" />
@@ -82,7 +82,7 @@ export default function MainPembimbing() {
                 </motion.div>
             }
             {tab === "Non" &&
-                <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="flex flex-col gap-3">
+                <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="flex flex-col gap-3">
                     {nonAktif.map((item, index) => (
                         <Link to={`/profile/${item._id}`} key={item._id} className="bg-white p-5 rounded-lg shadow transform transition flex items-center">
                             <img alt="foto-staff" src="https://randomuser.me/api/portraits/men/79.jpg" className="bg-gray-500 w-28 h-28 rounded-full mx-5" />

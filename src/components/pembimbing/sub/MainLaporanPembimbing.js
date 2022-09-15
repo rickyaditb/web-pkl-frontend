@@ -43,7 +43,7 @@ export default function MainLaporanPembimbing() {
     }
 
     return (
-        <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="col-span-12 lg:col-span-10 mb-8">
+        <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="col-span-12 lg:col-span-10 mb-8">
             <div class="text-lg font-bold text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700 bg-white shadow mb-3">
                 <ul class="flex flex-wrap -mb-px">
                     <li class="mr-2 cursor-pointer" onClick={switchToAktif}>
@@ -55,7 +55,7 @@ export default function MainLaporanPembimbing() {
                 </ul>
             </div>
             {tab === "Aktif" &&
-                <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="bg-white p-3 shadow rounded mb-16">
+                <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="bg-white p-3 shadow rounded mb-16">
                     <table className="text-left table-auto w-full">
                         <thead>
                             <tr className="text-gray-500">
@@ -91,7 +91,7 @@ export default function MainLaporanPembimbing() {
                 </motion.div>
             }
             {tab === "Non" &&
-                <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="bg-white p-3 shadow rounded mb-16">
+                <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="bg-white p-3 shadow rounded mb-16">
                     <table className="text-left table-auto w-full">
                         <thead>
                             <tr className="text-gray-500">

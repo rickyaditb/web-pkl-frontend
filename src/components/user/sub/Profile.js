@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 export default function Profile(props) {
     const user = useContext(AuthContext);
     return (
-        <motion.div initial={{opacity: 0, scale: 1.04}} animate={{opacity: 1, scale: 1}} transition={{ duration: 0.3}} className={`col-span-12 md:col-span-4 lg:col-span-3 ${props.kelas}`}>
+        <motion.div initial={{opacity: 0, scale: 1}} animate={{opacity: 1, scale: 1}} transition={{ duration: 0.3}} className={`col-span-12 md:col-span-4 lg:col-span-3 ${props.kelas}`}>
             <div className="ml-3 text-xl font-bold text-gray-600 flex">
                 <p>Profile</p>
                 <div className="flex my-auto ml-auto gap-3">

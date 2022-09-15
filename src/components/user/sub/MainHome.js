@@ -9,7 +9,7 @@ export default function MainHome() {
         user.refreshToken();
     }, []);
     return (
-        <motion.div initial={{opacity: 0, scale: 1.04}} animate={{opacity: 1, scale: 1}} transition={{ duration: 0.3}} className="col-span-12 md:col-span-8 lg:col-span-7 mb-64">
+        <motion.div initial={{opacity: 0, scale: 1}} animate={{opacity: 1, scale: 1}} transition={{ duration: 0.3}} className="col-span-12 md:col-span-8 lg:col-span-7 mb-1">
             <div className="bg-white p-5 rounded-lg shadow transform transition flex items-center">
                 <img src="https://randomuser.me/api/portraits/men/79.jpg" className="bg-gray-500 w-28 h-28 rounded-full mx-5" />
                 <div className="ml-5">
