@@ -32,7 +32,6 @@ export default function UploadGambar(props) {
             console.log(error);
             setErrorMsg("Terjadi Kesalahan!");
         }
-        console.log(user)
     }
     return (
         <div>

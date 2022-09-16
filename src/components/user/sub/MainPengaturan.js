@@ -32,6 +32,7 @@ export default function MainPengaturan(props) {
             await axios.patch(`http://localhost:5000/email/${_id}`, {
                 email
             });
+            user.refreshToken();
             setBerhasil("Email berhasil diubah");
             setErrorMsg("");
         } catch (error) {
@@ -46,6 +47,7 @@ export default function MainPengaturan(props) {
             await axios.patch(`http://localhost:5000/telepon/${_id}`, {
                 telepon
             });
+            user.refreshToken();
             setBerhasil("Nomor telepon berhasil diubah");
             setErrorMsg("");
         } catch (error) {
@@ -60,6 +62,7 @@ export default function MainPengaturan(props) {
             await axios.patch(`http://localhost:5000/password/${_id}`, {
                 passwordLama, passwordBaru
             });
+            user.refreshToken();
             setBerhasil("Kata Sandi berhasil diubah");
             setErrorMsg("");
         } catch (error) {
