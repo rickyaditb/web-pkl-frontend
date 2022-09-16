@@ -4,6 +4,9 @@ import { motion } from 'framer-motion';
 
 export default function Profile(props) {
     const user = useContext(AuthContext);
+    const id_user = user.id;
+    const gambar_user = user.gambar;
+
     return (
         <motion.div initial={{opacity: 0, scale: 1}} animate={{opacity: 1, scale: 1}} transition={{ duration: 0.3}} className={`col-span-12 md:col-span-4 lg:col-span-3 ${props.kelas}`}>
             <div className="ml-3 text-xl font-bold text-gray-600 flex">
@@ -21,7 +24,13 @@ export default function Profile(props) {
                 </div>
             </div>
             <div className="bg-white px-5 py-5 rounded-lg shadow transform transition duration-300 mt-3">
-                <img src="https://randomuser.me/api/portraits/men/66.jpg" className="bg-gray-500 w-24 h-24 rounded-full mx-auto" />
+                {gambar_user ? 
+                <img src={`http://localhost:5000/${id_user}${gambar_user}`} className="bg-gray-500 w-24 h-24 rounded-full mx-auto" />
+                :
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="bg-gray-500 p-3 text-white w-24 h-24 rounded-full mx-auto">
+                    <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
+                </svg>
+                }
                 <p className="text-center text-gray-700 mt-2 font-semibold text-lg">{user.nama}</p>
                 <p className="text-center text-gray-700 ">{user.instansi}</p>
             </div>

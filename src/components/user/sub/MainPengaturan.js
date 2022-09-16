@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import AuthContext from 'context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 
@@ -82,6 +82,15 @@ export default function MainPengaturan(props) {
         <div className="col-span-12 md:col-span-8 lg:col-span-7 transition duration-300 ease-in mb-24">
             {menu === "main" ?
                 <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="bg-white p-5 rounded shadow">
+                    <Link to={'/gambar'} className='font-bold text-gray-600 text-xl flex items-center gap-2 mb-4 pb-3 border-b-2 border-gray-200 cursor-pointer'>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                            <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
+                        </svg>
+                        <p>Ganti Foto Profil</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.3} stroke="currentColor" className="w-5 h-5 ml-auto">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                        </svg>
+                    </Link>
                     <div className='font-bold text-gray-600 text-xl flex items-center gap-2 mb-4 pb-3 border-b-2 border-gray-200 cursor-pointer' onClick={() => { setMenu("email") }}>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
                             <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
