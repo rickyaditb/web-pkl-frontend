@@ -14,6 +14,9 @@ export default function MainHome() {
     }, []);
     return (
         <motion.div initial={{opacity: 0, scale: 1}} animate={{opacity: 1, scale: 1}} transition={{ duration: 0.3}} className="col-span-12 md:col-span-8 lg:col-span-7 mb-1">
+            {gambar_user === undefined && 
+                <div className='bg-yellow-300 p-3 rounded shadow text-gray-700 font-bold mb-3'>Kamu belum melengkapi foto profil, klik disini untuk melengkapi</div>
+            }
             <div className="bg-white p-5 rounded-lg shadow transform transition flex items-center">
                 {gambar_user ? 
                 <img src={`http://localhost:5000/${id_user}${gambar_user}`} className="bg-gray-500 w-28 h-28 rounded-full mx-5" />
