@@ -9,22 +9,45 @@ export default function MainHome() {
     const user = useContext(AuthContext);
     const id_user = user.id;
     const gambar_user = user.gambar;
+    let fotoProfil = null;
 
     useEffect(() => {
         user.refreshToken();
     }, []);
+
+    const [statusGambar, setStatusGambar] = useState("");
+
+    useEffect(() => {
+        gambar_user && checkImage();
+    }, [gambar_user]);
+
+    let url = `http://localhost:5000/${id_user}${gambar_user}`;
+
+    function checkImage() {
+        var request = new XMLHttpRequest();
+        request.open("GET", url, true);
+        request.send();
+        request.onload = function () {
+            if (request.status == 200) {
+                setStatusGambar(true);
+            } else {
+                setStatusGambar(false);
+            }
+        }
+    }
+
     return (
-        <motion.div initial={{opacity: 0, scale: 1}} animate={{opacity: 1, scale: 1}} transition={{ duration: 0.3}} className="col-span-12 md:col-span-8 lg:col-span-7 mb-1">
-            {gambar_user === undefined && 
+        <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="col-span-12 md:col-span-8 lg:col-span-7 mb-1">
+            {statusGambar === false &&
                 <Link to={'/gambar'} className='block bg-yellow-300 p-3 rounded shadow text-gray-700 font-bold mb-3'>Kamu belum melengkapi foto profil, klik disini untuk melengkapi</Link>
             }
             <div className="bg-white p-5 rounded-lg shadow transform transition flex items-center">
-                {gambar_user ? 
-                <img src={`http://localhost:5000/${id_user}${gambar_user}`} className="bg-gray-500 w-28 h-28 rounded-full mx-5" />
-                :
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="bg-gray-500 p-3 text-white w-28 h-28 rounded-full mx-5">
-                    <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
-                </svg>
+                {statusGambar ?
+                    <img src={`http://localhost:5000/${id_user}${gambar_user}`} className="bg-gray-500 w-28 h-28 rounded-full mx-5" />
+                    :
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="bg-gray-500 p-3 text-white w-28 h-28 rounded-full mx-5">
+                        <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
+                    </svg>
                 }
                 <div className="ml-5">
                     <div className="flex flex-col gap-1">
