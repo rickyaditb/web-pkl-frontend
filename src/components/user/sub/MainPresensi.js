@@ -44,7 +44,7 @@ export default function MainPresensi() {
 
     return (
         <div className="col-span-12 lg:col-span-10">
-            <motion.div initial={{opacity: 0, scale: 1}} animate={{opacity: 1, scale: 1}} transition={{ duration: 0.3}} className="grid grid-cols-2 gap-3">
+            <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="grid grid-cols-2 gap-3">
                 <div className="bg-white p-2 shadow rounded">
                     <div className="flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 bg-blue-300 text-white p-2 mr-3 rounded" viewBox="0 0 20 20" fill="currentColor">
@@ -68,7 +68,7 @@ export default function MainPresensi() {
                     </div>
                 </div>
             </motion.div>
-            <motion.div initial={{opacity: 0, scale: 1}} animate={{opacity: 1, scale: 1}} transition={{ duration: 0.3}} className="bg-white mt-3 p-5 sm:p-8 rounded shadow grid grid-cols-2 justify-items-center">
+            <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="bg-white mt-3 p-5 sm:p-8 rounded shadow grid grid-cols-2 justify-items-center">
                 <img src={CalendarImg} className="h-48 sm:block hidden" />
                 <div className="flex flex-col justify-center col-span-2 sm:col-span-1">
                     {
@@ -107,10 +107,10 @@ export default function MainPresensi() {
                     }
                 </div>
             </motion.div>
-            <motion.div initial={{opacity: 0, scale: 1}} animate={{opacity: 1, scale: 1}} transition={{ duration: 0.3}} className="grid grid-cols-2 lg:grid-cols-5 gap-3 mt-3">
+            <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="grid grid-cols-2 lg:grid-cols-5 gap-3 mt-3">
                 <div className="bg-white text-gray-600 px-2 py-2 font-bold rounded-lg shadow flex col-span-2 lg:col-span-1">
                     <svg xmlns="http://www.w3.org/2000/svg"
-                        className="h-12 w-12 my-auto mr-2 bg-blue-400 text-white p-2 rounded-lg" viewBox="0 0 20 20"
+                        className="h-12 w-12 my-auto mr-2 bg-green-400 text-white p-2 rounded-lg" viewBox="0 0 20 20"
                         fill="currentColor">
                         <path fill-rule="evenodd"
                             d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -149,7 +149,7 @@ export default function MainPresensi() {
                 </div>
                 <div className="bg-white text-gray-600 px-2 py-2 font-bold rounded-lg shadow flex">
                     <svg xmlns="http://www.w3.org/2000/svg"
-                        className="h-12 w-12 my-auto mr-2 bg-yellow-400 text-white p-2 rounded-lg" viewBox="0 0 20 20"
+                        className="h-12 w-12 my-auto mr-2 bg-slate-400 text-white p-2 rounded-lg" viewBox="0 0 20 20"
                         fill="currentColor">
                         <path fill-rule="evenodd"
                             d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -199,7 +199,7 @@ export default function MainPresensi() {
                                     <tr className="text-gray-900 border-t hover:bg-gray-100" key={item._id}>
                                         <td className="p-3">{index + 1}</td>
                                         <td className="p-3">{moment(item.waktu_absensi).format('dddd, Do MMMM YYYY')}</td>
-                                        <td className="p-3 text-center">{moment(item.waktu_absensi).format('HH:mm')}</td>
+                                        <td className="p-3 text-center">{item.keterangan === "Alpha" ? <></> : moment(item.waktu_absensi).format('HH:mm')}</td>
                                         <td className="p-3">
                                             <div className="flex justify-center items-center">
                                                 {
@@ -208,11 +208,19 @@ export default function MainPresensi() {
                                                             return <div className="px-3 py-2 font-semibold leading-tight text-green-700 bg-green-200 text-lg rounded flex justify-center items-center">
                                                                 <p>{item.keterangan}</p>
                                                             </div>
+                                                        if (item.keterangan === "Terlambat")
+                                                            return <div className="px-3 py-2 font-semibold leading-tight text-orange-700 bg-orange-200 text-lg rounded flex justify-center items-center">
+                                                                <p>{item.keterangan}</p>
+                                                            </div>
                                                         if (item.keterangan === "Sakit")
-                                                            return <div className="px-3 py-2 font-semibold leading-tight text-yellow-700 bg-yellow-200 text-lg rounded flex justify-center items-center">
+                                                            return <div className="px-3 py-2 font-semibold leading-tight text-purple-700 bg-purple-200 text-lg rounded flex justify-center items-center">
                                                                 <p>{item.keterangan}</p>
                                                             </div>
                                                         if (item.keterangan === "Izin")
+                                                            return <div className="px-3 py-2 font-semibold leading-tight text-slate-700 bg-slate-300 text-lg rounded flex justify-center items-center">
+                                                                <p>{item.keterangan}</p>
+                                                            </div>
+                                                        if (item.keterangan === "Alpha")
                                                             return <div className="px-3 py-2 font-semibold leading-tight text-red-700 bg-red-200 text-lg rounded flex justify-center items-center">
                                                                 <p>{item.keterangan}</p>
                                                             </div>
