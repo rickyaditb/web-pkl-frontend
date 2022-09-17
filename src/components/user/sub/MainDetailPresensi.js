@@ -21,6 +21,7 @@ export default function MainDetailPresensi() {
 
     const [modal, setModal] = useState(false);
     const [modalValue, setModalValue] = useState("");
+    const [errorMsg, setErrorMsg] = useState("");
     const id_user = user.id;
 
     const navigate = useNavigate();
@@ -46,7 +47,9 @@ export default function MainDetailPresensi() {
             });
             navigate("/presensi");
         } catch (error) {
-            console.log(error);
+            setModalValue("");
+            setModal(false);
+            setErrorMsg(error.response.data.message);
         }
     }
 
@@ -86,6 +89,7 @@ export default function MainDetailPresensi() {
         </div>
     ) : coords ? (
         <motion.div initial={{opacity: 0, scale: 1.04}} animate={{opacity: 1, scale: 1}} transition={{ duration: 0.3}} className="col-span-12 lg:col-span-10">
+            {errorMsg && <div className='bg-red-200 text-red-800 p-3 rounded mb-2 font-semibold'>{errorMsg}</div>}
             <AnimatePresence>
             {modal &&
                 <motion.div initial={{opacity: 0, scale: 1.04}} animate={{opacity: 1, scale: 1}} transition={{ duration: 0.3}} exit={{opacity: 0}} className="bg-black/50 fixed inset-0 flex items-center justify-center z-30">
