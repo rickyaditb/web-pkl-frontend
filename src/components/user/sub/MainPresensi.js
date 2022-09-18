@@ -70,13 +70,13 @@ export default function MainPresensi() {
             </motion.div>
             <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="bg-white mt-3 p-5 sm:p-8 rounded shadow grid grid-cols-2 justify-items-center">
                 <img src={CalendarImg} className="h-48 sm:block hidden" />
-                <div className="flex flex-col justify-center col-span-2 sm:col-span-1">
+                <div className="flex flex-col justify-center col-span-2 sm:col-span-1 items-center py-3 sm:py-0">
                     {
                         (() => {
                             if (presensiToday === "x")
                                 return <div className='mb-96'></div>
                             if (presensiToday === null)
-                                return <div id="awal">
+                                return <div id="awal" className='mt-0 sm:-mt-3'>
                                     <div className="flex items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 bg-green-300 text-white p-2 mr-3 rounded" viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
@@ -95,8 +95,8 @@ export default function MainPresensi() {
                                             <p className="text-xl text-gray-600 font-bold -mt-1" id="jam-hari-ini">{final}</p>
                                         </div>
                                     </div>
-                                    <div className='mt-6'>
-                                        <Link to={`/presensi/detail/`} className="warna-main text-white px-5 py-3 font-bold rounded" onclick="absen()">Absen</Link>
+                                    <div className='mt-6 mb-3 sm:mb-0'>
+                                        <Link to={`/presensi/detail/`} className="warna-main text-white px-5 py-3 font-bold rounded">Absen</Link>
                                     </div>
                                 </div>
                             else
