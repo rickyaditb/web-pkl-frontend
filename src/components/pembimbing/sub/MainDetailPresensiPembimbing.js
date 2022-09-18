@@ -63,13 +63,13 @@ export default function MainDetailPresensiPembimbing() {
                 <div className="grid grid-cols-3 gap-3">
                     <div className="bg-white text-gray-600 px-2 py-2 font-bold rounded-lg shadow flex">
                         {user.status === "Aktif" ?
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 my-auto mr-2 bg-green-400 text-white p-2 rounded-lg" viewBox="0 0 20 20" fill="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 my-auto mr-2 bg-blue-400 text-white p-2 rounded-lg" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                             </svg> : (user.status === "Non Aktif") ?
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-12 w-12 my-auto mr-2 bg-red-400 text-white p-2 rounded-lg">
                                     <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clipRule="evenodd" />
                                 </svg> :
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 my-auto mr-2 bg-green-400 text-white p-2 rounded-lg" viewBox="0 0 20 20" fill="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 my-auto mr-2 bg-blue-400 text-white p-2 rounded-lg" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                 </svg>
                         }
@@ -80,7 +80,7 @@ export default function MainDetailPresensiPembimbing() {
                     </div>
                     <div className="bg-white text-gray-600 px-2 py-2 font-bold rounded-lg shadow flex">
                         <svg xmlns="http://www.w3.org/2000/svg"
-                            className="h-12 w-12 my-auto mr-2 bg-blue-400 text-white p-2 rounded-lg" viewBox="0 0 20 20"
+                            className="h-12 w-12 my-auto mr-2 bg-green-400 text-white p-2 rounded-lg" viewBox="0 0 20 20"
                             fill="currentColor">
                             <path fill-rule="evenodd"
                                 d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -119,7 +119,7 @@ export default function MainDetailPresensiPembimbing() {
                     </div>
                     <div className="bg-white text-gray-600 px-2 py-2 font-bold rounded-lg shadow flex">
                         <svg xmlns="http://www.w3.org/2000/svg"
-                            className="h-12 w-12 my-auto mr-2 bg-yellow-400 text-white p-2 rounded-lg" viewBox="0 0 20 20"
+                            className="h-12 w-12 my-auto mr-2 bg-slate-400 text-white p-2 rounded-lg" viewBox="0 0 20 20"
                             fill="currentColor">
                             <path fill-rule="evenodd"
                                 d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -169,25 +169,33 @@ export default function MainDetailPresensiPembimbing() {
                                         <tr className="text-gray-900 border-t hover:bg-gray-100">
                                             <td className="p-3">{index + 1}</td>
                                             <td className="p-3">{moment(item.waktu_absensi).format('dddd, Do MMMM YYYY')}</td>
-                                            <td className="p-3 text-center">{moment(item.waktu_absensi).format('HH:mm')}</td>
+                                            <td className="p-3 text-center">{item.keterangan === "Alpha" ? <></> : moment(item.waktu_absensi).format('HH:mm')}</td>
                                             <td className="p-3">
                                                 <div className="flex justify-center items-center">
-                                                    {
-                                                        (() => {
-                                                            if (item.keterangan === "Hadir")
-                                                                return <div className="px-3 py-2 font-semibold leading-tight text-green-700 bg-green-200 text-lg rounded flex justify-center items-center">
-                                                                    <p>{item.keterangan}</p>
-                                                                </div>
-                                                            if (item.keterangan === "Sakit")
-                                                                return <div className="px-3 py-2 font-semibold leading-tight text-purple-700 bg-purple-200 text-lg rounded flex justify-center items-center">
-                                                                    <p>{item.keterangan}</p>
-                                                                </div>
-                                                            if (item.keterangan === "Izin")
-                                                                return <div className="px-3 py-2 font-semibold leading-tight text-yellow-700 bg-yellow-200 text-lg rounded flex justify-center items-center">
-                                                                    <p>{item.keterangan}</p>
-                                                                </div>
-                                                        })()
-                                                    }
+                                                {
+                                                    (() => {
+                                                        if (item.keterangan === "Hadir")
+                                                            return <div className="px-3 py-2 font-semibold leading-tight text-green-700 bg-green-200 text-lg rounded flex justify-center items-center">
+                                                                <p>{item.keterangan}</p>
+                                                            </div>
+                                                        if (item.keterangan === "Terlambat")
+                                                            return <div className="px-3 py-2 font-semibold leading-tight text-orange-700 bg-orange-200 text-lg rounded flex justify-center items-center">
+                                                                <p>{item.keterangan}</p>
+                                                            </div>
+                                                        if (item.keterangan === "Sakit")
+                                                            return <div className="px-3 py-2 font-semibold leading-tight text-purple-700 bg-purple-200 text-lg rounded flex justify-center items-center">
+                                                                <p>{item.keterangan}</p>
+                                                            </div>
+                                                        if (item.keterangan === "Izin")
+                                                            return <div className="px-3 py-2 font-semibold leading-tight text-slate-700 bg-slate-300 text-lg rounded flex justify-center items-center">
+                                                                <p>{item.keterangan}</p>
+                                                            </div>
+                                                        if (item.keterangan === "Alpha")
+                                                            return <div className="px-3 py-2 font-semibold leading-tight text-red-700 bg-red-200 text-lg rounded flex justify-center items-center">
+                                                                <p>{item.keterangan}</p>
+                                                            </div>
+                                                    })()
+                                                }
                                                 </div>
                                             </td>
                                         </tr>
