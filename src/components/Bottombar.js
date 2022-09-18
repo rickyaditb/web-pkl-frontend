@@ -25,12 +25,16 @@ export default function Bottombar(props) {
     }
 
     const setSidebar = () => {
-        if (auth.role === "user") {
+        if(auth.role === "user") {
             setBeranda("/");
             setPresensi("/presensi");
             setLaporan("/laporan");
         } else if (auth.role === "pembimbing") {
             setBeranda("/pembimbing");
+            setPresensi("/presensi_pembimbing");
+            setLaporan("/laporan_pembimbing");
+        } else if (auth.role === "admin") {
+            setBeranda("/admin");
             setPresensi("/presensi_pembimbing");
             setLaporan("/laporan_pembimbing");
         }
