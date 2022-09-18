@@ -184,11 +184,11 @@ export default function MainProfile() {
                 </div>
             </div>
             <div className='flex mt-3 gap-3 justify-center mb-24'>
-                <Link to={`/laporan_pembimbing/${user._id}`} className="warna-main p-3 text-white font-bold rounded">
+                <Link to={`/presensi_pembimbing/${user._id}`} className="warna-main p-3 text-white font-bold rounded">
                     Detail Presensi
                 </Link>
-                <Link to={`/presensi_pembimbing/${user._id}`} className="warna-main p-3 text-white font-bold rounded">
-                    Detail Absensi
+                <Link to={`/laporan_pembimbing/${user._id}`} className="warna-main p-3 text-white font-bold rounded">
+                    Detail Laporan
                 </Link>
             </div>
         </motion.div>
