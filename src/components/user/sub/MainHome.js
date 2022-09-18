@@ -9,7 +9,6 @@ export default function MainHome() {
     const user = useContext(AuthContext);
     const id_user = user.id;
     const gambar_user = user.gambar;
-    let fotoProfil = null;
 
     useEffect(() => {
         user.refreshToken();
