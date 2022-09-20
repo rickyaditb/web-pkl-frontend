@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import AuthContext from 'context/AuthContext';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import ReactDOMServer from 'react-dom/server';
 
 export default function MainPembimbing() {
     const [user, setUser] = useState([]);
@@ -48,6 +49,10 @@ export default function MainPembimbing() {
         setTab("Aktif")
     }
 
+    const profilePlaceholder = ReactDOMServer.renderToStaticMarkup(<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="bg-gray-500 p-3 text-white w-28 h-28 rounded-full mx-5">
+        <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
+    </svg>)
+
     return (
         <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="col-span-12 md:col-span-8 lg:col-span-7 mb-1 md:mb-16">
             <div class="text-lg font-bold text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700 bg-white shadow mb-3">
@@ -64,7 +69,7 @@ export default function MainPembimbing() {
                 <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="flex flex-col gap-3">
                     {aktif.map((item, index) => (
                         <Link to={`/profile/${item._id}`} key={item._id} className="bg-white p-5 rounded-lg shadow transform transition flex items-center">
-                            <img alt="foto-staff" src="https://randomuser.me/api/portraits/men/79.jpg" className="bg-gray-500 w-28 h-28 rounded-full mx-5" />
+                            <img alt="foto-staff" onError={(e) => e.target.outerHTML = profilePlaceholder} src={`http://localhost:5000/${item._id}${item.gambar}`} className="bg-gray-500 w-28 h-28 rounded-full mx-5" />
                             <div className="ml-5">
                                 <div className="flex flex-col gap-1">
                                     <div>
@@ -85,7 +90,7 @@ export default function MainPembimbing() {
                 <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="flex flex-col gap-3">
                     {nonAktif.map((item, index) => (
                         <Link to={`/profile/${item._id}`} key={item._id} className="bg-white p-5 rounded-lg shadow transform transition flex items-center">
-                            <img alt="foto-staff" src="https://randomuser.me/api/portraits/men/79.jpg" className="bg-gray-500 w-28 h-28 rounded-full mx-5" />
+                            <img alt="foto-staff" onError={(e) => e.target.outerHTML = profilePlaceholder} src={`http://localhost:5000/${item._id}${item.gambar}`} className="bg-gray-500 w-28 h-28 rounded-full mx-5" />
                             <div className="ml-5">
                                 <div className="flex flex-col gap-1">
                                     <div>
