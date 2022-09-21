@@ -1038,6 +1038,10 @@ video {
   white-space: nowrap;
 }
 
+.whitespace-pre-line {
+  white-space: pre-line;
+}
+
 .break-all {
   word-break: break-all;
 }

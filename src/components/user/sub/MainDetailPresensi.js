@@ -28,6 +28,7 @@ export default function MainDetailPresensi() {
 
     useEffect(() => {
         id_user && getPresensiToday();
+        id_user && checkStatus();
     }, [id_user])
 
     const getPresensiToday = async () => {
@@ -36,6 +37,12 @@ export default function MainDetailPresensi() {
             navigate('/presensi')
         }
     };
+
+    const checkStatus = () => {
+        if (user.status === "Non Aktif") {
+            navigate('/presensi')
+        }
+    }
 
     let waktu_absensi = moment();
 
