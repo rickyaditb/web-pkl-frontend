@@ -6,6 +6,7 @@ import moment from 'moment';
 import 'moment/locale/id';
 import noData from 'components/img/no-data.svg';
 import { motion } from 'framer-motion';
+import ReactDOMServer from 'react-dom/server';
 
 export default function MainDetailPresensiPembimbing() {
     const [presensi, setPresensi] = useState("x");
@@ -29,7 +30,15 @@ export default function MainDetailPresensiPembimbing() {
         const response = await axios.get(`http://localhost:5000/presensi_detail/${id}`)
         setUser(response.data[0])
     }
-    
+
+    const id_user = user._id;
+    const gambar_user = user.gambar;
+    let url = `http://localhost:5000/${id_user}${gambar_user}`;
+
+    const profilePlaceholder = ReactDOMServer.renderToStaticMarkup(<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="bg-gray-500 p-3 text-white w-28 h-28 rounded-full mx-5">
+        <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
+    </svg>)
+
     return (
         <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="col-span-12 lg:col-span-10">
             <div className="bg-white rounded shadow px-5 py-3 mb-3 text-gray-700 font-semibold flex">
@@ -46,7 +55,7 @@ export default function MainDetailPresensiPembimbing() {
             </div>
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-3 mb-3">
                 <Link to={`/profile/${user._id}`} className="bg-white p-5 rounded-lg shadow flex items-center">
-                    <img alt="foto-staff" src="https://randomuser.me/api/portraits/men/79.jpg" className="bg-gray-500 w-28 h-28 rounded-full mx-5" />
+                {gambar_user && <img alt="foto-staff" onError={(e) => e.target.outerHTML = profilePlaceholder} src={url} className="bg-gray-500 w-28 h-28 rounded-full mx-5" />}
                     <div className="ml-5">
                         <div className="flex flex-col gap-1">
                             <div>
@@ -146,32 +155,32 @@ export default function MainDetailPresensiPembimbing() {
                 </div>
             </div>
             {(() => {
-                    if (presensi === "x")
-                        return <></>
-                    if (presensi.length === 0)
-                        return <div className='mb-24 bg-white p-4 md:p-8 grid grid-cols-2 mb-16 shadow rounded justify-items-center content-center gap-3 md:gap-0'> 
-                            <img src={noData} alt="" className='w-64' />
-                            <div className='flex items-center text-2xl md:text-4xl font-bold text-gray-700 text-center'>Data Presensi <br/>Masih Kosong</div>
-                        </div>
-                    else
-                        return <div className="bg-white p-3 shadow rounded mb-24">
-                            <table className="text-left table-auto w-full">
-                                <thead>
-                                    <tr className="text-gray-500">
-                                        <th className="font-semibold p-3">No.</th>
-                                        <th className="font-semibold p-3">Hari dan Tanggal Presensi</th>
-                                        <th className="font-semibold p-3 text-center">Jam Absensi</th>
-                                        <th className="font-semibold p-3 text-center">Keterangan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {presensi.map((item, index) => (
-                                        <tr className="text-gray-900 border-t hover:bg-gray-100">
-                                            <td className="p-3">{index + 1}</td>
-                                            <td className="p-3">{moment(item.waktu_absensi).format('dddd, Do MMMM YYYY')}</td>
-                                            <td className="p-3 text-center">{item.keterangan === "Alpha" ? <></> : moment(item.waktu_absensi).format('HH:mm')}</td>
-                                            <td className="p-3">
-                                                <div className="flex justify-center items-center">
+                if (presensi === "x")
+                    return <></>
+                if (presensi.length === 0)
+                    return <div className='mb-24 bg-white p-4 md:p-8 grid grid-cols-2 mb-16 shadow rounded justify-items-center content-center gap-3 md:gap-0'>
+                        <img src={noData} alt="" className='w-64' />
+                        <div className='flex items-center text-2xl md:text-4xl font-bold text-gray-700 text-center'>Data Presensi <br />Masih Kosong</div>
+                    </div>
+                else
+                    return <div className="bg-white p-3 shadow rounded mb-24">
+                        <table className="text-left table-auto w-full">
+                            <thead>
+                                <tr className="text-gray-500">
+                                    <th className="font-semibold p-3">No.</th>
+                                    <th className="font-semibold p-3">Hari dan Tanggal Presensi</th>
+                                    <th className="font-semibold p-3 text-center">Jam Absensi</th>
+                                    <th className="font-semibold p-3 text-center">Keterangan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {presensi.map((item, index) => (
+                                    <tr className="text-gray-900 border-t hover:bg-gray-100">
+                                        <td className="p-3">{index + 1}</td>
+                                        <td className="p-3">{moment(item.waktu_absensi).format('dddd, Do MMMM YYYY')}</td>
+                                        <td className="p-3 text-center">{item.keterangan === "Alpha" ? <></> : moment(item.waktu_absensi).format('HH:mm')}</td>
+                                        <td className="p-3">
+                                            <div className="flex justify-center items-center">
                                                 {
                                                     (() => {
                                                         if (item.keterangan === "Hadir")
@@ -196,14 +205,14 @@ export default function MainDetailPresensiPembimbing() {
                                                             </div>
                                                     })()
                                                 }
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                })()}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+            })()}
         </motion.div>
     )
 }

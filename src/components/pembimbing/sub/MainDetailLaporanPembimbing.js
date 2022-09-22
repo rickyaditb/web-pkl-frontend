@@ -6,6 +6,7 @@ import moment from 'moment';
 import 'moment/locale/id';
 import noData from 'components/img/no-data.svg';
 import { motion } from 'framer-motion';
+import ReactDOMServer from 'react-dom/server';
 
 export default function MainDetailLaporanPembimbing() {
     const [presensi, setPresensi] = useState("x");
@@ -30,6 +31,14 @@ export default function MainDetailLaporanPembimbing() {
         setUser(response.data[0])
     }
 
+    const id_user = user._id;
+    const gambar_user = user.gambar;
+    let url = `http://localhost:5000/${id_user}${gambar_user}`;
+
+    const profilePlaceholder = ReactDOMServer.renderToStaticMarkup(<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="bg-gray-500 p-3 text-white w-28 h-28 rounded-full mx-5">
+        <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
+    </svg>)
+
     return (
         <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="col-span-12 lg:col-span-10">
             <div className="bg-white rounded shadow px-5 py-3 mb-3 text-gray-700 font-semibold flex">
@@ -46,7 +55,7 @@ export default function MainDetailLaporanPembimbing() {
             </div>
             <div className="grid grid-cols-1 xl:grid-cols-5 gap-3 mb-3">
                 <Link to={`/profile/${user._id}`} className="bg-white p-5 rounded-lg shadow flex items-center xl:col-span-4">
-                    <img alt="foto-staff" src="https://randomuser.me/api/portraits/men/79.jpg" className="bg-gray-500 w-28 h-28 rounded-full mx-5" />
+                    {gambar_user && <img alt="foto-staff" onError={(e) => e.target.outerHTML = profilePlaceholder} src={url} className="bg-gray-500 w-28 h-28 rounded-full mx-5" />}
                     <div className="ml-5">
                         <div className="flex flex-col gap-1">
                             <div>
