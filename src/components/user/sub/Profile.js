@@ -30,7 +30,7 @@ export default function Profile(props) {
                 </div>
             </div>
             <div className="bg-white px-5 py-5 rounded-lg shadow transform transition duration-300 mt-3">
-                {gambar_user && <img alt="foto-staff" onError={(e) => e.target.outerHTML = profilePlaceholder} src={url} className="bg-gray-500 w-24 h-24 rounded-full mx-auto" />}
+                {id_user && <img alt="foto-staff" onError={(e) => e.target.outerHTML = profilePlaceholder} src={url} className="bg-gray-500 w-24 h-24 rounded-full mx-auto" />}
                 <p className="text-center text-gray-700 mt-2 font-semibold text-lg">{user.nama}</p>
                 <p className="text-center text-gray-700 ">{user.instansi}</p>
             </div>
