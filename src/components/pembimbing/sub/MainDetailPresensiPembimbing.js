@@ -55,7 +55,7 @@ export default function MainDetailPresensiPembimbing() {
             </div>
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-3 mb-3">
                 <Link to={`/profile/${user._id}`} className="bg-white p-5 rounded-lg shadow flex items-center">
-                {gambar_user && <img alt="foto-staff" onError={(e) => e.target.outerHTML = profilePlaceholder} src={url} className="bg-gray-500 w-28 h-28 rounded-full mx-5" />}
+                {id_user && <img alt="foto-staff" onError={(e) => e.target.outerHTML = profilePlaceholder} src={url} className="bg-gray-500 w-28 h-28 rounded-full mx-5" />}
                     <div className="ml-5">
                         <div className="flex flex-col gap-1">
                             <div>
