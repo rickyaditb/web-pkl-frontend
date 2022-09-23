@@ -17,12 +17,20 @@ export default function MainPresensi() {
     const [stat, setStat] = useState({})
     const [msg, setMsg] = useState("")
 
+    const hari = moment().format('d'); 
+
     useEffect(() => {
         id_user && getPresensi();
         id_user && getPresensiToday();
         id_user && getStatistic();
         id_user && checkStatus();
     }, [id_user])
+
+    useEffect(() => {
+        if(hari === "6" || hari === "7") {
+            setMsg("Presensi nonaktif \n saat akhir pekan");
+        }
+    }, [hari])
 
     const getPresensi = async () => {
         const response = await axios.get(`http://localhost:5000/presensi_user/${id_user}`);
@@ -51,6 +59,7 @@ export default function MainPresensi() {
 
     return (
         <div className="col-span-12 lg:col-span-10">
+            {hari}
             <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="grid grid-cols-2 gap-3">
                 <div className="bg-white p-2 shadow rounded">
                     <div className="flex items-center">

@@ -23,6 +23,8 @@ export default function MainDetailPresensi() {
     const [modalValue, setModalValue] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
     const id_user = user.id;
+    
+    const hari = moment().format('d'); 
 
     const navigate = useNavigate();
 
@@ -30,6 +32,12 @@ export default function MainDetailPresensi() {
         id_user && getPresensiToday();
         id_user && checkStatus();
     }, [id_user])
+
+    useEffect(() => {
+        if(hari === "6" || hari === "7") {
+            navigate('/presensi')
+        }
+    }, [hari])
 
     const getPresensiToday = async () => {
         const response = await axios.get(`http://localhost:5000/presensi_today/${id_user}`);
