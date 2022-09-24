@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import AuthContext from 'context/AuthContext';
 import moment from 'moment';
 import { motion } from 'framer-motion';
-import axios from 'axios';
 import ReactDOMServer from 'react-dom/server';
 
 export default function MainHome() {

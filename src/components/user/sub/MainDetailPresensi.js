@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { useGeolocated } from "react-geolocated";
 import GpsImg from './img/gps.svg'
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import moment from 'moment'
 import 'moment/locale/id';
 import { MapContainer, TileLayer, useMap, Rectangle, Popup, Marker } from 'react-leaflet'

@@ -59,7 +59,6 @@ export default function MainPresensi() {
 
     return (
         <div className="col-span-12 lg:col-span-10">
-            {hari}
             <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="grid grid-cols-2 gap-3">
                 <div className="bg-white p-2 shadow rounded">
                     <div className="flex items-center">
