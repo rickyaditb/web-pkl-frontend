@@ -1231,12 +1231,12 @@ video {
   background-color: rgb(203 213 225 / var(--tw-bg-opacity));
 }
 
-.p-5 {
-  padding: 1.25rem;
-}
-
 .p-3 {
   padding: 0.75rem;
+}
+
+.p-5 {
+  padding: 1.25rem;
 }
 
 .p-2 {
@@ -1776,12 +1776,12 @@ body {
     gap: 0px;
   }
 
-  .md\:p-8 {
-    padding: 2rem;
-  }
-
   .md\:p-0 {
     padding: 0px;
+  }
+
+  .md\:p-8 {
+    padding: 2rem;
   }
 
   .md\:text-4xl {

@@ -117,7 +117,7 @@ export default function MainDetailLaporanPembimbing() {
                                 <tr className="text-gray-500">
                                     <th className="font-semibold p-3">No.</th>
                                     <th className="font-semibold p-3">Hari dan Tanggal Laporan</th>
-                                    <th className="font-semibold p-3 text-center">Status</th>
+                                    <th className="font-semibold p-3 text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
