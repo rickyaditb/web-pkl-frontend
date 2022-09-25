@@ -61,8 +61,18 @@ export default function MainDetailPresensi() {
 
     let waktu_absensi = moment();
 
+    const d = new Date();
+    const jam = `0${d.getHours()}`;
+    const jamInt = parseInt(jam);
+
     const savePresensi = async () => {
         let keterangan = modalValue;
+        if(keterangan === "Hadir") {
+            if(jamInt > 8) {
+                keterangan = "Terlambat"
+            }
+        }
+
         try {
             await axios.post('http://localhost:5000/presensi', {
                 id_user, waktu_absensi, keterangan
@@ -178,7 +188,7 @@ export default function MainDetailPresensi() {
                                         Anda tidak berada pada lokasi absensi yang ditentukan.
                                     </p>
                                     <div className="mt-3 flex justify-center gap-3">
-                                    <button onClick={() => konfirmasi("Izin")} data-presensi="Izin" className="bg-yellow-400 font-bold text-2xl text-white px-6 py-3 rounded">Izin</button>
+                                        <button onClick={() => konfirmasi("Izin")} data-presensi="Izin" className="bg-yellow-400 font-bold text-2xl text-white px-6 py-3 rounded">Izin</button>
                                         <button onClick={() => konfirmasi("Sakit")} data-presensi="Sakit" className="bg-red-400 font-bold text-2xl text-white px-4 py-3 rounded">Sakit</button>
                                     </div>
                                 </div>
