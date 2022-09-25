@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios';
+import AuthContext from 'context/AuthContext';
 import { useNavigate, useParams } from 'react-router-dom';
 import moment from 'moment';
 import { motion } from 'framer-motion';
@@ -8,7 +9,11 @@ import { toast } from 'react-toastify';
 export default function MainEditLaporan() {
     const [tanggal_laporan, setTanggal] = useState("");
     const [isi_laporan, setIsi] = useState("");
+    const [author, setAuthor] = useState("");
+
     const navigate = useNavigate();
+
+    const auth = useContext(AuthContext);
 
     const { id } = useParams();
 
@@ -26,6 +31,7 @@ export default function MainEditLaporan() {
         const response = await axios.get(`http://localhost:5000/laporan/${id}`);
         setTanggal(response.data.tanggal_laporan);
         setIsi(response.data.isi_laporan);
+        setAuthor(response.data.id_user);
     }
 
     const editLaporan = async (e) => {
@@ -34,7 +40,12 @@ export default function MainEditLaporan() {
             await axios.patch(`http://localhost:5000/laporan/${id}`, {
                 tanggal_laporan, isi_laporan
             });
-            navigate("/laporan");
+            if(auth.role === "admin") {
+                navigate(`/laporan_pembimbing/${author}`);
+            } else {
+                navigate('/laporan')
+            }
+            
             showToastMessage();
         } catch (error) {
             console.log(error);

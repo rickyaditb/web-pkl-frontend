@@ -6,7 +6,6 @@ import Bottombar from 'components/Bottombar.js';
 import CheckUser from './sub/CheckUser.js';
 
 export default function EditLaporan() {
-    CheckUser();
     return (
         <div>
             <Header kelas="hidden md:flex" />

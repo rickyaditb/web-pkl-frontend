@@ -5,23 +5,57 @@ import { useParams, Link } from 'react-router-dom';
 import moment from 'moment';
 import 'moment/locale/id';
 import noData from 'components/img/no-data.svg';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import ReactDOMServer from 'react-dom/server';
+import { toast } from 'react-toastify';
 
 export default function MainDetailLaporanPembimbing() {
     const [presensi, setPresensi] = useState("x");
     const [user, setUser] = useState({})
+    const [modal, setModal] = useState(false)
+    const [modalValue, setModalValue] = useState("")
 
     const auth = useContext(AuthContext);
 
     const { id } = useParams();
 
     useEffect(() => {
-        getPresensi();
+        getLaporan();
         getStatistic();
     }, [auth])
 
-    const getPresensi = async () => {
+    const showToastMessage = () => {
+        toast.success('Laporan berhasil dihapus', {
+            position: toast.POSITION.TOP_RIGHT
+        });
+    };
+
+    const deleteLaporan = async (id) => {
+        try {
+            await axios.delete(`http://localhost:5000/laporan/${id}`);
+            getLaporan();
+            setModal(false);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const konfirmasi = (value) => {
+        setModalValue(value);
+        setModal(true);
+    }
+
+    const batal = () => {
+        setModalValue("");
+        setModal(false);
+    }
+
+    const hapus = () => {
+        deleteLaporan(modalValue)
+        showToastMessage()
+    }
+
+    const getLaporan = async () => {
         const response = await axios.get(`http://localhost:5000/laporan_user/${id}`);
         setPresensi(response.data);
     };
@@ -41,6 +75,22 @@ export default function MainDetailLaporanPembimbing() {
 
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} className="col-span-12 lg:col-span-10">
+            <AnimatePresence>
+                {modal &&
+                    <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} exit={{ opacity: 0 }} className="bg-black/50 fixed inset-0 z-0 flex items-center justify-center">
+                        <div>
+                            <div className="bg-white px-8 py-8 rounded text-center">
+                                <p className='font-bold text-2xl text-gray-800 mb-3'>Hapus Laporan ?</p>
+                                <p className='text-lg'>Laporan yang sudah dihapus tidak akan bisa dikembalikan.</p>
+                                <div className="flex gap-5 mt-3 justify-center">
+                                    <button onClick={hapus} className='bg-red-100 text-red-700 w-full rounded py-3 font-bold text-lg'>Ya, Hapus</button>
+                                    <button onClick={() => batal()} className='bg-blue-100 text-blue-700 w-full rounded py-3 font-bold text-lg'>Tidak, Kembali</button>
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                }
+            </AnimatePresence>
             <div className="bg-white rounded shadow px-5 py-3 mb-3 text-gray-700 font-semibold flex">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2 mt-0.5 text-gray-600" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
@@ -117,7 +167,10 @@ export default function MainDetailLaporanPembimbing() {
                                 <tr className="text-gray-500">
                                     <th className="font-semibold p-3">No.</th>
                                     <th className="font-semibold p-3">Hari dan Tanggal Laporan</th>
-                                    <th className="font-semibold p-3 text-center">Aksi</th>
+                                    <th className="font-semibold p-3 text-center">Detail</th>
+                                    {auth.role === "admin" &&
+                                        <th className="font-semibold p-3 text-center">Aksi</th>
+                                    }
                                 </tr>
                             </thead>
                             <tbody>
@@ -136,6 +189,25 @@ export default function MainDetailLaporanPembimbing() {
                                                 </Link>
                                             </div>
                                         </td>
+                                        {auth.role === "admin" &&
+                                            <td className="p-3">
+                                                <div className="flex justify-center items-center gap-2">
+                                                    <Link to={`/laporan/edit/${item._id}`} className="p-2 font-semibold leading-tight text-yellow-700 bg-yellow-100 text-sm rounded flex justify-center items-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                                                            <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
+                                                        </svg>
+                                                        <p className="ml-1">Edit Laporan</p>
+                                                    </Link>
+                                                    <button onClick={() => konfirmasi(item._id)} className="p-2 font-semibold leading-tight text-red-700 bg-red-100 text-sm rounded flex justify-center items-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                                        </svg>
+                                                        <p className="ml-1">Hapus Laporan</p>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        }
                                     </tr>
                                 ))}
                             </tbody>
