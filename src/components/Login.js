@@ -4,6 +4,7 @@ import Logo from './img/logo.png'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import RegisterContext from 'context/RegisterContext'
+import { motion } from 'framer-motion';
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -54,12 +55,12 @@ export default function Login() {
                     {errorMsg ? <div className='bg-red-200 text-red-800 p-5 rounded my-2 font-semibold'>{errorMsg}</div> : <></>}
                     <label htmlFor="email" className="text-gray-700">Email</label><br />
                     <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} id="email" name="email" placeholder="Masukan Email Anda"
-                        className="bg-gray-100 w-full py-3 px-3 rounded-lg mb-5 focus:outline-none focus:ring-2 border-none" required/><br />
+                        className="bg-gray-100 w-full py-3 px-3 rounded-lg mb-5 focus:outline-none focus:ring-2 border-none focus:bg-gray-200 transition duration-300" required/><br />
                     <label htmlFor="password" className="text-gray-700">Kata Sandi</label><br />
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} id="password" name="password" placeholder="Masukan Kata Sandi Anda"
-                        className="bg-gray-100 w-full py-3 px-3 rounded-lg focus:outline-none focus:ring-2 border-none" required/><br /><br />
+                        className="bg-gray-100 w-full py-3 px-3 rounded-lg focus:outline-none focus:ring-2 border-none focus:bg-gray-200 transition duration-300" required/><br /><br />
                     <input type="submit" value="Masuk"
-                        className="w-full py-3 rounded-lg text-white warna-main font-bold cursor-pointer" required/>
+                        className="w-full py-3 rounded-lg text-white warna-main font-bold cursor-pointer hover:bg-purple-500 transition duration-300" required/>
                 </form>
                 <Link to={`/register`}>
                     <p className="text-center text-gray-500 mt-5 mb-10 sm:mb-0">Belum punya akun ?
