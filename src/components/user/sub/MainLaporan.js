@@ -6,6 +6,7 @@ import moment from 'moment';
 import 'moment/locale/id';
 import noData from 'components/img/no-data.svg';
 import { motion, AnimatePresence } from 'framer-motion';
+import { toast } from 'react-toastify';
 
 export default function MainLaporan() {
     const user = useContext(AuthContext);
@@ -23,6 +24,12 @@ export default function MainLaporan() {
     const getLaporan = async () => {
         const response = await axios.get(`http://localhost:5000/laporan_user/${id_user}`);
         setLaporan(response.data);
+    };
+
+    const showToastMessage = () => {
+        toast.success('Laporan berhasil dihapus', {
+            position: toast.POSITION.TOP_RIGHT
+        });
     };
 
     const deleteLaporan = async (id) => {
@@ -45,6 +52,11 @@ export default function MainLaporan() {
         setModal(false);
     }
 
+    const hapus = () => {
+        deleteLaporan(modalValue)
+        showToastMessage()
+    }
+
     return (
         <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="col-span-12 lg:col-span-10">
             <AnimatePresence>
@@ -55,7 +67,7 @@ export default function MainLaporan() {
                                 <p className='font-bold text-2xl text-gray-800 mb-3'>Hapus Laporan ?</p>
                                 <p className='text-lg'>Laporan yang sudah dihapus tidak akan bisa dikembalikan.</p>
                                 <div className="flex gap-5 mt-3 justify-center">
-                                    <button onClick={() => deleteLaporan(modalValue)} className='bg-red-100 text-red-700 w-full rounded py-3 font-bold text-lg'>Ya, Hapus</button>
+                                    <button onClick={hapus} className='bg-red-100 text-red-700 w-full rounded py-3 font-bold text-lg'>Ya, Hapus</button>
                                     <button onClick={() => batal()} className='bg-blue-100 text-blue-700 w-full rounded py-3 font-bold text-lg'>Tidak, Kembali</button>
                                 </div>
                             </div>

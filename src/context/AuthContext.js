@@ -2,7 +2,8 @@ import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AuthContext = createContext({});
 
@@ -79,6 +80,7 @@ export const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider value={{ id, nama, email, telepon, instansi, tanggal_mulai, tanggal_selesai, token, refreshToken, axiosJWT, role, status, pembimbing, gambar }} >
+            <ToastContainer />
             <div className="container mx-auto px-3 lg:px-16">
                 {children}
             </div>

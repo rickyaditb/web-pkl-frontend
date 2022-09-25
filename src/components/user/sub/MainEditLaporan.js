@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import moment from 'moment';
 import { motion } from 'framer-motion';
+import { toast } from 'react-toastify';
 
 export default function MainEditLaporan() {
     const [tanggal_laporan, setTanggal] = useState("");
@@ -14,6 +15,12 @@ export default function MainEditLaporan() {
     useEffect(() => {
         getLaporanById();
     }, []);
+
+    const showToastMessage = () => {
+        toast.success('Laporan berhasil diubah', {
+            position: toast.POSITION.TOP_RIGHT
+        });
+    };
 
     const getLaporanById = async () => {
         const response = await axios.get(`http://localhost:5000/laporan/${id}`);
@@ -28,10 +35,12 @@ export default function MainEditLaporan() {
                 tanggal_laporan, isi_laporan
             });
             navigate("/laporan");
+            showToastMessage();
         } catch (error) {
             console.log(error);
         }
     }
+
     return (
         <motion.div initial={{opacity: 0, scale: 1.04}} animate={{opacity: 1, scale: 1}} transition={{ duration: 0.3}} className="col-span-12 lg:col-span-10 mb-16">
             <div className="bg-white rounded shadow px-5 py-3 mb-3 text-gray-700 font-semibold flex">

@@ -11,6 +11,7 @@ import AuthContext from 'context/AuthContext';
 import marker from 'leaflet/dist/images/marker-icon.png';
 import { Icon } from 'leaflet';
 import { motion, AnimatePresence } from 'framer-motion';
+import { toast } from 'react-toastify';
 
 const myIcon = new Icon({
     iconUrl: marker
@@ -39,6 +40,12 @@ export default function MainDetailPresensi() {
         }
     }, [hari])
 
+    const showToastMessage = () => {
+        toast.success('Absensi berhasil', {
+            position: toast.POSITION.TOP_RIGHT
+        });
+    };
+
     const getPresensiToday = async () => {
         const response = await axios.get(`http://localhost:5000/presensi_today/${id_user}`);
         if(response.data) {
@@ -61,6 +68,7 @@ export default function MainDetailPresensi() {
                 id_user, waktu_absensi, keterangan
             });
             navigate("/presensi");
+            showToastMessage();
         } catch (error) {
             setModalValue("");
             setModal(false);
