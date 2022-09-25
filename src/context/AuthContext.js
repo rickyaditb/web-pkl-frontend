@@ -80,7 +80,7 @@ export const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider value={{ id, nama, email, telepon, instansi, tanggal_mulai, tanggal_selesai, token, refreshToken, axiosJWT, role, status, pembimbing, gambar }} >
-            <ToastContainer />
+            <ToastContainer className='p-3 md:p-0' />
             <div className="container mx-auto px-3 lg:px-16">
                 {children}
             </div>
