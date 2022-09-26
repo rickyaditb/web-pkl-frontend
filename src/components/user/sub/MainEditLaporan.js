@@ -40,12 +40,7 @@ export default function MainEditLaporan() {
             await axios.patch(`http://localhost:5000/laporan/${id}`, {
                 tanggal_laporan, isi_laporan
             });
-            if(auth.role === "admin") {
-                navigate(`/laporan_pembimbing/${author}`);
-            } else {
-                navigate('/laporan')
-            }
-            
+            navigate(`/laporan/detail/${id}`);
             showToastMessage();
         } catch (error) {
             console.log(error);
