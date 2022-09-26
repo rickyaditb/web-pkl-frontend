@@ -58,11 +58,11 @@ export default function MainEditLaporan() {
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.3} stroke="currentColor" className="w-5 h-5">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                     </svg>
-                    <p>Edit Laporan Kegiatan</p>
+                    <p>Ubah Laporan Kegiatan</p>
                 </p>
             </div>
             <div className="bg-white shadow rounded p-5 mb-10">
-                <p className="text-center font-bold text-xl text-gray-600">Edit Laporan</p>
+                <p className="text-center font-bold text-xl text-gray-600">Ubah Laporan</p>
                 <form className="mt-3" action="laporan.html" onSubmit={editLaporan}>
                     <label htmlFor="gambar" className="text-gray-700">Tanggal Laporan</label>
                     <input type="date" value={moment(tanggal_laporan).format('YYYY-MM-DD')} onChange={(e) => setTanggal(e.target.value)} id="gambar" name="gambar" placeholder="Masukan Isi Laporan" className="gambar-form bg-gray-100 w-full py-3 px-3 rounded-lg mb-5 focus:outline-none focus:ring-2 border-none" required />
