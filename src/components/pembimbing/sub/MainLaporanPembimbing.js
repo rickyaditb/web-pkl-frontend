@@ -61,7 +61,7 @@ export default function MainLaporanPembimbing() {
                             <tr className="text-gray-500">
                                 <th className="font-semibold p-3">No.</th>
                                 <th className="font-semibold p-3">Nama</th>
-                                <th className="font-semibold p-3">Hadir</th>
+                                <th className="font-semibold p-3">Asal Instansi</th>
                                 <th className="font-semibold p-3 text-center">Jumlah Laporan</th>
                                 <th className="font-semibold p-3 text-center">Aksi</th>
                             </tr>
