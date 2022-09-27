@@ -12,7 +12,7 @@ export default function HomePembimbing() {
         <div>
             <Header />
             <div className="grid grid-cols-12 gap-3 mt-5">
-                <Sidebar activePage="home"/>
+                <Sidebar activePage="home" anim="home"/>
                 <MainPembimbing />
                 <Profile />
             </div>

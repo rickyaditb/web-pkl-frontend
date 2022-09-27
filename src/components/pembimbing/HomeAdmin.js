@@ -9,7 +9,7 @@ export default function HomeAdmin() {
         <div>
             <Header />
             <div className="grid grid-cols-12 gap-3 mt-5">
-                <Sidebar activePage="home"/>
+                <Sidebar activePage="home" anim="home"/>
                 <MainAdmin />
             </div>
             <Bottombar activePage="home" />

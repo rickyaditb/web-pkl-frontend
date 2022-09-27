@@ -11,7 +11,7 @@ export default function PresensiPembimbing() {
         <div>
             <Header kelas="hidden md:flex" />
             <div className="grid grid-cols-12 gap-3 mt-5">
-                <Sidebar activePage="presensi"/>
+                <Sidebar activePage="presensi" anim="presensi"/>
                 <MainPresensiPembimbing />
             </div>
             <Bottombar activePage="presensi" />
