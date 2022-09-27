@@ -11,7 +11,7 @@ export default function Laporan() {
         <div>
             <Header kelas="hidden md:flex" />
             <div className="grid grid-cols-12 gap-3 mt-5">
-                <Sidebar activePage="laporan"/>
+                <Sidebar activePage="laporan" anim="laporan"/>
                 <MainLaporan />
             </div>
             <Bottombar activePage="laporan" />
