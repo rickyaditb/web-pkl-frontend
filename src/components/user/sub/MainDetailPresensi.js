@@ -35,7 +35,7 @@ export default function MainDetailPresensi() {
     }, [id_user])
 
     useEffect(() => {
-        if(hari === "6" || hari === "7") {
+        if(hari === "6" || hari === "0") {
             navigate('/presensi')
         }
     }, [hari])

@@ -27,7 +27,7 @@ export default function MainPresensi() {
     }, [id_user])
 
     useEffect(() => {
-        if(hari === "6" || hari === "7") {
+        if(hari === "6" || hari === "0") {
             setMsg("Presensi nonaktif \n saat akhir pekan");
         }
     }, [hari])
