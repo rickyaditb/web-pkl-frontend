@@ -4,19 +4,33 @@ import AuthContext from 'context/AuthContext';
 import moment from 'moment';
 import { motion } from 'framer-motion';
 import ReactDOMServer from 'react-dom/server';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export default function MainHome() {
     const user = useContext(AuthContext);
+
+    const [statusGambar, setStatusGambar] = useState(true);
+    const [statusLaporan, setStatusLaporan] = useState("");
+    const [laporan, setLaporan] = useState(null);
+
     const id_user = user.id;
     const gambar_user = user.gambar;
+    let urlLaporan = `http://localhost:5000/${id_user}.pdf`;
+    let url = `http://localhost:5000/${id_user}${gambar_user}`;
+    var formData = new FormData();
 
     useEffect(() => {
         user.refreshToken();
     }, []);
 
-    const [statusGambar, setStatusGambar] = useState(true);
+    useEffect(() => {
+        id_user && checkLaporan();
+    }, [id_user]);
 
-    let url = `http://localhost:5000/${id_user}${gambar_user}`;
+    useEffect(() => {
+        laporan && kirim();
+    }, [laporan]);
 
     const checkImage = (e) => {
         e.target.outerHTML = profilePlaceholder;
@@ -27,13 +41,48 @@ export default function MainHome() {
         <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
     </svg>)
 
+    const showToastMessage = () => {
+        toast.success('Laporan berhasil diunggah', {
+            position: toast.POSITION.TOP_RIGHT
+        });
+    };
+
+    const kirim = async () => {
+        formData.append("id_user", user.id);
+        formData.append("laporan", laporan);
+        try {
+            await axios.post('http://localhost:5000/file_laporan', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            setStatusLaporan(true)
+            showToastMessage();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    function checkLaporan() {
+        var request = new XMLHttpRequest();
+        request.open("GET", urlLaporan, true);
+        request.send();
+        request.onload = function () {
+            if (request.status == 200) {
+                setStatusLaporan(true);
+            } else {
+                setStatusLaporan(false);
+            }
+        }
+    }
+
     return (
         <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="col-span-12 md:col-span-8 lg:col-span-7 mb-1">
             {!statusGambar &&
                 <Link to={'/gambar'} className='block bg-yellow-300 p-3 rounded shadow text-gray-700 font-bold mb-3'>Kamu belum melengkapi foto profil, klik disini untuk melengkapi</Link>
             }
             <div className="bg-white p-5 rounded-lg shadow transform transition flex items-center">
-            {id_user && <img alt="foto-staff" onError={checkImage} src={url} className="bg-gray-500 w-28 h-28 rounded-full mx-5" />}
+                {id_user && <img alt="foto-staff" onError={checkImage} src={url} className="bg-gray-500 w-28 h-28 rounded-full mx-5" />}
                 <div className="ml-5">
                     <div className="flex flex-col gap-1">
                         <div>
@@ -112,6 +161,39 @@ export default function MainHome() {
                     </div>
                 </div>
             </div>
+            {statusLaporan ?
+                <div className='bg-blue-500 hover:bg-blue-600 transition mt-3 py-3 pl-5 pr-3 rounded-lg text-white'>
+                    <form method='POST' enctype="multipart/form-data" onSubmit={kirim}>
+                        <div className='hidden'>
+                            <input type="file" name='laporan' id="laporan" accept="application/pdf" onChange={e => {
+                                const file = e.target.files[0];
+                                setLaporan(file);
+                            }} className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-base file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100" /><br />
+                        </div>
+                        <div className='flex items-center'>
+                            <div>
+                                <p htmlFor="laporan" className='font-bold text-lg'>Laporan Praktik Lapangan</p>
+                                <a href={urlLaporan}>Unduh Laporan</a>
+                            </div>
+                            <label htmlFor="laporan" className='bg-white p-3 text-blue-500 font-bold rounded-lg ml-auto cursor-pointer'>Ganti Laporan</label>
+                        </div>
+                    </form>
+                </div> :
+                <div className='bg-blue-500 hover:bg-blue-600 transition mt-3 py-3 pl-5 pr-3 rounded-lg text-white'>
+                    <form method='POST' enctype="multipart/form-data" onSubmit={kirim}>
+                        <div className='hidden'>
+                            <input type="file" name='laporan' id="laporan" accept="application/pdf" onChange={e => {
+                                const file = e.target.files[0];
+                                setLaporan(file);
+                            }} className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-base file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100" /><br />
+                        </div>
+                        <div className='flex items-center'>
+                            <p htmlFor="laporan" className='font-bold text-xl'>Laporan Praktik Lapangan</p>
+                            <label htmlFor="laporan" className='bg-white p-3 text-blue-500 font-bold rounded-lg ml-auto cursor-pointer'>Unggah Laporan</label>
+                        </div>
+                    </form>
+                </div>
+            }
         </motion.div>
     )
 }
