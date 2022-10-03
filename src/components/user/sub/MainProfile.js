@@ -10,6 +10,7 @@ import ReactDOMServer from 'react-dom/server';
 export default function MainProfile() {
     const [presensi, setPresensi] = useState({})
     const [user, setUser] = useState({})
+    const [statusLaporan, setStatusLaporan] = useState("");
 
     const auth = useContext(AuthContext);
 
@@ -33,13 +34,31 @@ export default function MainProfile() {
     const id_user = user._id;
     const gambar_user = user.gambar;
     let url = `http://localhost:5000/${id_user}${gambar_user}`;
+    let urlLaporan = `http://localhost:5000/${id_user}.pdf`;
 
     const profilePlaceholder = ReactDOMServer.renderToStaticMarkup(<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="bg-gray-500 p-3 text-white w-28 h-28 rounded-full mx-5">
         <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
     </svg>)
 
+    useEffect(() => {
+        id_user && checkLaporan();
+    }, [id_user]);
+
+    function checkLaporan() {
+        var request = new XMLHttpRequest();
+        request.open("GET", urlLaporan, true);
+        request.send();
+        request.onload = function () {
+            if (request.status == 200) {
+                setStatusLaporan(true);
+            } else {
+                setStatusLaporan(false);
+            }
+        }
+    }
+
     return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} className="col-span-12 lg:col-span-10">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }} className="col-span-12 lg:col-span-10">
             <div className="bg-white rounded shadow px-5 py-3 mb-3 text-gray-700 font-semibold flex">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2 mt-0.5 text-gray-600" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
@@ -54,7 +73,7 @@ export default function MainProfile() {
             </div>
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-3 mb-3">
                 <div className="bg-white p-5 rounded-lg shadow flex items-center">
-                {id_user && <img alt="foto-staff" onError={(e) => e.target.outerHTML = profilePlaceholder} src={url} className="bg-gray-500 w-28 h-28 rounded-full mx-5" />}
+                    {id_user && <img alt="foto-staff" onError={(e) => e.target.outerHTML = profilePlaceholder} src={url} className="bg-gray-500 w-28 h-28 rounded-full mx-5" />}
                     <div className="ml-5">
                         <div className="flex flex-col gap-1">
                             <div>
@@ -192,13 +211,25 @@ export default function MainProfile() {
                     </div>
                 </div>
             </div>
-            <div className='flex mt-3 gap-3 justify-center mb-24'>
-                <Link to={`/presensi_pembimbing/${user._id}`} className="warna-main p-3 text-white font-bold rounded">
-                    Detail Presensi
-                </Link>
-                <Link to={`/laporan_pembimbing/${user._id}`} className="warna-main p-3 text-white font-bold rounded">
-                    Detail Laporan
-                </Link>
+            <div className='grid grid-cols-2 gap-3 mt-3 mb-24'>
+                {statusLaporan ?
+                    <div className='bg-blue-500 hover:bg-blue-600 transition py-3 pl-5 pr-3 rounded-lg text-white'>
+                        <div className='flex items-center'>
+                            <p className='font-bold text-xl'>Laporan Praktik Lapangan</p>
+                            <a href={urlLaporan} className='bg-white p-3 text-blue-500 font-bold rounded-lg ml-auto cursor-pointer'>Unduh Laporan</a>
+                        </div>
+                    </div> :
+                    <div className='bg-blue-500 hover:bg-blue-600 transition py-3 pl-5 pr-3 rounded-lg text-white'>
+                    <div className='flex items-center'>
+                        <p className='font-bold text-xl'>Laporan Praktik Lapangan</p>
+                        <p className='bg-white p-3 text-blue-500 font-bold rounded-lg ml-auto cursor-pointer'>Belum Diunggah</p>
+                    </div>
+                </div>
+                }
+                <div className='px-3 py-2 text-xl rounded-lg text-white grid grid-cols-2 text-center gap-4'>
+                    <Link to={`/presensi_pembimbing/${user._id}`} className='warna-main p-3 text-white font-bold rounded-lg cursor-pointer flex items-center justify-center'>Detail Presensi</Link>
+                    <Link to={`/laporan_pembimbing/${user._id}`} className='warna-main p-3 text-white font-bold rounded-lg cursor-pointer flex items-center justify-center'>Detail Laporan</Link>
+                </div>
             </div>
         </motion.div>
     )
