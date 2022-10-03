@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import RegisterContext from 'context/RegisterContext';
+import { motion } from 'framer-motion';
 
 export default function Register() {
     const [email, setEmail] = useState("");
@@ -58,7 +59,7 @@ export default function Register() {
     };
 
     return (
-        <div className="bg-white">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} className="bg-white">
             <form className="container lg:px-32 mx-auto p-5 h-screen" onSubmit={daftarUser}>
                 <img src={Logo} className="w-32 mx-auto mb-3 block mt-3" />
                 <p className="text-center font-bold text-2xl text-gray-600 mb-6">Sistem Informasi Staff Magang</p>
@@ -137,6 +138,6 @@ export default function Register() {
                 </div>
             </form>
             {pembimbing}
-        </div>
+        </motion.div>
     )
 }

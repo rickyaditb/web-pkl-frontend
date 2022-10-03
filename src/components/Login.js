@@ -43,7 +43,7 @@ export default function Login() {
     }
 
     return (
-        <div className="container mx-auto p-5 md:grid grid-cols-2 h-screen bg-white">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} className="container mx-auto p-5 md:grid grid-cols-2 h-screen bg-white">
             <div className="px-8 mx-auto mt-16 md:m-0 md:my-auto">
                 <img src={LoginImg} />
             </div>
@@ -67,6 +67,6 @@ export default function Login() {
                         Daftar Disini</p>
                 </Link>
             </div>
-        </div >
+        </motion.div>
     )
 }
