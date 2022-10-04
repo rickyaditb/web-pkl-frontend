@@ -155,7 +155,7 @@ export default function MainPengaturan(props) {
                             <input type="password" value={passwordLama} onChange={(e) => setPasswordLama(e.target.value)} id="password-lama" placeholder='Masukan Kata Sandi Lama' className='w-full bg-gray-100 p-3' required />
                             <label for="password-baru" className='text-gray-700'>Kata Sandi Baru</label>
                             <input type="password" value={passwordBaru} onChange={(e) => setPasswordBaru(e.target.value)} id="password-lama" placeholder='Masukan Kata Sandi Baru' className='w-full bg-gray-100 p-3' required />
-                            <button className='bg-utama text-white font-bold p-3 rounded mt-3 w-full text-xl'>Ganti Kata Sandi</button>
+                            <button className='bg-utama hover:bg-sekunder transition cursor-pointer text-white font-bold p-3 rounded mt-3 w-full text-xl'>Ganti Kata Sandi</button>
                         </form>
                     </div>
                 </motion.div> : <></>
@@ -188,7 +188,7 @@ export default function MainPengaturan(props) {
                         <form onSubmit={editEmail}>
                             <label for="email" className='text-gray-700'>Email Baru</label>
                             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} id="email" name='email' placeholder='Masukan Email Baru' className='w-full bg-gray-100 p-3' required />
-                            <button className='bg-utama text-white font-bold p-3 rounded mt-3 w-full text-xl'>Ganti Email</button>
+                            <button className='bg-utama hover:bg-sekunder transition cursor-pointer text-white font-bold p-3 rounded mt-3 w-full text-xl'>Ganti Email</button>
                         </form>
                     </div>
                 </motion.div> : <></>
@@ -221,13 +221,13 @@ export default function MainPengaturan(props) {
                         <form onSubmit={editTelepon}>
                             <label for="number" className='text-gray-700'>Nomor Telepon Baru</label>
                             <input type="number" value={telepon} onChange={(e) => setTelepon(e.target.value)} id="telepon" name='telepon' placeholder='Masukan No. Telepon Baru' className='w-full bg-gray-100 p-3' required />
-                            <button className='bg-utama text-white font-bold p-3 rounded mt-3 w-full text-xl'>Ganti Nomor Telepon</button>
+                            <button className='bg-utama hover:bg-sekunder transition cursor-pointer text-white font-bold p-3 rounded mt-3 w-full text-xl'>Ganti Nomor Telepon</button>
                         </form>
                     </div>
                 </motion.div> : <></>
             }
             {menu === "main" ?
-                <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className='mt-3 bg-red-400 text-white font-bold p-3 rounded text-xl flex items-center gap-2 justify-center lg:hidden cursor-pointer' onClick={Logout}>
+                <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className='mt-3 bg-red-400 hover:bg-red-500 transition text-white font-bold p-3 rounded text-xl flex items-center gap-2 justify-center lg:hidden cursor-pointer' onClick={Logout}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 my-auto" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

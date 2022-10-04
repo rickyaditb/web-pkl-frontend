@@ -69,7 +69,7 @@ export default function UploadGambar(props) {
                                     setFoto(file);
                                     setBerhasil("");
                                 }} className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-base file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100" /><br />
-                                <input type="submit" value="Unggah Foto Profil" className='bg-utama text-white font-bold p-3 rounded w-full text-xl' />
+                                <input type="submit" value="Unggah Foto Profil" className='bg-utama hover:bg-sekunder transition cursor-pointer text-white font-bold p-3 rounded w-full text-xl' />
                             </form>
                         </div>
                     </motion.div>

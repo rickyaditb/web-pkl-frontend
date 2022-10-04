@@ -116,7 +116,7 @@ export default function MainPresensi() {
                                             </div>
                                         </div>
                                         <div className='mt-6 mb-3 sm:mb-0'>
-                                            <Link to={`/presensi/detail/`} className="bg-utama text-white px-5 py-3 font-bold rounded">Absen</Link>
+                                            <Link to={`/presensi/detail/`} className="bg-utama text-white px-5 py-3 font-bold rounded hover:bg-sekunder transition">Absen</Link>
                                         </div>
                                     </div>
                                 }

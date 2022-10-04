@@ -123,7 +123,7 @@ export default function Register() {
                                     <p className="text-center text-gray-500">Sudah punya akun ?<br />
                                         Masuk Disini</p>
                                 </Link>
-                                <input type="submit" value="Daftar" className="px-5 py-3 rounded-lg text-white bg-utama font-bold cursor-pointer" required />
+                                <input type="submit" value="Buat Akun" className="px-5 py-3 rounded-lg text-white bg-utama font-bold hover:bg-sekunder transition cursor-pointer" required />
                             </div>
                         </div>
                     </div>

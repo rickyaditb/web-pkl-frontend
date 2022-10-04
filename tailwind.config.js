@@ -12,7 +12,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        utama: "#6C63FF"
+        utama: "#6C63FF",
+        sekunder: "#564fc9"
       }
     },
   },
