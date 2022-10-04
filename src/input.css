@@ -5,19 +5,3 @@
 body {
     @apply bg-gray-100;
 }
-
-.warna-main {
-    background-color: #6C63FF;
-}
-
-.text-warna-main {
-    color: #6C63FF;
-}
-
-.warna-bg {
-    background-color: #25294a;
-}
-
-.border-main {
-    border-color: #6C63FF;
-}

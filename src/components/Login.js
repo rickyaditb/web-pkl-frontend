@@ -60,7 +60,7 @@ export default function Login() {
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} id="password" name="password" placeholder="Masukan Kata Sandi Anda"
                         className="bg-gray-100 w-full py-3 px-3 rounded-lg focus:outline-none focus:ring-2 border-none focus:bg-gray-200 transition duration-300" required/><br /><br />
                     <input type="submit" value="Masuk"
-                        className="w-full py-3 rounded-lg text-white warna-main font-bold cursor-pointer hover:bg-purple-500 transition duration-300" required/>
+                        className="w-full py-3 rounded-lg text-white bg-utama font-bold cursor-pointer hover:bg-purple-500 transition duration-300" required/>
                 </form>
                 <Link to={`/register`}>
                     <p className="text-center text-gray-500 mt-5 mb-10 sm:mb-0">Belum punya akun ?

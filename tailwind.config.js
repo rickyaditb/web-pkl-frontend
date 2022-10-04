@@ -10,7 +10,11 @@ module.exports = {
     "./src/components/pembimbing/sub/*.{html,js}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        utama: "#6C63FF"
+      }
+    },
   },
   plugins: [],
 }

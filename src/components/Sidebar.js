@@ -47,7 +47,7 @@ export default function Sidebar(props) {
         <div className="col-span-2 mb-96 hidden lg:block">
             <Link to={beranda}>
                 {props.anim === "home" ?
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.1 }} className={`text-gray-600 px-4 py-3 ${activePage === "home" && "warna-main text-white "} font-bold rounded-lg flex cursor-pointer ${activePage !== "home" && "hover:bg-purple-200 "} duration-300`}>
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.1 }} className={`text-gray-600 px-4 py-3 ${activePage === "home" && "bg-utama text-white "} font-bold rounded-lg flex cursor-pointer ${activePage !== "home" && "hover:bg-purple-200 "} duration-300`}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 my-auto" viewBox="0 0 20 20"
                             fill="currentColor">
                             <path
@@ -55,7 +55,7 @@ export default function Sidebar(props) {
                         </svg>
                         <p className="ml-2">Beranda</p>
                     </motion.div> :
-                    <div className={`text-gray-600 px-4 py-3 ${activePage === "home" && "warna-main text-white "} font-bold rounded-lg flex cursor-pointer ${activePage !== "home" && "hover:bg-purple-200 "} duration-300`}>
+                    <div className={`text-gray-600 px-4 py-3 ${activePage === "home" && "bg-utama text-white "} font-bold rounded-lg flex cursor-pointer ${activePage !== "home" && "hover:bg-purple-200 "} duration-300`}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 my-auto" viewBox="0 0 20 20"
                             fill="currentColor">
                             <path
@@ -67,7 +67,7 @@ export default function Sidebar(props) {
             </Link>
             <Link to={presensi}>
                 {props.anim === "presensi" ?
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.1 }} className={`text-gray-600 px-4 py-3 ${activePage === "presensi" && "warna-main text-white "} font-bold rounded-lg flex cursor-pointer ${activePage !== "presensi" && "hover:bg-purple-200 "} duration-300`}>
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.1 }} className={`text-gray-600 px-4 py-3 ${activePage === "presensi" && "bg-utama text-white "} font-bold rounded-lg flex cursor-pointer ${activePage !== "presensi" && "hover:bg-purple-200 "} duration-300`}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 my-auto" viewBox="0 0 20 20"
                             fill="currentColor">
                             <path fill-rule="evenodd"
@@ -76,7 +76,7 @@ export default function Sidebar(props) {
                         </svg>
                         <p className="ml-2">Presensi</p>
                     </motion.div> :
-                    <div className={`text-gray-600 px-4 py-3 ${activePage === "presensi" && "warna-main text-white "} font-bold rounded-lg flex cursor-pointer ${activePage !== "presensi" && "hover:bg-purple-200 "} duration-300`}>
+                    <div className={`text-gray-600 px-4 py-3 ${activePage === "presensi" && "bg-utama text-white "} font-bold rounded-lg flex cursor-pointer ${activePage !== "presensi" && "hover:bg-purple-200 "} duration-300`}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 my-auto" viewBox="0 0 20 20"
                             fill="currentColor">
                             <path fill-rule="evenodd"
@@ -89,7 +89,7 @@ export default function Sidebar(props) {
             </Link>
             <Link to={laporan}>
                 {props.anim === "laporan" ?
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.1 }} className={`text-gray-600 px-4 py-3 ${activePage === "laporan" && "warna-main text-white "} font-bold rounded-lg flex cursor-pointer ${activePage !== "laporan" && "hover:bg-purple-200 "} duration-300`}>
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.1 }} className={`text-gray-600 px-4 py-3 ${activePage === "laporan" && "bg-utama text-white "} font-bold rounded-lg flex cursor-pointer ${activePage !== "laporan" && "hover:bg-purple-200 "} duration-300`}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 my-auto" viewBox="0 0 20 20"
                             fill="currentColor">
                             <path fill-rule="evenodd"
@@ -98,7 +98,7 @@ export default function Sidebar(props) {
                         </svg>
                         <p className="ml-2">Laporan</p>
                     </motion.div> :
-                    <div className={`text-gray-600 px-4 py-3 ${activePage === "laporan" && "warna-main text-white "} font-bold rounded-lg flex cursor-pointer ${activePage !== "laporan" && "hover:bg-purple-200 "} duration-300`}>
+                    <div className={`text-gray-600 px-4 py-3 ${activePage === "laporan" && "bg-utama text-white "} font-bold rounded-lg flex cursor-pointer ${activePage !== "laporan" && "hover:bg-purple-200 "} duration-300`}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 my-auto" viewBox="0 0 20 20"
                             fill="currentColor">
                             <path fill-rule="evenodd"
@@ -111,7 +111,7 @@ export default function Sidebar(props) {
             </Link>
             <Link to="/pengaturan">
                 {props.anim === "pengaturan" ?
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.1 }} className={`text-gray-600 px-4 py-3 ${activePage === "pengaturan" && "warna-main text-white "} font-bold rounded-lg flex cursor-pointer ${activePage !== "pengaturan" && "hover:bg-purple-200 "} duration-300`}>
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.1 }} className={`text-gray-600 px-4 py-3 ${activePage === "pengaturan" && "bg-utama text-white "} font-bold rounded-lg flex cursor-pointer ${activePage !== "pengaturan" && "hover:bg-purple-200 "} duration-300`}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 my-auto" viewBox="0 0 20 20"
                             fill="currentColor">
                             <path fill-rule="evenodd"
@@ -120,7 +120,7 @@ export default function Sidebar(props) {
                         </svg>
                         <p className="ml-2">Pengaturan</p>
                     </motion.div> :
-                    <div className={`text-gray-600 px-4 py-3 ${activePage === "pengaturan" && "warna-main text-white "} font-bold rounded-lg flex cursor-pointer ${activePage !== "pengaturan" && "hover:bg-purple-200 "} duration-300`}>
+                    <div className={`text-gray-600 px-4 py-3 ${activePage === "pengaturan" && "bg-utama text-white "} font-bold rounded-lg flex cursor-pointer ${activePage !== "pengaturan" && "hover:bg-purple-200 "} duration-300`}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 my-auto" viewBox="0 0 20 20"
                             fill="currentColor">
                             <path fill-rule="evenodd"

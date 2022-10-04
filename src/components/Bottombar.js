@@ -42,7 +42,7 @@ export default function Bottombar(props) {
     let activePage = props.activePage;
     return (
         <div className='grid grid-cols-4 bg-white justify-items-center py-4 shadow-2xl drop-shadow-2xl w-full bottom-0 fixed inset-x-0 block lg:hidden'>
-            <Link to={beranda} className={`text-gray-600 font-bold cursor-pointer ${activePage === "home" && "text-warna-main"}`}>
+            <Link to={beranda} className={`text-gray-600 font-bold cursor-pointer ${activePage === "home" && "text-utama"}`}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-auto mb-1" viewBox="0 0 20 20"
                     fill="currentColor">
                     <path
@@ -50,7 +50,7 @@ export default function Bottombar(props) {
                 </svg>
                 <p>Beranda</p>
             </Link>
-            <Link to={presensi} className={`text-gray-600 font-bold cursor-pointer ${activePage === "presensi" && "text-warna-main"}`}>
+            <Link to={presensi} className={`text-gray-600 font-bold cursor-pointer ${activePage === "presensi" && "text-utama"}`}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-auto mb-1" viewBox="0 0 20 20"
                     fill="currentColor">
                     <path fill-rule="evenodd"
@@ -59,7 +59,7 @@ export default function Bottombar(props) {
                 </svg>
                 <p>Presensi</p>
             </Link>
-            <Link to={laporan} className={`text-gray-600 font-bold cursor-pointer ${activePage === "laporan" && "text-warna-main"}`}>
+            <Link to={laporan} className={`text-gray-600 font-bold cursor-pointer ${activePage === "laporan" && "text-utama"}`}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-auto mb-1" viewBox="0 0 20 20"
                     fill="currentColor">
                     <path fill-rule="evenodd"
@@ -68,7 +68,7 @@ export default function Bottombar(props) {
                 </svg>
                 <p>Laporan</p>
             </Link>
-            <Link to="/pengaturan" className={`text-gray-600 font-bold cursor-pointer ${activePage === "pengaturan" && "text-warna-main"}`}>
+            <Link to="/pengaturan" className={`text-gray-600 font-bold cursor-pointer ${activePage === "pengaturan" && "text-utama"}`}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-auto mb-1" viewBox="0 0 20 20"
                     fill="currentColor">
                     <path fill-rule="evenodd"
