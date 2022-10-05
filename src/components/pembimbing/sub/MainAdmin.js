@@ -2,10 +2,13 @@ import React, { useState, useEffect, useContext } from 'react';
 import AuthContext from 'context/AuthContext';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 export default function MainAdmin() {
     const [user, setUser] = useState([]);
-
+    const [modal, setModal] = useState(false)
+    const [modalValue, setModalValue] = useState("")
 
     const auth = useContext(AuthContext);
 
@@ -49,8 +52,55 @@ export default function MainAdmin() {
         setTab("Aktif")
     }
 
+    const showToastMessage = () => {
+        toast.success('User berhasil dihapus', {
+            position: toast.POSITION.TOP_RIGHT
+        });
+    };
+
+    const deleteLaporan = async (id) => {
+        try {
+            await axios.delete(`http://localhost:5000/hapus_user/${id}`);
+            getUser();
+            setModal(false);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const konfirmasi = (value) => {
+        setModalValue(value);
+        setModal(true);
+    }
+
+    const batal = () => {
+        setModalValue("");
+        setModal(false);
+    }
+
+    const hapus = () => {
+        deleteLaporan(modalValue)
+        showToastMessage()
+    }
+
     return (
         <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="col-span-12 lg:col-span-10">
+            <AnimatePresence>
+                {modal &&
+                    <motion.div initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} exit={{ opacity: 0 }} className="bg-black/50 fixed inset-0 z-0 flex items-center justify-center">
+                        <div>
+                            <div className="bg-white px-8 py-8 rounded text-center">
+                                <p className='font-bold text-2xl text-gray-800 mb-3'>Hapus User ?</p>
+                                <p className='text-lg'>User yang sudah dihapus tidak akan bisa dikembalikan.</p>
+                                <div className="flex gap-5 mt-3 justify-center">
+                                    <button onClick={hapus} className='bg-red-100 text-red-700 w-full rounded py-3 font-bold text-lg'>Ya, Hapus</button>
+                                    <button onClick={() => batal()} className='bg-blue-100 text-blue-700 w-full rounded py-3 font-bold text-lg'>Tidak, Kembali</button>
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                }
+            </AnimatePresence>
             <div class="text-lg font-bold text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700 bg-white shadow mb-3">
                 <ul class="flex flex-wrap -mb-px">
                     <li class="mr-2 cursor-pointer" onClick={switchToAktif}>
@@ -81,7 +131,7 @@ export default function MainAdmin() {
                                     <td className="p-3">{item.asal_instansi}</td>
                                     <td className="p-3">{item.pembimbing.nama}</td>
                                     <td className="p-3 text-center">
-                                        <div className="flex justify-center items-center">
+                                        <div className="flex justify-center items-center gap-2">
                                             <Link to={`/profile/${item._id}`} key={item._id} className="p-2 font-semibold leading-tight text-blue-700 bg-blue-100 text-sm rounded flex justify-center items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
                                                     <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
@@ -89,6 +139,14 @@ export default function MainAdmin() {
                                                 </svg>
                                                 <p className="ml-1">Detail</p>
                                             </Link>
+                                            {auth.role === "admin" &&
+                                                <button onClick={() => konfirmasi(item._id)} className="p-2 font-semibold leading-tight text-red-700 bg-red-100 text-sm rounded flex justify-center items-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                                    </svg>
+                                                    <p className="ml-1">Hapus</p>
+                                                </button>
+                                            }
                                         </div>
                                     </td>
                                 </tr>
@@ -118,7 +176,7 @@ export default function MainAdmin() {
                                     <td className="p-3">{item.asal_instansi}</td>
                                     <td className="p-3">{item.pembimbing.nama}</td>
                                     <td className="p-3 text-center">
-                                        <div className="flex justify-center items-center">
+                                        <div className="flex justify-center items-center gap-2">
                                             <Link to={`/profile/${item._id}`} key={item._id} className="p-2 font-semibold leading-tight text-blue-700 bg-blue-100 text-sm rounded flex justify-center items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
                                                     <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
@@ -126,6 +184,14 @@ export default function MainAdmin() {
                                                 </svg>
                                                 <p className="ml-1">Detail</p>
                                             </Link>
+                                            {auth.role === "admin" &&
+                                                <button onClick={() => konfirmasi(item._id)} className="p-2 font-semibold leading-tight text-red-700 bg-red-100 text-sm rounded flex justify-center items-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                                    </svg>
+                                                    <p className="ml-1">Hapus</p>
+                                                </button>
+                                            }
                                         </div>
                                     </td>
                                 </tr>
