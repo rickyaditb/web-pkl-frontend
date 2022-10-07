@@ -227,8 +227,8 @@ export default function MainProfile() {
                 </div>
                 }
                 <div className='px-3 py-2 text-xl rounded-lg text-white grid grid-cols-2 text-center gap-4'>
-                    <Link to={`/presensi_pembimbing/${user._id}`} className='bg-utama p-3 text-white font-bold rounded-lg cursor-pointer flex items-center justify-center'>Detail Presensi</Link>
-                    <Link to={`/laporan_pembimbing/${user._id}`} className='bg-utama p-3 text-white font-bold rounded-lg cursor-pointer flex items-center justify-center'>Detail Laporan</Link>
+                    <Link to={`/presensi_pembimbing/${user._id}`} className='bg-utama p-3 text-white font-bold rounded-lg cursor-pointer flex items-center justify-center hover:bg-sekunder transition'>Detail Presensi</Link>
+                    <Link to={`/laporan_pembimbing/${user._id}`} className='bg-utama p-3 text-white font-bold rounded-lg cursor-pointer flex items-center justify-center hover:bg-sekunder transition'>Detail Laporan</Link>
                 </div>
             </div>
         </motion.div>
