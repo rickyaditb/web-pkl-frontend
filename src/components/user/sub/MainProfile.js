@@ -64,7 +64,7 @@ export default function MainProfile() {
                     <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
                 </svg>
                 <p className="my-auto flex items-center gap-1">
-                    <Link to={`/pembimbing`}>Daftar User</Link>
+                    <Link to={`${auth.role === "pembimbing" ? "/pembimbing" : "/admin"}`}>Daftar User</Link>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.3} stroke="currentColor" className="w-5 h-5">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                     </svg>
