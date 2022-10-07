@@ -17,6 +17,7 @@ import PresensiPembimbing from 'components/pembimbing/PresensiPembimbing';
 import DetailPresensiPembimbing from 'components/pembimbing/DetailPresensiPembimbing';
 import LaporanPembimbing from 'components/pembimbing/LaporanPembimbing';
 import DetailLaporanPembimbing from 'components/pembimbing/DetailLaporanPembimbing';
+import PembimbingProfile from 'components/pembimbing/PembimbingProfile';
 // Admin Component
 import HomeAdmin from 'components/pembimbing/HomeAdmin';
 // Universal Component
@@ -44,6 +45,7 @@ function App() {
         <Route path="/presensi_pembimbing/:id" element={<Ap><DetailPresensiPembimbing /></Ap>}></Route>
         <Route path="/laporan_pembimbing" element={<Ap><LaporanPembimbing /></Ap>}></Route>
         <Route path="/laporan_pembimbing/:id" element={<Ap><DetailLaporanPembimbing /></Ap>}></Route>
+        <Route path="/profile_pembimbing/:id" element={<Ap><PembimbingProfile /></Ap>}></Route>
 
         <Route path="/admin" element={<Ap><HomeAdmin /></Ap>}></Route>
 
