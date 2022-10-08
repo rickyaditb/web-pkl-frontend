@@ -69,7 +69,7 @@ export default function Register() {
                         <div className="flex flex-col gap-3">
                             <div>
                                 <label htmlFor="email" className="text-gray-700">Email</label>
-                                <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} id="email" name="email" placeholder="Masukan Email Anda" className="bg-gray-100 w-full py-3 px-3 rounded-lg focus:outline-none focus:ring-2 border-none" required />
+                                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} id="email" name="email" placeholder="Masukan Email Anda" className="bg-gray-100 w-full py-3 px-3 rounded-lg focus:outline-none focus:ring-2 border-none" required />
                             </div>
                             <div>
                                 <label htmlFor="nama" className="text-gray-700">Nama Lengkap</label>
