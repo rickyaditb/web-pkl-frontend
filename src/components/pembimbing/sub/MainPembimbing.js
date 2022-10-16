@@ -3,14 +3,18 @@ import AuthContext from 'context/AuthContext';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ReactDOMServer from 'react-dom/server';
+import noData from 'components/img/no-data.svg';
 
 export default function MainPembimbing() {
     const [user, setUser] = useState([]);
+    const [aktif, setAktif] = useState("Loading");
+    const [nonAktif, setNonAktif] = useState("Loading");
+    const [tab, setTab] = useState('Aktif');
 
     const auth = useContext(AuthContext);
 
     useEffect(() => {
-        getUser();
+        auth && getUser();
     }, [auth]);
 
     const getUser = async () => {
@@ -21,8 +25,6 @@ export default function MainPembimbing() {
         });
         setUser(response.data);
     };
-
-    const [tab, setTab] = useState('Aktif');
 
     useEffect(() => {
         let aktifContainer = [];
@@ -37,9 +39,6 @@ export default function MainPembimbing() {
         setAktif(aktifContainer);
         setNonAktif(nonContainer);
     }, [user]);
-
-    let [aktif, setAktif] = useState([]);
-    let [nonAktif, setNonAktif] = useState([]);
 
     const switchToNon = () => {
         setTab("Non")
@@ -69,46 +68,72 @@ export default function MainPembimbing() {
                 </ul>
             </div>
             {tab === "Aktif" &&
-                <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="flex flex-col gap-3">
-                    {aktif.map((item, index) => (
-                        <Link to={`/profile/${item._id}`} key={item._id} className="bg-white p-5 rounded-lg shadow transform transition flex items-center">
-                            <img alt="foto-staff" onError={(e) => e.target.outerHTML = profilePlaceholder} src={`http://localhost:5000/${item._id}${item.gambar}`} className="bg-gray-500 w-28 h-28 rounded-full mx-5" />
-                            <div className="ml-5">
-                                <div className="flex flex-col gap-1">
-                                    <div>
-                                        <p className="text-gray-500">Nama</p>
-                                        <p className="font-bold text-gray-600 text-xl">{item.nama}</p>
-                                    </div>
-                                    <div>
-                                        <p className="text-gray-500">Asal Instansi</p>
-                                        <p className="font-bold text-gray-600 text-xl">{item.asal_instansi}</p>
-                                    </div>
+                <div>
+                    {aktif === "Loading" ?
+                        <></> :
+                        <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="flex flex-col gap-3">
+                            {aktif.length > 0 ?
+                                <div className="flex flex-col gap-3">
+                                    {aktif.map((item, index) => (
+                                        <Link to={`/profile/${item._id}`} key={item._id} className="bg-white p-5 rounded-lg shadow transform transition flex items-center">
+                                            <img alt="foto-staff" onError={(e) => e.target.outerHTML = profilePlaceholder} src={`http://localhost:5000/${item._id}${item.gambar}`} className="bg-gray-500 w-28 h-28 rounded-full mx-5" />
+                                            <div className="ml-5">
+                                                <div className="flex flex-col gap-1">
+                                                    <div>
+                                                        <p className="text-gray-500">Nama</p>
+                                                        <p className="font-bold text-gray-600 text-xl">{item.nama}</p>
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-gray-500">Asal Instansi</p>
+                                                        <p className="font-bold text-gray-600 text-xl">{item.asal_instansi}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    ))}
+                                </div> :
+                                <div className='bg-white shadow rounded p-4 md:p-8 grid justify-items-center content-center gap-3 md:gap-0'>
+                                    <img src={noData} alt="" className='w-64' />
+                                    <div className='flex items-center mt-5 text-4xl font-bold text-gray-700 text-center'>Data Staff Aktif <br />Kosong</div>
                                 </div>
-                            </div>
-                        </Link>
-                    ))}
-                </motion.div>
+                            }
+                        </motion.div>
+                    }
+                </div>
             }
             {tab === "Non" &&
-                <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="flex flex-col gap-3">
-                    {nonAktif.map((item, index) => (
-                        <Link to={`/profile/${item._id}`} key={item._id} className="bg-white p-5 rounded-lg shadow transform transition flex items-center">
-                            <img alt="foto-staff" onError={(e) => e.target.outerHTML = profilePlaceholder} src={`http://localhost:5000/${item._id}${item.gambar}`} className="bg-gray-500 w-28 h-28 rounded-full mx-5" />
-                            <div className="ml-5">
-                                <div className="flex flex-col gap-1">
-                                    <div>
-                                        <p className="text-gray-500">Nama</p>
-                                        <p className="font-bold text-gray-600 text-xl">{item.nama}</p>
-                                    </div>
-                                    <div>
-                                        <p className="text-gray-500">Asal Instansi</p>
-                                        <p className="font-bold text-gray-600 text-xl">{item.asal_instansi}</p>
-                                    </div>
+                <div>
+                    {nonAktif === "Loading" ?
+                        <></> :
+                        <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }}>
+                            {nonAktif.length > 0 ?
+                                <div className="flex flex-col gap-3">
+                                    {nonAktif.map((item, index) => (
+                                        <Link to={`/profile/${item._id}`} key={item._id} className="bg-white p-5 rounded-lg shadow transform transition flex items-center">
+                                            <img alt="foto-staff" onError={(e) => e.target.outerHTML = profilePlaceholder} src={`http://localhost:5000/${item._id}${item.gambar}`} className="bg-gray-500 w-28 h-28 rounded-full mx-5" />
+                                            <div className="ml-5">
+                                                <div className="flex flex-col gap-1">
+                                                    <div>
+                                                        <p className="text-gray-500">Nama</p>
+                                                        <p className="font-bold text-gray-600 text-xl">{item.nama}</p>
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-gray-500">Asal Instansi</p>
+                                                        <p className="font-bold text-gray-600 text-xl">{item.asal_instansi}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    ))}
+                                </div> :
+                                <div className='bg-white shadow rounded p-4 md:p-8 grid justify-items-center content-center gap-3 md:gap-0'>
+                                    <img src={noData} alt="" className='w-64' />
+                                    <div className='flex items-center mt-5 text-4xl font-bold text-gray-700 text-center'>Data Staff Non Aktif <br />Kosong</div>
                                 </div>
-                            </div>
-                        </Link>
-                    ))}
-                </motion.div>
+                            }
+                        </motion.div>
+                    }
+                </div>
             }
         </motion.div>
     )

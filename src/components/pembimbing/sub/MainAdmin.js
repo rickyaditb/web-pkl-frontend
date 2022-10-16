@@ -4,18 +4,23 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import noData from 'components/img/no-data.svg';
 
 export default function MainAdmin() {
     const [user, setUser] = useState([]);
-    const [pembimbing, setPembimbing] = useState([]);
     const [modal, setModal] = useState(false)
     const [modalValue, setModalValue] = useState("")
+
+    const [tab, setTab] = useState('Aktif');
+    const [aktif, setAktif] = useState("Loading");
+    const [nonAktif, setNonAktif] = useState("Loading");
+    const [pembimbing, setPembimbing] = useState("Loading");
 
     const auth = useContext(AuthContext);
 
     useEffect(() => {
-        getUser();
-        getPembimbing();
+        auth && getUser();
+        auth && getPembimbing();
     }, [auth]);
 
     const getUser = async () => {
@@ -36,8 +41,6 @@ export default function MainAdmin() {
         setPembimbing(response.data);
     };
 
-    const [tab, setTab] = useState('Aktif');
-
     useEffect(() => {
         let aktifContainer = [];
         let nonContainer = [];
@@ -51,9 +54,6 @@ export default function MainAdmin() {
         setAktif(aktifContainer);
         setNonAktif(nonContainer);
     }, [user]);
-
-    let [aktif, setAktif] = useState([]);
-    let [nonAktif, setNonAktif] = useState([]);
 
     const switchToNon = () => {
         setTab("Non")
@@ -130,136 +130,169 @@ export default function MainAdmin() {
                 </ul>
             </div>
             {tab === "Aktif" &&
-                <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="bg-white p-3 shadow rounded mb-16">
-                    <table className="text-left table-auto w-full">
-                        <thead>
-                            <tr className="text-gray-500">
-                                <th className="font-semibold p-3">No.</th>
-                                <th className="font-semibold p-3">Nama</th>
-                                <th className="font-semibold p-3">Asal Instansi</th>
-                                <th className="font-semibold p-3">Pembimbing</th>
-                                <th className="font-semibold p-3 text-center">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {aktif.map((item, index) => (
-                                <tr className="text-gray-900 border-t hover:bg-gray-100">
-                                    <td className="p-3">{index + 1}</td>
-                                    <td className="p-3">{item.nama}</td>
-                                    <td className="p-3">{item.asal_instansi}</td>
-                                    <td className="p-3">{item.pembimbing.nama}</td>
-                                    <td className="p-3 text-center">
-                                        <div className="flex justify-center items-center gap-2">
-                                            <Link to={`/profile/${item._id}`} key={item._id} className="p-2 font-semibold leading-tight text-blue-700 bg-blue-100 text-sm rounded flex justify-center items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-                                                    <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
-                                                    <path fillRule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clipRule="evenodd" />
-                                                </svg>
-                                                <p className="ml-1">Detail</p>
-                                            </Link>
-                                            {auth.role === "admin" &&
-                                                <button onClick={() => konfirmasi(item._id)} className="p-2 font-semibold leading-tight text-red-700 bg-red-100 text-sm rounded flex justify-center items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
-                                                    </svg>
-                                                    <p className="ml-1">Hapus</p>
-                                                </button>
-                                            }
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </motion.div>
+                <div>
+                    {aktif === "Loading" ?
+                        <></> :
+                        <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="bg-white p-3 shadow rounded mb-16">
+                            {aktif.length > 0 ?
+                                <table className="text-left table-auto w-full">
+                                    <thead>
+                                        <tr className="text-gray-500">
+                                            <th className="font-semibold p-3">No.</th>
+                                            <th className="font-semibold p-3">Nama</th>
+                                            <th className="font-semibold p-3">Asal Instansi</th>
+                                            <th className="font-semibold p-3">Pembimbing</th>
+                                            <th className="font-semibold p-3 text-center">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {aktif.map((item, index) => (
+                                            <tr className="text-gray-900 border-t hover:bg-gray-100">
+                                                <td className="p-3">{index + 1}</td>
+                                                <td className="p-3">{item.nama}</td>
+                                                <td className="p-3">{item.asal_instansi}</td>
+                                                <td className="p-3">{item.pembimbing.nama}</td>
+                                                <td className="p-3 text-center">
+                                                    <div className="flex justify-center items-center gap-2">
+                                                        <Link to={`/profile/${item._id}`} key={item._id} className="p-2 font-semibold leading-tight text-blue-700 bg-blue-100 text-sm rounded flex justify-center items-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+                                                                <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                                                                <path fillRule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clipRule="evenodd" />
+                                                            </svg>
+                                                            <p className="ml-1">Detail</p>
+                                                        </Link>
+                                                        {auth.role === "admin" &&
+                                                            <button onClick={() => konfirmasi(item._id)} className="p-2 font-semibold leading-tight text-red-700 bg-red-100 text-sm rounded flex justify-center items-center">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                                                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                                                </svg>
+                                                                <p className="ml-1">Hapus</p>
+                                                            </button>
+                                                        }
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table> :
+                                <div className='p-4 md:p-8 grid md:grid-cols-2 justify-items-center content-center gap-3 md:gap-0'>
+                                    <img src={noData} alt="" className='w-64' />
+                                    <div className='flex items-center mt-5 md:mt-0 text-3xl md:text-5xl font-bold text-gray-700 text-center'>Data Staff Aktif <br />Kosong</div>
+                                </div>
+                            }
+                        </motion.div>
+                    }
+                </div>
             }
 
             {tab === "Non" &&
-                <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="bg-white p-3 shadow rounded mb-16">
-                    <table className="text-left table-auto w-full">
-                        <thead>
-                            <tr className="text-gray-500">
-                                <th className="font-semibold p-3">No.</th>
-                                <th className="font-semibold p-3">Nama</th>
-                                <th className="font-semibold p-3">Asal Instansi</th>
-                                <th className="font-semibold p-3">Pembimbing</th>
-                                <th className="font-semibold p-3 text-center">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {nonAktif.map((item, index) => (
-                                <tr className="text-gray-900 border-t hover:bg-gray-100">
-                                    <td className="p-3">{index + 1}</td>
-                                    <td className="p-3">{item.nama}</td>
-                                    <td className="p-3">{item.asal_instansi}</td>
-                                    <td className="p-3">{item.pembimbing.nama}</td>
-                                    <td className="p-3 text-center">
-                                        <div className="flex justify-center items-center gap-2">
-                                            <Link to={`/profile/${item._id}`} key={item._id} className="p-2 font-semibold leading-tight text-blue-700 bg-blue-100 text-sm rounded flex justify-center items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-                                                    <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
-                                                    <path fillRule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clipRule="evenodd" />
-                                                </svg>
-                                                <p className="ml-1">Detail</p>
-                                            </Link>
-                                            {auth.role === "admin" &&
-                                                <button onClick={() => konfirmasi(item._id)} className="p-2 font-semibold leading-tight text-red-700 bg-red-100 text-sm rounded flex justify-center items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
-                                                    </svg>
-                                                    <p className="ml-1">Hapus</p>
-                                                </button>
-                                            }
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </motion.div>
+                <div>
+                    {nonAktif === "Loading" ?
+                        <></> :
+                        <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="bg-white p-3 shadow rounded mb-16">
+                            {nonAktif.length > 0 ?
+                                <table className="text-left table-auto w-full">
+                                    <thead>
+                                        <tr className="text-gray-500">
+                                            <th className="font-semibold p-3">No.</th>
+                                            <th className="font-semibold p-3">Nama</th>
+                                            <th className="font-semibold p-3">Asal Instansi</th>
+                                            <th className="font-semibold p-3">Pembimbing</th>
+                                            <th className="font-semibold p-3 text-center">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {nonAktif.map((item, index) => (
+                                            <tr className="text-gray-900 border-t hover:bg-gray-100">
+                                                <td className="p-3">{index + 1}</td>
+                                                <td className="p-3">{item.nama}</td>
+                                                <td className="p-3">{item.asal_instansi}</td>
+                                                <td className="p-3">{item.pembimbing.nama}</td>
+                                                <td className="p-3 text-center">
+                                                    <div className="flex justify-center items-center gap-2">
+                                                        <Link to={`/profile/${item._id}`} key={item._id} className="p-2 font-semibold leading-tight text-blue-700 bg-blue-100 text-sm rounded flex justify-center items-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+                                                                <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                                                                <path fillRule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clipRule="evenodd" />
+                                                            </svg>
+                                                            <p className="ml-1">Detail</p>
+                                                        </Link>
+                                                        {auth.role === "admin" &&
+                                                            <button onClick={() => konfirmasi(item._id)} className="p-2 font-semibold leading-tight text-red-700 bg-red-100 text-sm rounded flex justify-center items-center">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                                                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                                                </svg>
+                                                                <p className="ml-1">Hapus</p>
+                                                            </button>
+                                                        }
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table> :
+                                <div className='p-4 md:p-8 grid md:grid-cols-2 justify-items-center content-center gap-3 md:gap-0'>
+                                    <img src={noData} alt="" className='w-64' />
+                                    <div className='flex items-center mt-5 md:mt-0 text-3xl md:text-5xl font-bold text-gray-700 text-center'>Data Staff Aktif <br />Kosong</div>
+                                </div>
+                            }
+                        </motion.div>
+                    }
+                </div>
             }
 
             {tab === "Pembimbing" &&
-                <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="bg-white p-3 shadow rounded mb-16">
-                    <table className="text-left table-auto w-full">
-                        <thead>
-                            <tr className="text-gray-500">
-                                <th className="font-semibold p-3">No.</th>
-                                <th className="font-semibold p-3">Nama</th>
-                                <th className="font-semibold p-3">Asal Instansi</th>
-                                <th className="font-semibold p-3 text-center">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {pembimbing.map((item, index) => (
-                                <tr className="text-gray-900 border-t hover:bg-gray-100">
-                                    <td className="p-3">{index + 1}</td>
-                                    <td className="p-3">{item.nama}</td>
-                                    <td className="p-3">{item.asal_instansi}</td>
-                                    <td className="p-3 text-center">
-                                        <div className="flex justify-center items-center gap-2">
-                                            <Link to={`/profile_pembimbing/${item._id}`} key={item._id} className="p-2 font-semibold leading-tight text-blue-700 bg-blue-100 text-sm rounded flex justify-center items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-                                                    <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
-                                                    <path fillRule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clipRule="evenodd" />
-                                                </svg>
-                                                <p className="ml-1">Detail</p>
-                                            </Link>
-                                            {auth.role === "admin" &&
-                                                <button onClick={() => konfirmasi(item._id)} className="p-2 font-semibold leading-tight text-red-700 bg-red-100 text-sm rounded flex justify-center items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
-                                                    </svg>
-                                                    <p className="ml-1">Hapus</p>
-                                                </button>
-                                            }
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </motion.div>
+                <div>
+                    {pembimbing === "Loading" ?
+                        <></> :
+                        <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="bg-white p-3 shadow rounded mb-16">
+                            {pembimbing.length > 0 ?
+                                <table className="text-left table-auto w-full">
+                                    <thead>
+                                        <tr className="text-gray-500">
+                                            <th className="font-semibold p-3">No.</th>
+                                            <th className="font-semibold p-3">Nama</th>
+                                            <th className="font-semibold p-3">Asal Instansi</th>
+                                            <th className="font-semibold p-3 text-center">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {pembimbing.map((item, index) => (
+                                            <tr className="text-gray-900 border-t hover:bg-gray-100">
+                                                <td className="p-3">{index + 1}</td>
+                                                <td className="p-3">{item.nama}</td>
+                                                <td className="p-3">{item.asal_instansi}</td>
+                                                <td className="p-3 text-center">
+                                                    <div className="flex justify-center items-center gap-2">
+                                                        <Link to={`/profile_pembimbing/${item._id}`} key={item._id} className="p-2 font-semibold leading-tight text-blue-700 bg-blue-100 text-sm rounded flex justify-center items-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+                                                                <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                                                                <path fillRule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clipRule="evenodd" />
+                                                            </svg>
+                                                            <p className="ml-1">Detail</p>
+                                                        </Link>
+                                                        {auth.role === "admin" &&
+                                                            <button onClick={() => konfirmasi(item._id)} className="p-2 font-semibold leading-tight text-red-700 bg-red-100 text-sm rounded flex justify-center items-center">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                                                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                                                </svg>
+                                                                <p className="ml-1">Hapus</p>
+                                                            </button>
+                                                        }
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table> :
+                                <div className='p-4 md:p-8 grid md:grid-cols-2 justify-items-center content-center gap-3 md:gap-0'>
+                                    <img src={noData} alt="" className='w-64' />
+                                    <div className='flex items-center mt-5 md:mt-0 text-3xl md:text-5xl font-bold text-gray-700 text-center'>Data Staff Aktif <br />Kosong</div>
+                                </div>
+                            }
+                        </motion.div>
+                    }
+                </div>
             }
         </motion.div>
     )
