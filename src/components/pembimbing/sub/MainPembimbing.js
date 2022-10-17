@@ -27,17 +27,19 @@ export default function MainPembimbing() {
     };
 
     useEffect(() => {
-        let aktifContainer = [];
-        let nonContainer = [];
-        user.map((item, index) => {
-            if (item.status === "Aktif") {
-                aktifContainer.push({ ...item })
-            } else if (item.status === "Non Aktif") {
-                nonContainer.push({ ...item })
-            }
-        });
-        setAktif(aktifContainer);
-        setNonAktif(nonContainer);
+        if (user.length > 1) {
+            let aktifContainer = [];
+            let nonContainer = [];
+            user.map((item, index) => {
+                if (item.status === "Aktif") {
+                    aktifContainer.push({ ...item })
+                } else if (item.status === "Non Aktif") {
+                    nonContainer.push({ ...item })
+                }
+            });
+            setAktif(aktifContainer);
+            setNonAktif(nonContainer);
+        }
     }, [user]);
 
     const switchToNon = () => {
