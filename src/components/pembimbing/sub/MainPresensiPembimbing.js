@@ -62,8 +62,6 @@ export default function MainPresensiPembimbing() {
         setTab("Semua")
     }
 
-    console.log(user2)
-
     return (
         <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="col-span-12 lg:col-span-10 mb-8">
             <div class="text-lg font-bold text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700 bg-white shadow mb-3">
