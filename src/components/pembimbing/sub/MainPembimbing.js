@@ -27,7 +27,7 @@ export default function MainPembimbing() {
     };
 
     useEffect(() => {
-        if (user.length > 1) {
+        if (user.length > 0) {
             let aktifContainer = [];
             let nonContainer = [];
             user.map((item, index) => {

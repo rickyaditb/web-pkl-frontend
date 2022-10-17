@@ -35,7 +35,7 @@ export default function MainLaporanPembimbing() {
     const [tab, setTab] = useState('Aktif');
 
     useEffect(() => {
-        if (user.length > 1) {
+        if (user.length > 0) {
             let aktifContainer = [];
             let nonContainer = [];
             user.map((item, index) => {
