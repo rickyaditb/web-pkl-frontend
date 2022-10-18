@@ -11,7 +11,7 @@ export default function Home() {
     return (
         <div>
             <Header />
-            <div className="grid grid-cols-12 gap-3 mt-5">
+            <div className="grid grid-cols-12 gap-3 mt-5 mb-4">
                 <Sidebar activePage="home" anim="home"/>
                 <MainHome />
                 <Pembimbing />

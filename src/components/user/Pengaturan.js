@@ -9,7 +9,7 @@ export default function Pengaturan() {
     return (
         <div>
             <Header kelas="hidden md:flex" />
-            <div className="grid grid-cols-12 gap-3 mt-5">
+            <div className="grid grid-cols-12 gap-3 mt-3 md:mt-5">
                 <Sidebar activePage="pengaturan" anim="pengaturan" />
                 <MainPengaturan />
                 <Profile kelas="hidden md:block" />
