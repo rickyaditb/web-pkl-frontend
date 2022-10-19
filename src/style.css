@@ -1721,15 +1721,6 @@ body {
     display: block;
   }
 
-  .sm\:flex {
-    display: flex;
-  }
-
-  .sm\:bg-red-300 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(252 165 165 / var(--tw-bg-opacity));
-  }
-
   .sm\:p-8 {
     padding: 2rem;
   }
@@ -1775,16 +1766,12 @@ body {
     margin-top: 0px;
   }
 
-  .md\:mb-16 {
-    margin-bottom: 4rem;
-  }
-
-  .md\:mb-8 {
-    margin-bottom: 2rem;
-  }
-
   .md\:mt-5 {
     margin-top: 1.25rem;
+  }
+
+  .md\:mb-16 {
+    margin-bottom: 4rem;
   }
 
   .md\:block {
@@ -1809,11 +1796,6 @@ body {
 
   .md\:gap-0 {
     gap: 0px;
-  }
-
-  .md\:bg-red-300 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(252 165 165 / var(--tw-bg-opacity));
   }
 
   .md\:p-0 {

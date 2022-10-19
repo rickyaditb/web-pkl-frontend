@@ -47,6 +47,12 @@ export default function MainHome() {
         });
     };
 
+    const showErrorMessage = () => {
+        toast.error('Hanya format file .pdf yang diizinkan!', {
+            position: toast.POSITION.TOP_RIGHT
+        });
+    };
+
     const kirim = async () => {
         formData.append("id_user", user.id);
         formData.append("laporan", laporan);
@@ -60,6 +66,7 @@ export default function MainHome() {
             showToastMessage();
         } catch (error) {
             console.log(error);
+            showErrorMessage();
         }
     }
 
