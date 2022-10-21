@@ -184,7 +184,7 @@ export default function MainHome() {
                                 <p htmlFor="laporan" className='font-bold text-lg'>Laporan Praktik Lapangan</p>
                                 <a href={urlLaporan}>Unduh Laporan</a>
                             </div>
-                            <label htmlFor="laporan" className='bg-white p-3 text-blue-500 font-bold rounded-lg ml-auto cursor-pointer'>Ganti Laporan</label>
+                            <label htmlFor="laporan" className='bg-white p-3 text-blue-500 font-bold rounded-lg ml-auto cursor-pointer'>Ubah Laporan</label>
                         </div>
                     </form>
                 </div> :
