@@ -715,8 +715,8 @@ video {
   margin-left: auto;
 }
 
-.mb-16 {
-  margin-bottom: 4rem;
+.mb-8 {
+  margin-bottom: 2rem;
 }
 
 .mb-96 {
@@ -757,6 +757,10 @@ video {
 
 .mr-5 {
   margin-right: 1.25rem;
+}
+
+.mb-16 {
+  margin-bottom: 4rem;
 }
 
 .-mb-1 {
@@ -801,10 +805,6 @@ video {
 
 .-mb-px {
   margin-bottom: -1px;
-}
-
-.mb-8 {
-  margin-bottom: 2rem;
 }
 
 .block {

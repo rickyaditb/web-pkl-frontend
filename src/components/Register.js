@@ -118,7 +118,7 @@ export default function Register() {
                                 <label htmlFor="password2" className="text-gray-700">Konfirmasi Kata Sandi</label>
                                 <input type="password" value={confPassword} onChange={(e) => setPassword2(e.target.value)} id="password2" name="password2" placeholder="Masukan Kembali Kata Sandi Anda" className="bg-gray-100 w-full py-3 px-3 rounded-lg focus:outline-none focus:ring-2 border-none" required />
                             </div>
-                            <div className="ml-auto items-center gap-3 hidden md:flex">
+                            <div className="ml-auto mb-8 items-center gap-3 hidden md:flex">
                                 <Link to={`/login`}>
                                     <p className="text-center text-gray-500">Sudah punya akun ?<br />
                                         Masuk Disini</p>
@@ -128,7 +128,7 @@ export default function Register() {
                         </div>
                     </div>
                 </div>
-                <div className="block md:hidden mt-3 mb-16">
+                <div className="block md:hidden mt-3 mb-8">
                     <input type="submit" value="Daftar" className="w-full px-5 py-3 rounded-lg text-white bg-utama font-bold cursor-pointer" required />
                     <Link to={`/login`}>
                         <p className="text-center text-gray-500 mt-3">
