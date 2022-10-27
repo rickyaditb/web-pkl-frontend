@@ -59,16 +59,16 @@ export default function MainPembimbing() {
             <div class="text-lg font-bold text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700 bg-white shadow mb-3">
                 <ul class="flex flex-wrap -mb-px">
                     <li class="mr-2 cursor-pointer" onClick={switchToAktif}>
-                        <p class={`hidden xl:block inline-block p-4 rounded-t-lg border-b-2 ${tab === "Aktif" ? "text-blue-600 border-blue-600" : "border-transparent hover:text-gray-600 hover:border-gray-300"}`} aria-current="page">Staff Dibimbing Aktif</p>
-                        <p class={`block xl:hidden inline-block p-4 rounded-t-lg border-b-2 ${tab === "Aktif" ? "text-blue-600 border-blue-600" : "border-transparent hover:text-gray-600 hover:border-gray-300"}`} aria-current="page">Aktif</p>
+                        <p class={`hidden xl:inline-block p-4 rounded-t-lg border-b-2 ${tab === "Aktif" ? "text-blue-600 border-blue-600" : "border-transparent hover:text-gray-600 hover:border-gray-300"}`} aria-current="page">Staff Dibimbing Aktif</p>
+                        <p class={`inline-block xl:hidden p-4 rounded-t-lg border-b-2 ${tab === "Aktif" ? "text-blue-600 border-blue-600" : "border-transparent hover:text-gray-600 hover:border-gray-300"}`} aria-current="page">Aktif</p>
                     </li>
                     <li class="mr-2 cursor-pointer" onClick={switchToNon}>
-                        <p class={`hidden xl:block inline-block p-4 rounded-t-lg border-b-2 ${tab === "Non" ? "text-blue-600 border-blue-600" : "border-transparent hover:text-gray-600 hover:border-gray-300"}`}>Staff Dibimbing Non-Aktif</p>
-                        <p class={`block xl:hidden inline-block p-4 rounded-t-lg border-b-2 ${tab === "Non" ? "text-blue-600 border-blue-600" : "border-transparent hover:text-gray-600 hover:border-gray-300"}`}>Non-Aktif</p>
+                        <p class={`hidden xl:inline-block p-4 rounded-t-lg border-b-2 ${tab === "Non" ? "text-blue-600 border-blue-600" : "border-transparent hover:text-gray-600 hover:border-gray-300"}`}>Staff Dibimbing Non-Aktif</p>
+                        <p class={`inline-block xl:hidden p-4 rounded-t-lg border-b-2 ${tab === "Non" ? "text-blue-600 border-blue-600" : "border-transparent hover:text-gray-600 hover:border-gray-300"}`}>Non-Aktif</p>
                     </li>
                     <Link class="mr-2 cursor-pointer" to={"/admin"}>
-                        <p class={`hidden xl:block inline-block p-4 rounded-t-lg border-b-2 ${tab === "x" ? "text-blue-600 border-blue-600" : "border-transparent hover:text-gray-600 hover:border-gray-300"}`}>Semua Staff</p>
-                        <p class={`block xl:hidden inline-block p-4 rounded-t-lg border-b-2 ${tab === "x" ? "text-blue-600 border-blue-600" : "border-transparent hover:text-gray-600 hover:border-gray-300"}`}>Semua</p>
+                        <p class={`hidden xl:inline-block p-4 rounded-t-lg border-b-2 ${tab === "x" ? "text-blue-600 border-blue-600" : "border-transparent hover:text-gray-600 hover:border-gray-300"}`}>Semua Staff</p>
+                        <p class={`inline-block xl:hidden p-4 rounded-t-lg border-b-2 ${tab === "x" ? "text-blue-600 border-blue-600" : "border-transparent hover:text-gray-600 hover:border-gray-300"}`}>Semua</p>
                     </Link>
                 </ul>
             </div>
