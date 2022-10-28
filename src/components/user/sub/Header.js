@@ -8,7 +8,7 @@ export default function Header(props) {
             <img src={Logo} className="w-16"/>
             <div>
                 <p className="text-gray-600 font-bold ml-5 mt-1 text-2xl">Pengadilan Agama Bogor</p>
-                <p className="text-gray-600 ml-5 text-xl">Sistem Informasi Staff Magang</p>
+                <p className="text-gray-600 ml-5 text-xl">Sistem Informasi Presensi Karyawan Magang</p>
             </div>
             <div className="ml-auto hidden">
                 <div className="mr-5 relative inline-block">

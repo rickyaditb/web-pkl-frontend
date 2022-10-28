@@ -62,7 +62,7 @@ export default function Register() {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} className="bg-white">
             <form className="container lg:px-32 mx-auto p-5 h-screen" onSubmit={daftarUser}>
                 <img src={Logo} className="w-32 mx-auto mb-3 block mt-3" />
-                <p className="text-center font-bold text-2xl text-gray-600 mb-6">Sistem Informasi Staff Magang</p>
+                <p className="text-center font-bold text-2xl text-gray-600 mb-6">Sistem Informasi Presensi Karyawan Magang</p>
                 {errorMsg ? <div className='bg-red-200 text-red-800 p-5 rounded mb-3 -mt-3 font-semibold'>{errorMsg}</div> : <></>}
                 <div className="md:grid grid-cols-2 gap-5">
                     <div className="" id="login">
