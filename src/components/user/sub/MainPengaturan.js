@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import AuthContext from 'context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function MainPengaturan(props) {
     const [menu, setMenu] = useState("main");
@@ -27,6 +27,8 @@ export default function MainPengaturan(props) {
     }
 
     const editEmail = async (e) => {
+        setBerhasil("");
+        setErrorMsg("");
         e.preventDefault();
         try {
             await axios.patch(`http://localhost:5000/email/${_id}`, {
@@ -42,6 +44,8 @@ export default function MainPengaturan(props) {
     }
 
     const editTelepon = async (e) => {
+        setBerhasil("");
+        setErrorMsg("");
         e.preventDefault();
         try {
             await axios.patch(`http://localhost:5000/telepon/${_id}`, {
@@ -57,6 +61,8 @@ export default function MainPengaturan(props) {
     }
 
     const editPassword = async (e) => {
+        setBerhasil("");
+        setErrorMsg("");
         e.preventDefault();
         try {
             await axios.patch(`http://localhost:5000/password/${_id}`, {
@@ -148,8 +154,10 @@ export default function MainPengaturan(props) {
                         </p>
                     </div>
                     <div className='bg-white p-5 rounded shadow'>
-                        {errorMsg ? <div className='bg-red-200 text-red-800 p-3 rounded mb-2 font-semibold'>{errorMsg}</div> : <></>}
-                        {berhasil ? <div className='bg-green-200 text-green-800 p-3 rounded mb-2 font-semibold'>{berhasil}</div> : <></>}
+                        <AnimatePresence>
+                            {errorMsg ? <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} exit={{ opacity: 0 }} className='bg-red-200 text-red-800 p-3 rounded mb-2 font-semibold'>{errorMsg}</motion.div> : <></>}
+                            {berhasil ? <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} exit={{ opacity: 0 }} className='bg-green-200 text-green-800 p-3 rounded mb-2 font-semibold'>{berhasil}</motion.div> : <></>}
+                        </AnimatePresence>
                         <form onSubmit={editPassword}>
                             <label for="password-lama" className='text-gray-700'>Kata Sandi Lama</label>
                             <input type="password" value={passwordLama} onChange={(e) => setPasswordLama(e.target.value)} id="password-lama" placeholder='Masukan Kata Sandi Lama' className='w-full bg-gray-100 p-3' required />
@@ -183,8 +191,10 @@ export default function MainPengaturan(props) {
                         </p>
                     </div>
                     <div className='bg-white p-5 rounded shadow'>
-                        {errorMsg ? <div className='bg-red-200 text-red-800 p-3 rounded mb-2 font-semibold'>{errorMsg}</div> : <></>}
-                        {berhasil ? <div className='bg-green-200 text-green-800 p-3 rounded mb-2 font-semibold'>{berhasil}</div> : <></>}
+                        <AnimatePresence>
+                            {errorMsg ? <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} exit={{ opacity: 0 }} className='bg-red-200 text-red-800 p-3 rounded mb-2 font-semibold'>{errorMsg}</motion.div> : <></>}
+                            {berhasil ? <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} exit={{ opacity: 0 }} className='bg-green-200 text-green-800 p-3 rounded mb-2 font-semibold'>{berhasil}</motion.div> : <></>}
+                        </AnimatePresence>
                         <form onSubmit={editEmail}>
                             <label for="email" className='text-gray-700'>Email Baru</label>
                             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} id="email" name='email' placeholder='Masukan Email Baru' className='w-full bg-gray-100 p-3' required />
@@ -216,8 +226,10 @@ export default function MainPengaturan(props) {
                         </p>
                     </div>
                     <div className='bg-white p-5 rounded shadow'>
-                        {errorMsg ? <div className='bg-red-200 text-red-800 p-3 rounded mb-2 font-semibold'>{errorMsg}</div> : <></>}
-                        {berhasil ? <div className='bg-green-200 text-green-800 p-3 rounded mb-2 font-semibold'>{berhasil}</div> : <></>}
+                        <AnimatePresence>
+                            {errorMsg ? <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} exit={{ opacity: 0 }} className='bg-red-200 text-red-800 p-3 rounded mb-2 font-semibold'>{errorMsg}</motion.div> : <></>}
+                            {berhasil ? <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} exit={{ opacity: 0 }} className='bg-green-200 text-green-800 p-3 rounded mb-2 font-semibold'>{berhasil}</motion.div> : <></>}
+                        </AnimatePresence>
                         <form onSubmit={editTelepon}>
                             <label for="number" className='text-gray-700'>Nomor Telepon Baru</label>
                             <input type="number" value={telepon} onChange={(e) => setTelepon(e.target.value)} id="telepon" name='telepon' placeholder='Masukan No. Telepon Baru' className='w-full bg-gray-100 p-3' required />

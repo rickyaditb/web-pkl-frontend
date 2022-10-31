@@ -6,7 +6,7 @@ import Header from 'components/user/sub/Header.js';
 import Sidebar from 'components/Sidebar.js';
 import Profile from 'components/user/sub/Profile.js';
 import Bottombar from 'components/Bottombar.js';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function UploadGambar(props) {
     const user = useContext(AuthContext);
@@ -61,8 +61,10 @@ export default function UploadGambar(props) {
                             </p>
                         </Link>
                         <div className='bg-white mb-24 p-5 shadow'>
-                            {errorMsg ? <div className='bg-red-200 text-red-800 p-3 rounded mb-4 font-semibold'>{errorMsg}</div> : <></>}
-                            {berhasil ? <div className='bg-green-200 text-green-800 p-3 rounded mb-4 font-semibold'>{berhasil}</div> : <></>}
+                            <AnimatePresence>
+                                {errorMsg ? <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} exit={{ opacity: 0 }} className='bg-red-200 text-red-800 p-3 rounded mb-4 font-semibold'>{errorMsg}</motion.div> : <></>}
+                                {berhasil ? <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} exit={{ opacity: 0 }} className='bg-green-200 text-green-800 p-3 rounded mb-4 font-semibold'>{berhasil}</motion.div> : <></>}
+                            </AnimatePresence>
                             <form method='POST' enctype="multipart/form-data" onSubmit={kirim}>
                                 <input type="file" name='image' accept="image/*" onChange={e => {
                                     const file = e.target.files[0];
