@@ -4,7 +4,7 @@ import Logo from './img/logo.png'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import RegisterContext from 'context/RegisterContext'
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -20,6 +20,8 @@ export default function Login() {
     const pesan = useContext(RegisterContext);
 
     const loginUser = async (e) => {
+        pesan.setBerhasilMsg("");
+        setErrorMsg("");
         e.preventDefault();
         try {
             await axios.post('http://localhost:5000/login', {
@@ -51,8 +53,10 @@ export default function Login() {
                 <img src={Logo} className="w-32 mx-auto mb-3 hidden md:block" />
                 <form onSubmit={loginUser}>
                     <p className="text-center font-bold text-2xl text-gray-600 mb-3">Sistem Informasi Presensi<br/>Karyawan Magang</p>
-                    {pesan.berhasilMsg ? <div className='bg-green-200 text-green-800 p-5 rounded my-2 font-semibold'>{pesan.berhasilMsg}</div> : <></>}
-                    {errorMsg ? <div className='bg-red-200 text-red-800 p-5 rounded my-2 font-semibold'>{errorMsg}</div> : <></>}
+                    <AnimatePresence>
+                        {pesan.berhasilMsg ? <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} exit={{ opacity: 0 }} className='bg-green-200 text-green-800 p-5 rounded my-2 font-semibold'>{pesan.berhasilMsg}</motion.div> : <></>}
+                        {errorMsg ? <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} exit={{ opacity: 0 }} className='bg-red-200 text-red-800 p-5 rounded my-2 font-semibold'>{errorMsg}</motion.div> : <></>}
+                    </AnimatePresence>
                     <label htmlFor="email" className="text-gray-700">Email</label><br />
                     <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} id="email" name="email" placeholder="Masukan Email Anda"
                         className="bg-gray-100 w-full py-3 px-3 rounded-lg mb-5 focus:outline-none focus:ring-2 border-none focus:bg-gray-200 transition duration-300" required/><br />
