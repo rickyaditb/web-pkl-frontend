@@ -160,18 +160,8 @@ export default function MainDetailPresensi() {
                 </MapContainer>
                 <div className='flex items-center justify-center text-center ml-2 p-3'>
                     {coords &&
-                        (() => {
-                            if (coords.latitude > -6.55693 && coords.latitude < -6.55756)
-                                return <div className=''>
-                                    <p className='text-3xl text-gray-700 font-bold'>
-                                        Anda tidak berada pada lokasi absensi yang ditentukan.
-                                    </p>
-                                    <div className="mt-3 flex justify-center gap-3">
-                                        <button onClick={() => konfirmasi("Izin")} data-presensi="Izin" className="bg-yellow-400 font-bold text-2xl text-white px-6 py-3 rounded">Izin</button>
-                                        <button onClick={() => konfirmasi("Sakit")} data-presensi="Sakit" className="bg-red-400 font-bold text-2xl text-white px-4 py-3 rounded">Sakit</button>
-                                    </div>
-                                </div>
-                            if (coords.longitude > 106.77489 && coords.longitude < 106.77556)
+                        (() => { 
+                            if (coords.longitude > 106.77489 && coords.longitude < 106.77556 && coords.latitude < -6.55693 && coords.latitude > -6.55756)
                                 return <div className=''>
                                     <p className='text-3xl text-gray-700 font-bold'>
                                         Anda sudah berada pada lokasi absensi yang ditentukan.
