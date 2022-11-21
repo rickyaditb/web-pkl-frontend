@@ -44,7 +44,7 @@ export default function Register() {
         setErrorMsg("");
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/user', {
+            await axios.post('https://web-pkl-backend-b259363fx-rickyaditb.vercel.app/user', {
                 email, telepon, nama, asal_instansi, role, tanggal_mulai, tanggal_selesai, password, confPassword, pembimbing
             });
             pesan.setBerhasilMsg("Akun anda berhasil dibuat, silahkan masuk");
@@ -55,7 +55,7 @@ export default function Register() {
     }
 
     const getPembimbing = async () => {
-        const response = await axios.get(`http://localhost:5000/pembimbing`);
+        const response = await axios.get(`https://web-pkl-backend-b259363fx-rickyaditb.vercel.app/pembimbing`);
         setPembimbingList(response.data);
     };
 
