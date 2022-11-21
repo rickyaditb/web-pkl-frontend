@@ -10,11 +10,10 @@ import { toast } from 'react-toastify';
 export default function MainHome() {
     const user = useContext(AuthContext);
 
-    console.log(user)
-
     const [statusGambar, setStatusGambar] = useState(true);
     const [statusLaporan, setStatusLaporan] = useState("");
     const [laporan, setLaporan] = useState(null);
+    const [kegiatan, setKegiatan] = useState("");
 
     const id_user = user.id;
     const gambar_user = user.gambar;
@@ -28,6 +27,7 @@ export default function MainHome() {
 
     useEffect(() => {
         id_user && checkLaporan();
+        id_user && getJumlahLaporan();
     }, [id_user]);
 
     useEffect(() => {
@@ -85,6 +85,11 @@ export default function MainHome() {
         }
     }
 
+    const getJumlahLaporan = async () => {
+        const response = await axios.get(`http://localhost:5000/laporan_detail/${id_user}`)
+        setKegiatan(response.data[0])
+    }
+
     return (
         <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }} className="col-span-12 md:col-span-8 lg:col-span-7 mb-1">
             <AnimatePresence>
@@ -131,7 +136,7 @@ export default function MainHome() {
                     </svg>
                     <div className="border-l-2 pl-2 my-auto">
                         <p className="text-xs text-gray-500">Kegiatan</p>
-                        <p className="text-lg -mb-1">92%</p>
+                        <p className="text-lg -mb-1">{kegiatan.jumlah_laporan} Laporan</p>
                     </div>
                 </div>
                 <div className="bg-white text-gray-600 font-bold rounded-lg flex">
