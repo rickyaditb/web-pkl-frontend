@@ -24,10 +24,10 @@ export default function Login() {
         setErrorMsg("");
         e.preventDefault();
         try {
-            await axios.post('http://web-pkl-backend.vercel.app/login', {
+            await axios.post('https://web-pkl-backend.vercel.app/login', {
                 email, password
             },);
-            const response = await axios.get(`http://web-pkl-backend.vercel.app/login/${email}`);
+            const response = await axios.get(`https://web-pkl-backend.vercel.app/login/${email}`);
             if (response.data.role === "user") {
                 navigate("/");
             } else if (response.data.role === "pembimbing") {
