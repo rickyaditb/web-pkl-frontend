@@ -16,11 +16,11 @@ export default function MainLaporanPembimbing() {
         auth && getDetailLaporan();
     }, [auth])
 
-    const targetUrl = auth.role === "admin" ? "http://localhost:5000/laporan_detail" : `http://localhost:5000/laporan_pembimbing/${auth.id}`
+    const targetUrl = auth.role === "admin" ? "https://web-pkl-backend.vercel.app/laporan_detail" : `https://web-pkl-backend.vercel.app/laporan_pembimbing/${auth.id}`
 
     const getDetailLaporan = async () => {
         const response = await axios.get(targetUrl);
-        const response2 = await axios.get(`http://localhost:5000/laporan_detail`);
+        const response2 = await axios.get(`https://web-pkl-backend.vercel.app/laporan_detail`);
         if (response.data.length === 0) {
             setAktif([])
             setNonAktif([])

@@ -20,7 +20,7 @@ export default function Sidebar(props) {
 
     const Logout = async () => {
         try {
-            await axios.delete('http://localhost:5000/logout');
+            await axios.delete('https://web-pkl-backend.vercel.app/logout');
             navigate('/login')
         } catch (error) {
             console.log(error)

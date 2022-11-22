@@ -16,11 +16,11 @@ export default function MainPresensiPembimbing() {
         auth && getDetailPresensi();
     }, [auth])
 
-    const targetUrl = auth.role === "admin" ? "http://localhost:5000/presensi_detail" : `http://localhost:5000/presensi_pembimbing/${auth.id}`
+    const targetUrl = auth.role === "admin" ? "https://web-pkl-backend.vercel.app/presensi_detail" : `https://web-pkl-backend.vercel.app/presensi_pembimbing/${auth.id}`
 
     const getDetailPresensi = async () => {
         const response = await axios.get(targetUrl);
-        const response2 = await axios.get(`http://localhost:5000/presensi_detail`);
+        const response2 = await axios.get(`https://web-pkl-backend.vercel.app/presensi_detail`);
         if (response.data.length === 0) {
             setAktif([])
             setNonAktif([])

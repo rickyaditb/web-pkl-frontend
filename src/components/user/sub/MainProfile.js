@@ -22,19 +22,19 @@ export default function MainProfile() {
     }, [auth])
 
     const getStatistic = async () => {
-        const response = await axios.get(`http://localhost:5000/presensi_detail/${id}`)
+        const response = await axios.get(`https://web-pkl-backend.vercel.app/presensi_detail/${id}`)
         setPresensi(response.data[0])
     }
 
     const getUserById = async () => {
-        const response = await axios.get(`http://localhost:5000/user/${id}`)
+        const response = await axios.get(`https://web-pkl-backend.vercel.app/user/${id}`)
         setUser(response.data)
     }
 
     const id_user = user._id;
     const gambar_user = user.gambar;
-    let url = `http://localhost:5000/${id_user}${gambar_user}`;
-    let urlLaporan = `http://localhost:5000/${id_user}.pdf`;
+    let url = `https://web-pkl-backend.vercel.app/${id_user}${gambar_user}`;
+    let urlLaporan = `https://web-pkl-backend.vercel.app/${id_user}.pdf`;
 
     const profilePlaceholder = ReactDOMServer.renderToStaticMarkup(<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="bg-gray-500 p-3 text-white w-28 h-28 rounded-full mx-5">
         <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />

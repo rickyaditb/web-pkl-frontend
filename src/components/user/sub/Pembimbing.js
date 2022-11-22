@@ -8,7 +8,7 @@ export default function Pembimbing() {
     const id_pembimbing = user.pembimbing._id;
     const gambar_pembimbing = user.pembimbing.gambar;
 
-    let urlPembimbing = `http://localhost:5000/${id_pembimbing}${gambar_pembimbing}`;
+    let urlPembimbing = `https://web-pkl-backend.vercel.app/${id_pembimbing}${gambar_pembimbing}`;
 
     const profilePlaceholder = ReactDOMServer.renderToStaticMarkup(<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="bg-gray-500 p-3 text-white w-24 h-24 rounded-full mx-auto">
         <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />

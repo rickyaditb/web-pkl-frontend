@@ -24,7 +24,7 @@ export default function MainAdmin() {
     }, [auth]);
 
     const getUser = async () => {
-        const response = await auth.axiosJWT.get(`http://localhost:5000/user`, {
+        const response = await auth.axiosJWT.get(`https://web-pkl-backend.vercel.app/user`, {
             headers: {
                 Authorization: `Bearer ${auth.token}`
             }
@@ -33,7 +33,7 @@ export default function MainAdmin() {
     };
 
     const getPembimbing = async () => {
-        const response = await auth.axiosJWT.get(`http://localhost:5000/pembimbing`, {
+        const response = await auth.axiosJWT.get(`https://web-pkl-backend.vercel.app/pembimbing`, {
             headers: {
                 Authorization: `Bearer ${auth.token}`
             }
@@ -77,7 +77,7 @@ export default function MainAdmin() {
 
     const deleteLaporan = async (id) => {
         try {
-            await axios.delete(`http://localhost:5000/hapus_user/${id}`);
+            await axios.delete(`https://web-pkl-backend.vercel.app/hapus_user/${id}`);
             getUser();
             setModal(false);
         } catch (error) {

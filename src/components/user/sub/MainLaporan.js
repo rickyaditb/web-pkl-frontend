@@ -22,7 +22,7 @@ export default function MainLaporan() {
     }, [id_user]);
 
     const getLaporan = async () => {
-        const response = await axios.get(`http://localhost:5000/laporan_user/${id_user}`);
+        const response = await axios.get(`https://web-pkl-backend.vercel.app/laporan_user/${id_user}`);
         setLaporan(response.data);
     };
 
@@ -34,7 +34,7 @@ export default function MainLaporan() {
 
     const deleteLaporan = async (id) => {
         try {
-            await axios.delete(`http://localhost:5000/laporan/${id}`);
+            await axios.delete(`https://web-pkl-backend.vercel.app/laporan/${id}`);
             getLaporan();
             setModal(false);
         } catch (error) {

@@ -22,7 +22,7 @@ export default function MainTambahLaporan() {
     const saveLaporan = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/laporan', {
+            await axios.post('https://web-pkl-backend.vercel.app/laporan', {
                 id_user, tanggal_laporan, isi_laporan
             });
             navigate("/laporan");

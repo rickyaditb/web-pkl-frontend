@@ -20,7 +20,7 @@ export default function UploadGambar(props) {
         formData.append("id_user", user.id);
         formData.append("image", foto);
         try {
-            await axios.post('http://localhost:5000/image', formData, {
+            await axios.post('https://web-pkl-backend.vercel.app/image', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

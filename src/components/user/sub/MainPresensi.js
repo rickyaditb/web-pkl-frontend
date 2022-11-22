@@ -33,16 +33,16 @@ export default function MainPresensi() {
     }, [hari])
 
     const getPresensi = async () => {
-        const response = await axios.get(`http://localhost:5000/presensi_user/${id_user}`);
+        const response = await axios.get(`https://web-pkl-backend.vercel.app/presensi_user/${id_user}`);
         setPresensi(response.data);
     };
     const getPresensiToday = async () => {
-        const response = await axios.get(`http://localhost:5000/presensi_today/${id_user}`);
+        const response = await axios.get(`https://web-pkl-backend.vercel.app/presensi_today/${id_user}`);
         setPresensiToday(response.data);
     };
 
     const getStatistic = async () => {
-        const response = await axios.get(`http://localhost:5000/presensi_detail/${id_user}`)
+        const response = await axios.get(`https://web-pkl-backend.vercel.app/presensi_detail/${id_user}`)
         setStat(response.data[0])
     }
 

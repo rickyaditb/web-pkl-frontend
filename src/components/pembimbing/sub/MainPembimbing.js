@@ -18,7 +18,7 @@ export default function MainPembimbing() {
     }, [auth]);
 
     const getUser = async () => {
-        const response = await auth.axiosJWT.get(`http://localhost:5000/user_pembimbing/${auth.id}`, {
+        const response = await auth.axiosJWT.get(`https://web-pkl-backend.vercel.app/user_pembimbing/${auth.id}`, {
             headers: {
                 Authorization: `Bearer ${auth.token}`
             }
@@ -81,7 +81,7 @@ export default function MainPembimbing() {
                                 <div className="flex flex-col gap-3">
                                     {aktif.map((item, index) => (
                                         <Link to={`/profile/${item._id}`} key={item._id} className="bg-white p-5 rounded-lg shadow transform transition flex items-center">
-                                            <img alt="foto-staff" onError={(e) => e.target.outerHTML = profilePlaceholder} src={`http://localhost:5000/${item._id}${item.gambar}`} className="bg-gray-500 w-28 h-28 rounded-full mx-5" />
+                                            <img alt="foto-staff" onError={(e) => e.target.outerHTML = profilePlaceholder} src={`https://web-pkl-backend.vercel.app/${item._id}${item.gambar}`} className="bg-gray-500 w-28 h-28 rounded-full mx-5" />
                                             <div className="ml-5">
                                                 <div className="flex flex-col gap-1">
                                                     <div>
@@ -115,7 +115,7 @@ export default function MainPembimbing() {
                                 <div className="flex flex-col gap-3">
                                     {nonAktif.map((item, index) => (
                                         <Link to={`/profile/${item._id}`} key={item._id} className="bg-white p-5 rounded-lg shadow transform transition flex items-center">
-                                            <img alt="foto-staff" onError={(e) => e.target.outerHTML = profilePlaceholder} src={`http://localhost:5000/${item._id}${item.gambar}`} className="bg-gray-500 w-28 h-28 rounded-full mx-5" />
+                                            <img alt="foto-staff" onError={(e) => e.target.outerHTML = profilePlaceholder} src={`https://web-pkl-backend.vercel.app/${item._id}${item.gambar}`} className="bg-gray-500 w-28 h-28 rounded-full mx-5" />
                                             <div className="ml-5">
                                                 <div className="flex flex-col gap-1">
                                                     <div>

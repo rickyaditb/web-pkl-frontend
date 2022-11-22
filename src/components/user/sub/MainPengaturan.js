@@ -19,7 +19,7 @@ export default function MainPengaturan(props) {
 
     const Logout = async() => {
         try {
-            await axios.delete('http://localhost:5000/logout');
+            await axios.delete('https://web-pkl-backend.vercel.app/logout');
             navigate('/login')
         } catch (error) {
             console.log(error)
@@ -31,7 +31,7 @@ export default function MainPengaturan(props) {
         setErrorMsg("");
         e.preventDefault();
         try {
-            await axios.patch(`http://localhost:5000/email/${_id}`, {
+            await axios.patch(`https://web-pkl-backend.vercel.app/email/${_id}`, {
                 email
             });
             user.refreshToken();
@@ -48,7 +48,7 @@ export default function MainPengaturan(props) {
         setErrorMsg("");
         e.preventDefault();
         try {
-            await axios.patch(`http://localhost:5000/telepon/${_id}`, {
+            await axios.patch(`https://web-pkl-backend.vercel.app/telepon/${_id}`, {
                 telepon
             });
             user.refreshToken();
@@ -65,7 +65,7 @@ export default function MainPengaturan(props) {
         setErrorMsg("");
         e.preventDefault();
         try {
-            await axios.patch(`http://localhost:5000/password/${_id}`, {
+            await axios.patch(`https://web-pkl-backend.vercel.app/password/${_id}`, {
                 passwordLama, passwordBaru
             });
             user.refreshToken();

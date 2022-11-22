@@ -28,7 +28,7 @@ export default function MainEditLaporan() {
     };
 
     const getLaporanById = async () => {
-        const response = await axios.get(`http://localhost:5000/laporan/${id}`);
+        const response = await axios.get(`https://web-pkl-backend.vercel.app/laporan/${id}`);
         setTanggal(response.data.tanggal_laporan);
         setIsi(response.data.isi_laporan);
         setAuthor(response.data.id_user);
@@ -37,7 +37,7 @@ export default function MainEditLaporan() {
     const editLaporan = async (e) => {
         e.preventDefault();
         try {
-            await axios.patch(`http://localhost:5000/laporan/${id}`, {
+            await axios.patch(`https://web-pkl-backend.vercel.app/laporan/${id}`, {
                 tanggal_laporan, isi_laporan
             });
             navigate(`/laporan/detail/${id}`);

@@ -17,8 +17,8 @@ export default function MainHome() {
 
     const id_user = user.id;
     const gambar_user = user.gambar;
-    let urlLaporan = `http://localhost:5000/${id_user}.pdf`;
-    let url = `http://localhost:5000/${id_user}${gambar_user}`;
+    let urlLaporan = `https://web-pkl-backend.vercel.app/${id_user}.pdf`;
+    let url = `https://web-pkl-backend.vercel.app/${id_user}${gambar_user}`;
     var formData = new FormData();
 
     useEffect(() => {
@@ -59,7 +59,7 @@ export default function MainHome() {
         formData.append("id_user", user.id);
         formData.append("laporan", laporan);
         try {
-            await axios.post('http://localhost:5000/file_laporan', formData, {
+            await axios.post('https://web-pkl-backend.vercel.app/file_laporan', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -86,7 +86,7 @@ export default function MainHome() {
     }
 
     const getJumlahLaporan = async () => {
-        const response = await axios.get(`http://localhost:5000/laporan_detail/${id_user}`)
+        const response = await axios.get(`https://web-pkl-backend.vercel.app/laporan_detail/${id_user}`)
         setKegiatan(response.data[0])
     }
 

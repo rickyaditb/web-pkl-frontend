@@ -47,7 +47,7 @@ export default function MainDetailPresensi() {
     };
 
     const getPresensiToday = async () => {
-        const response = await axios.get(`http://localhost:5000/presensi_today/${id_user}`);
+        const response = await axios.get(`https://web-pkl-backend.vercel.app/presensi_today/${id_user}`);
         if(response.data) {
             navigate('/presensi')
         }
@@ -74,7 +74,7 @@ export default function MainDetailPresensi() {
         }
 
         try {
-            await axios.post('http://localhost:5000/presensi', {
+            await axios.post('https://web-pkl-backend.vercel.app/presensi', {
                 id_user, waktu_absensi, keterangan
             });
             navigate("/presensi");
