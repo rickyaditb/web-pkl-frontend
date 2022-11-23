@@ -92,11 +92,6 @@ export default function MainHome() {
 
     return (
         <motion.div initial={{ opacity: 0, scale: 1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }} className="col-span-12 md:col-span-8 lg:col-span-7 mb-1">
-            <AnimatePresence>
-                {!statusGambar &&
-                    <Link to={'/gambar'} initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }} exit={{ opacity: 0 }} className='block bg-yellow-300 p-3 rounded shadow text-gray-700 font-bold mb-3'>Kamu belum melengkapi foto profil, klik disini untuk melengkapi</Link>
-                }
-            </AnimatePresence>
             <div className="bg-white p-5 rounded-lg shadow transform transition flex items-center">
                 {id_user && <img alt="foto-staff" onError={checkImage} src={url} className="bg-gray-500 w-28 h-28 rounded-full mx-5" />}
                 <div className="ml-5">
@@ -177,39 +172,6 @@ export default function MainHome() {
                     </div>
                 </div>
             </div>
-            {statusLaporan ?
-                <div className='bg-blue-500 hover:bg-blue-600 transition mt-3 py-3 pl-5 pr-3 rounded-lg text-white'>
-                    <form method='POST' enctype="multipart/form-data" onSubmit={kirim}>
-                        <div className='hidden'>
-                            <input type="file" name='laporan' id="laporan" accept="application/pdf" onChange={e => {
-                                const file = e.target.files[0];
-                                setLaporan(file);
-                            }} className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-base file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100" /><br />
-                        </div>
-                        <div className='flex items-center'>
-                            <div>
-                                <p htmlFor="laporan" className='font-bold text-lg'>Laporan Praktik Lapangan</p>
-                                <a href={urlLaporan}>Unduh Laporan</a>
-                            </div>
-                            <label htmlFor="laporan" className='bg-white p-3 text-blue-500 font-bold rounded-lg ml-auto cursor-pointer'>Ubah Laporan</label>
-                        </div>
-                    </form>
-                </div> :
-                <div className='bg-blue-500 hover:bg-blue-600 transition mt-3 py-3 pl-5 pr-3 rounded-lg text-white'>
-                    <form method='POST' enctype="multipart/form-data" onSubmit={kirim}>
-                        <div className='hidden'>
-                            <input type="file" name='laporan' id="laporan" accept="application/pdf" onChange={e => {
-                                const file = e.target.files[0];
-                                setLaporan(file);
-                            }} className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-base file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100" /><br />
-                        </div>
-                        <div className='flex items-center'>
-                            <p htmlFor="laporan" className='font-bold text-xl'>Laporan Praktik Lapangan</p>
-                            <label htmlFor="laporan" className='bg-white p-3 text-blue-500 font-bold rounded-lg ml-auto cursor-pointer'>Unggah Laporan</label>
-                        </div>
-                    </form>
-                </div>
-            }
         </motion.div>
     )
 }
