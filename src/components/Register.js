@@ -140,7 +140,6 @@ export default function Register() {
                     </Link>
                 </div>
             </form>
-            {pembimbing}
         </motion.div>
     )
 }
