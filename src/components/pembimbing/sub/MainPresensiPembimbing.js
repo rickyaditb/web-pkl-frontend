@@ -74,12 +74,12 @@ export default function MainPresensiPembimbing() {
                         <p class={`hidden md:inline-block p-4 rounded-t-lg border-b-2 ${tab === "Non" ? "text-blue-600 border-blue-600" : "border-transparent hover:text-gray-600 hover:border-gray-300"}`}>Staff {auth.role === "pembimbing" ? "Dibimbing" : "Magang"} Non Aktif</p>
                         <p class={`inline-block md:hidden p-4 rounded-t-lg border-b-2 ${tab === "Non" ? "text-blue-600 border-blue-600" : "border-transparent hover:text-gray-600 hover:border-gray-300"}`}>Non-Aktif</p>
                     </li>
-                    {auth.role === "pembimbing" &&
+                    {/* {auth.role === "pembimbing" &&
                         <li class="mr-2 cursor-pointer" onClick={switchToSemua}>
                             <p class={`hidden md:inline-block p-4 rounded-t-lg border-b-2 ${tab === "Semua" ? "text-blue-600 border-blue-600" : "border-transparent hover:text-gray-600 hover:border-gray-300"}`}>Semua Staff</p>
                             <p class={`inline-block md:hidden p-4 rounded-t-lg border-b-2 ${tab === "Semua" ? "text-blue-600 border-blue-600" : "border-transparent hover:text-gray-600 hover:border-gray-300"}`}>Semua</p>
                         </li>
-                    }
+                    } */}
                 </ul>
             </div>
             {tab === "Aktif" &&
