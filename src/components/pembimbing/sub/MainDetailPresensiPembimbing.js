@@ -11,6 +11,9 @@ import ReactDOMServer from 'react-dom/server';
 export default function MainDetailPresensiPembimbing() {
     const [presensi, setPresensi] = useState("x");
     const [user, setUser] = useState({})
+    const [filterMulai, setMulai] = useState("");
+    const [filterSelesai, setSelesai] = useState("");
+    const [filtered, setFiltered] = useState("");
 
     const auth = useContext(AuthContext);
 
@@ -20,6 +23,15 @@ export default function MainDetailPresensiPembimbing() {
         getPresensi();
         getStatistic();
     }, [auth])
+
+    useEffect(() => {
+        if (filterMulai < filterSelesai) {
+            filterDate();
+        }
+        if (filterMulai === "" && filterSelesai === "") {
+            setFiltered("");
+        }
+    }, [filterMulai, filterSelesai])
 
     const getPresensi = async () => {
         const response = await axios.get(`http://localhost:5000/presensi_user/${id}`);
@@ -38,6 +50,16 @@ export default function MainDetailPresensiPembimbing() {
     const profilePlaceholder = ReactDOMServer.renderToStaticMarkup(<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="bg-gray-500 p-3 text-white w-28 h-28 rounded-full mx-5">
         <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
     </svg>)
+    
+    const filterDate = () => {
+        const filtered = [];
+        presensi.filter((value) => {
+            if (moment(value.waktu_absensi).isBetween(filterMulai, filterSelesai, undefined, '[]')) {
+                filtered.push(value);
+            }
+        })
+        setFiltered(filtered)
+    }
 
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }} className="col-span-12 lg:col-span-10">
@@ -55,7 +77,7 @@ export default function MainDetailPresensiPembimbing() {
             </div>
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-3 mb-3">
                 <Link to={`/profile/${user._id}`} className="bg-white p-5 rounded-lg shadow flex items-center">
-                {id_user && <img alt="foto-staff" onError={(e) => e.target.outerHTML = profilePlaceholder} src={url} className="bg-gray-500 w-28 h-28 rounded-full mx-5" />}
+                    {id_user && <img alt="foto-staff" onError={(e) => e.target.outerHTML = profilePlaceholder} src={url} className="bg-gray-500 w-28 h-28 rounded-full mx-5" />}
                     <div className="ml-5">
                         <div className="flex flex-col gap-1">
                             <div>
@@ -164,53 +186,115 @@ export default function MainDetailPresensiPembimbing() {
                     </div>
                 else
                     return <div className="bg-white p-3 shadow rounded mb-24">
-                        <table className="text-left table-auto w-full">
-                            <thead>
-                                <tr className="text-gray-500">
-                                    <th className="font-semibold p-3">No.</th>
-                                    <th className="font-semibold p-3">Hari dan Tanggal Presensi</th>
-                                    <th className="font-semibold p-3 text-center">Jam Absensi</th>
-                                    <th className="font-semibold p-3 text-center">Keterangan</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {presensi.map((item, index) => (
-                                    <tr className="text-gray-900 border-t hover:bg-gray-100">
-                                        <td className="p-3">{index + 1}</td>
-                                        <td className="p-3">{moment(item.waktu_absensi).format('dddd, Do MMMM YYYY')}</td>
-                                        <td className="p-3 text-center">{item.keterangan === "Alpha" ? <></> : moment(item.waktu_absensi).format('HH:mm')}</td>
-                                        <td className="p-3">
-                                            <div className="flex justify-center items-center">
-                                                {
-                                                    (() => {
-                                                        if (item.keterangan === "Hadir")
-                                                            return <div className="px-3 py-2 font-semibold leading-tight text-green-700 bg-green-200 text-lg rounded flex justify-center items-center">
-                                                                <p>{item.keterangan}</p>
-                                                            </div>
-                                                        if (item.keterangan === "Terlambat")
-                                                            return <div className="px-3 py-2 font-semibold leading-tight text-orange-700 bg-orange-200 text-lg rounded flex justify-center items-center">
-                                                                <p>{item.keterangan}</p>
-                                                            </div>
-                                                        if (item.keterangan === "Sakit")
-                                                            return <div className="px-3 py-2 font-semibold leading-tight text-purple-700 bg-purple-200 text-lg rounded flex justify-center items-center">
-                                                                <p>{item.keterangan}</p>
-                                                            </div>
-                                                        if (item.keterangan === "Izin")
-                                                            return <div className="px-3 py-2 font-semibold leading-tight text-slate-700 bg-slate-300 text-lg rounded flex justify-center items-center">
-                                                                <p>{item.keterangan}</p>
-                                                            </div>
-                                                        if (item.keterangan === "Alpha")
-                                                            return <div className="px-3 py-2 font-semibold leading-tight text-red-700 bg-red-200 text-lg rounded flex justify-center items-center">
-                                                                <p>{item.keterangan}</p>
-                                                            </div>
-                                                    })()
-                                                }
-                                            </div>
-                                        </td>
+                        <div className='flex gap-5 items-center mb-2'>
+                            <div className='flex items-center gap-2 text-xl font-bold text-gray-600'>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                                    <path d="M18.75 12.75h1.5a.75.75 0 000-1.5h-1.5a.75.75 0 000 1.5zM12 6a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5A.75.75 0 0112 6zM12 18a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5A.75.75 0 0112 18zM3.75 6.75h1.5a.75.75 0 100-1.5h-1.5a.75.75 0 000 1.5zM5.25 18.75h-1.5a.75.75 0 010-1.5h1.5a.75.75 0 010 1.5zM3 12a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5A.75.75 0 013 12zM9 3.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zM12.75 12a2.25 2.25 0 114.5 0 2.25 2.25 0 01-4.5 0zM9 15.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z" />
+                                </svg>
+                                <p>Filter</p>
+                            </div>
+                            <div className='flex items-center gap-3'>
+                                <input type="date" className='bg-gray-200 px-3 py-2 rounded-lg' onChange={(e) => setMulai(e.target.value)} />
+                                <span className='text-2xl'>-</span>
+                                <input type="date" className='bg-gray-200 px-3 py-2 rounded-lg' onChange={(e) => setSelesai(e.target.value)} />
+                            </div>
+                        </div>
+                        {filtered ?
+                            <table className="text-left table-auto w-full">
+                                <thead>
+                                    <tr className="text-gray-500">
+                                        <th className="font-semibold p-3">No.</th>
+                                        <th className="font-semibold p-3">Hari dan Tanggal Presensi</th>
+                                        <th className="font-semibold p-3 text-center">Jam Absensi</th>
+                                        <th className="font-semibold p-3 text-center">Keterangan</th>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    {filtered.map((item, index) => (
+                                        <tr className="text-gray-900 border-t hover:bg-gray-100">
+                                            <td className="p-3">{index + 1}</td>
+                                            <td className="p-3">{moment(item.waktu_absensi).format('dddd, Do MMMM YYYY')}</td>
+                                            <td className="p-3 text-center">{item.keterangan === "Alpha" ? <></> : moment(item.waktu_absensi).format('HH:mm')}</td>
+                                            <td className="p-3">
+                                                <div className="flex justify-center items-center">
+                                                    {
+                                                        (() => {
+                                                            if (item.keterangan === "Hadir")
+                                                                return <div className="px-3 py-2 font-semibold leading-tight text-green-700 bg-green-200 text-lg rounded flex justify-center items-center">
+                                                                    <p>{item.keterangan}</p>
+                                                                </div>
+                                                            if (item.keterangan === "Terlambat")
+                                                                return <div className="px-3 py-2 font-semibold leading-tight text-orange-700 bg-orange-200 text-lg rounded flex justify-center items-center">
+                                                                    <p>{item.keterangan}</p>
+                                                                </div>
+                                                            if (item.keterangan === "Sakit")
+                                                                return <div className="px-3 py-2 font-semibold leading-tight text-purple-700 bg-purple-200 text-lg rounded flex justify-center items-center">
+                                                                    <p>{item.keterangan}</p>
+                                                                </div>
+                                                            if (item.keterangan === "Izin")
+                                                                return <div className="px-3 py-2 font-semibold leading-tight text-slate-700 bg-slate-300 text-lg rounded flex justify-center items-center">
+                                                                    <p>{item.keterangan}</p>
+                                                                </div>
+                                                            if (item.keterangan === "Alpha")
+                                                                return <div className="px-3 py-2 font-semibold leading-tight text-red-700 bg-red-200 text-lg rounded flex justify-center items-center">
+                                                                    <p>{item.keterangan}</p>
+                                                                </div>
+                                                        })()
+                                                    }
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table> :
+                            <table className="text-left table-auto w-full">
+                                <thead>
+                                    <tr className="text-gray-500">
+                                        <th className="font-semibold p-3">No.</th>
+                                        <th className="font-semibold p-3">Hari dan Tanggal Presensi</th>
+                                        <th className="font-semibold p-3 text-center">Jam Absensi</th>
+                                        <th className="font-semibold p-3 text-center">Keterangan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {presensi.map((item, index) => (
+                                        <tr className="text-gray-900 border-t hover:bg-gray-100">
+                                            <td className="p-3">{index + 1}</td>
+                                            <td className="p-3">{moment(item.waktu_absensi).format('dddd, Do MMMM YYYY')}</td>
+                                            <td className="p-3 text-center">{item.keterangan === "Alpha" ? <></> : moment(item.waktu_absensi).format('HH:mm')}</td>
+                                            <td className="p-3">
+                                                <div className="flex justify-center items-center">
+                                                    {
+                                                        (() => {
+                                                            if (item.keterangan === "Hadir")
+                                                                return <div className="px-3 py-2 font-semibold leading-tight text-green-700 bg-green-200 text-lg rounded flex justify-center items-center">
+                                                                    <p>{item.keterangan}</p>
+                                                                </div>
+                                                            if (item.keterangan === "Terlambat")
+                                                                return <div className="px-3 py-2 font-semibold leading-tight text-orange-700 bg-orange-200 text-lg rounded flex justify-center items-center">
+                                                                    <p>{item.keterangan}</p>
+                                                                </div>
+                                                            if (item.keterangan === "Sakit")
+                                                                return <div className="px-3 py-2 font-semibold leading-tight text-purple-700 bg-purple-200 text-lg rounded flex justify-center items-center">
+                                                                    <p>{item.keterangan}</p>
+                                                                </div>
+                                                            if (item.keterangan === "Izin")
+                                                                return <div className="px-3 py-2 font-semibold leading-tight text-slate-700 bg-slate-300 text-lg rounded flex justify-center items-center">
+                                                                    <p>{item.keterangan}</p>
+                                                                </div>
+                                                            if (item.keterangan === "Alpha")
+                                                                return <div className="px-3 py-2 font-semibold leading-tight text-red-700 bg-red-200 text-lg rounded flex justify-center items-center">
+                                                                    <p>{item.keterangan}</p>
+                                                                </div>
+                                                        })()
+                                                    }
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        }
                     </div>
             })()}
         </motion.div>
